@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Teeth Whitening Lab — A Brighter Smile in 90 Minutes | Long Beach</title>
+<meta name="description" content="Premium laser teeth whitening in Long Beach. A brighter, whiter smile in 90 minutes or less — guaranteed, with zero to minimal sensitivity. Book your session today." />
+<meta property="og:title" content="Teeth Whitening Lab — A Brighter Smile in 90 Minutes" />
+<meta property="og:description" content="Premium laser teeth whitening in Long Beach. Brighter, whiter, guaranteed — with zero to minimal sensitivity." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0d12; --ink-2:#1a1a22; --bg:#ffffff; --soft:#f5f4ff; --soft-2:#efeefc;
+  --primary:#5b4be8; --primary-2:#8174ff; --blue:#3f7bff; --muted:#6d6d7a; --line:#e9e8f2;
+  --grad:linear-gradient(120deg,#5b4be8 0%,#8174ff 55%,#3f7bff 100%);
+  --shadow:0 24px 60px -24px rgba(40,30,120,.35); --shadow-sm:0 10px 30px -16px rgba(40,30,120,.4);
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;line-height:1.05;letter-spacing:-.01em}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.eyebrow{font-family:'Inter';font-weight:600;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--primary)}
+.muted{color:var(--muted)}
+section{position:relative}
+.sec-pad{padding:clamp(64px,9vw,130px) 0}
+
+/* Buttons with the "dance" hover */
+.btn{display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.98rem;padding:1rem 1.7rem;border-radius:100px;border:0;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .3s;will-change:transform}
+.btn-primary{background:var(--grad);color:#fff;background-size:160% 160%;box-shadow:var(--shadow-sm)}
+.btn-primary:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 18px 36px -14px rgba(91,75,232,.6);animation:wiggle .5s ease}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{transform:translateY(-3px);border-color:var(--primary);color:var(--primary)}
+.btn-lg{padding:1.15rem 2.1rem;font-size:1.05rem}
+@keyframes wiggle{0%,100%{rotate:0}25%{rotate:-1.5deg}75%{rotate:1.5deg}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Nav */
+header{position:fixed;top:0;left:0;right:0;z-index:90;transition:background .3s,box-shadow .3s,padding .3s;padding:18px 0}
+header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);padding:10px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:'Fraunces';font-size:1.15rem;font-weight:600}
+.brand img{height:42px;width:auto;filter:saturate(1.05)}
+.nav-links{display:flex;gap:1.6rem;align-items:center}
+.nav-links a{font-weight:500;font-size:.95rem;color:var(--ink-2);position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:2px;width:0;background:var(--primary);transition:width .25s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{display:flex;gap:.6rem;align-items:center}
+.menu-btn{display:none;background:none;border:0;font-size:1.6rem;cursor:pointer;color:var(--ink)}
+@media(max-width:920px){.nav-links{display:none}.menu-btn{display:block}.nav-cta .btn-ghost{display:none}}
+
+/* Hero */
+.hero{padding-top:clamp(120px,16vw,170px);padding-bottom:clamp(40px,6vw,80px);background:radial-gradient(120% 90% at 85% 0%,var(--soft) 0%,#fff 55%)}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(22px,4vw,60px);align-items:center;grid-template-areas:"head media" "para media" "cta media" "rate media"}
+.h-head{grid-area:head}.h-media{grid-area:media}.h-para{grid-area:para}.h-cta{grid-area:cta;margin-top:1.6rem}.h-rate{grid-area:rate}
+.hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);margin-top:.45rem}
+.hero h1 .tint{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+.hero p.lede{font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--muted);margin:1.3rem 0 0;max-width:46ch}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.rating-line{display:flex;align-items:center;gap:.7rem;margin-top:1.4rem;font-size:.93rem;color:var(--muted);flex-wrap:wrap}
+.stars{color:#f5a623;letter-spacing:2px;font-size:1.05rem}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"head" "media" "cta" "rate" "para";text-align:center}.hero p.lede{margin:1.4rem auto 0}.hero-cta,.rating-line{justify-content:center}.h-media{margin:.3rem 0}.h-cta{margin-top:1.2rem}}
+
+/* Before/After slider */
+.ba{position:relative;width:100%;max-width:660px;margin-inline:auto;aspect-ratio:16/9;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);user-select:none;touch-action:pan-y;background:#0d0d12}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba .after-img{z-index:1}
+.ba .before-img{z-index:2;clip-path:inset(0 50% 0 0)}
+.ba .ba-tag{position:absolute;top:14px;z-index:4;background:rgba(13,13,18,.62);backdrop-filter:blur(6px);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.4em .8em;border-radius:100px}
+.ba .tag-before{left:14px}.ba .tag-after{right:14px}
+.ba .handle{position:absolute;top:0;bottom:0;left:50%;z-index:5;width:44px;transform:translateX(-50%);cursor:ew-resize;display:flex;align-items:center;justify-content:center}
+.ba .handle::before{content:"";position:absolute;top:0;bottom:0;width:3px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+.ba .knob{width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.1rem;position:relative;z-index:2}
+.ba:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.ba-caption{font-size:.8rem;color:var(--muted);text-align:center;margin-top:.7rem}
+
+/* Stat band */
+.stats{background:var(--ink);color:#fff}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:clamp(34px,5vw,56px) 0;text-align:center}
+.stat .n{font-family:'Fraunces';font-size:clamp(2rem,4vw,3rem);font-weight:600;background:linear-gradient(120deg,#fff,#b9adff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .l{font-size:.85rem;color:#b6b6c6;letter-spacing:.04em;margin-top:.2rem}
+@media(max-width:680px){.stats .wrap{grid-template-columns:repeat(2,1fr);gap:1.6rem}}
+
+/* Section heading */
+.head{max-width:60ch}
+.head h2{font-size:clamp(2rem,4.2vw,3.2rem);margin-top:.6rem}
+.head.center{margin-inline:auto;text-align:center}
+
+/* Results swipe deck */
+.gallery{overflow:hidden}
+.deck-wrap{display:flex;flex-direction:column;align-items:center;gap:1.4rem}
+.deck{position:relative;width:min(380px,86vw);aspect-ratio:4/5;touch-action:pan-y}
+.deck-card{position:absolute;inset:0;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:var(--soft);cursor:grab;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s;will-change:transform}
+.deck-card.dragging{transition:none;cursor:grabbing}
+.deck-card img{width:100%;height:100%;object-fit:cover;pointer-events:none;transform:scale(2)}
+.deck-card.q-tl img{transform-origin:0 0}
+.deck-card.q-tr img{transform-origin:100% 0}
+.deck-card.q-bl img{transform-origin:0 100%}
+.deck-card.q-br img{transform-origin:100% 100%}
+.deck-card .cap{position:absolute;left:0;right:0;bottom:0;padding:1.1rem 1.2rem;background:linear-gradient(transparent,rgba(13,13,18,.82));color:#fff;font-size:.95rem;font-weight:500;display:flex;align-items:center;gap:.55rem;z-index:3}
+.deck-card .cap .stars{color:#ffd35c;font-size:.9rem;letter-spacing:1px}
+.deck-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.28);backdrop-filter:blur(7px);color:#fff;font-size:1.7rem;line-height:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.deck-arrow:hover{background:rgba(255,255,255,.5);transform:translateY(-50%) scale(1.08)}
+.deck-arrow.prev{left:12px}.deck-arrow.next{right:12px}
+.deck-hint{font-size:.82rem;color:var(--muted)}
+
+/* Alternating feature blocks */
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center;margin-top:clamp(40px,6vw,90px)}
+.feature:first-of-type{margin-top:0}
+.feature.rev .f-media{order:2}
+.feature img.f-img{border-radius:22px;box-shadow:var(--shadow);aspect-ratio:5/4;object-fit:cover;width:100%}
+.feature h3{font-size:clamp(1.6rem,3vw,2.3rem);margin:.5rem 0 1rem}
+.feature ul{list-style:none;margin-top:1.1rem;display:grid;gap:.6rem}
+.feature li{padding-left:1.7rem;position:relative;color:var(--ink-2)}
+.feature li::before{content:"✦";position:absolute;left:0;color:var(--primary)}
+@media(max-width:820px){.feature{grid-template-columns:1fr}.feature.rev .f-media{order:0}}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:clamp(30px,4vw,54px)}
+.step{background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:1.1rem 1.1rem 1.5rem;overflow:hidden}
+.step .thumb{position:relative;border-radius:13px;overflow:hidden;aspect-ratio:16/11;margin-bottom:1.1rem}
+.step .thumb img{width:100%;height:100%;object-fit:cover}
+.step .num{font-family:'Fraunces';font-size:1.25rem;width:42px;height:42px;border-radius:50%;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;position:absolute;top:10px;left:10px;box-shadow:0 6px 16px rgba(91,75,232,.45);z-index:2}
+.step h4{font-size:1.15rem;margin-bottom:.35rem}
+@media(max-width:820px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}}
+
+/* Pricing */
+.pricing{background:var(--soft)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:clamp(30px,4vw,52px)}
+.price-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.9rem;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;position:relative}
+.price-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.price-card.feat{border:2px solid var(--primary);box-shadow:var(--shadow)}
+.price-card .pop{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35em .9em;border-radius:100px;z-index:2}
+.price-card .pc-img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:13px;margin-bottom:1.2rem}
+.price-card h4{font-size:1.15rem;font-family:'Inter';font-weight:700}
+.price-card .amt{font-family:'Fraunces';font-size:2.6rem;font-weight:600;margin:.3rem 0;color:var(--primary)}
+.price-card .amt span{font-size:.95rem;color:var(--muted);font-family:'Inter';font-weight:500}
+.price-card p{font-size:.92rem;color:var(--muted);min-height:2.6em}
+.price-card .btn{margin-top:1.3rem;justify-content:center}
+.price-extra{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem;font-size:.92rem;color:var(--muted)}
+.price-extra b{color:var(--ink)}
+@media(max-width:820px){.price-grid{grid-template-columns:1fr}}
+
+/* vs Zoom comparison */
+.compare{overflow:hidden}
+.ctable{width:100%;border-collapse:collapse;margin-top:clamp(26px,4vw,46px);background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-sm)}
+.ctable th,.ctable td{padding:1.05rem 1.2rem;text-align:left;border-bottom:1px solid var(--line);font-size:.97rem}
+.ctable thead th{background:var(--ink);color:#fff;font-family:'Inter';font-weight:600}
+.ctable thead th.us{background:var(--grad)}
+.ctable td.us{font-weight:600;color:var(--primary)}
+.ctable tr:last-child td{border-bottom:0}
+.ctable .yes{color:#2ca36a;font-weight:700}.ctable .no{color:#c0506a;font-weight:600}
+@media(max-width:680px){.ctable th,.ctable td{padding:.8rem .7rem;font-size:.86rem}}
+
+/* Guarantee */
+.guarantee{background:var(--ink);color:#fff;text-align:center;border-radius:28px;padding:clamp(40px,6vw,72px);box-shadow:var(--shadow)}
+.guarantee .seal{width:88px;height:88px;border-radius:50%;border:2px dashed var(--primary-2);display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-size:.78rem;text-align:center;line-height:1.1;margin:0 auto 1.4rem;color:#cbbcff}
+.guarantee h2{font-size:clamp(2rem,4.5vw,3.2rem)}
+.guarantee p{color:#b6b6c6;max-width:52ch;margin:1rem auto 1.8rem}
+
+/* Reviews */
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:clamp(26px,4vw,42px) 0}
+.proof-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.9rem;text-align:center;box-shadow:var(--shadow-sm);transition:transform .3s}
+.proof-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.proof-card .plat{font-family:'Fraunces';font-size:1.5rem;font-weight:600}
+.proof-card .stars{color:#f5a623;font-size:1.5rem;letter-spacing:3px;margin:.5rem 0}
+.proof-card .sub{color:var(--muted);font-size:.92rem}
+.proof-card .plat-img{height:46px;width:auto;margin:0 auto .7rem;display:block;object-fit:contain}
+.proof-card .btn-bounce{display:inline-flex;align-items:center;gap:.4em;margin-top:1.1rem;padding:.7rem 1.3rem;border-radius:100px;background:var(--grad);color:#fff;font-weight:700;font-size:.92rem;box-shadow:var(--shadow-sm);transition:transform .2s}
+.proof-card .btn-bounce:hover{animation:bounce .6s ease infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media(max-width:680px){.proof{grid-template-columns:1fr}}
+.rev-carousel{max-width:780px;margin:clamp(28px,4vw,44px) auto 0;position:relative;text-align:center}
+.rev-slide{display:none}
+.rev-slide.active{display:block;animation:fade .5s ease}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.rev-slide .stars{font-size:1.6rem;display:block;color:#f5a623;letter-spacing:3px}
+.rev-slide .vr{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);font-weight:700;margin:.55rem 0 1.2rem}
+.rev-slide blockquote{font-family:'Fraunces';font-size:clamp(1.15rem,2vw,1.5rem);font-style:italic;line-height:1.45;color:var(--ink)}
+.rev-slide .who{margin-top:1.2rem;font-weight:600}
+.rev-slide .who span{color:var(--muted);font-weight:400}
+.rev-dots{display:flex;gap:.5rem;justify-content:center;margin-top:1.7rem}
+.rev-dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;transition:.25s;padding:0}
+.rev-dots button.on{background:var(--primary);width:26px;border-radius:5px}
+.review{background:var(--soft);border-radius:24px;padding:clamp(30px,4vw,56px);display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;margin-top:clamp(26px,4vw,40px)}
+.review .badge{width:120px;text-align:center}
+.review .badge .stars{font-size:1.4rem}
+.review blockquote{font-family:'Fraunces';font-size:clamp(1.15rem,2vw,1.5rem);font-style:italic;line-height:1.4}
+.review .who{margin-top:1rem;font-weight:600;font-family:'Inter';font-style:normal;font-size:1rem}
+.review .who span{color:var(--muted);font-weight:400}
+.rev-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.4rem}
+@media(max-width:680px){.review{grid-template-columns:1fr;text-align:center}}
+
+/* FAQ */
+.faq{max-width:840px;margin-inline:auto}
+.acc{border-bottom:1px solid var(--line);transition:background .3s;border-radius:12px}
+.acc button{width:100%;background:none;border:0;text-align:left;padding:1.25rem 1rem;font-size:1.08rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;color:var(--ink);font-family:'Inter';transition:color .25s}
+.acc button:hover{color:var(--primary)}
+.acc.open{background:var(--soft)}
+.acc.open button{color:var(--primary)}
+.acc .ic{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--soft-2);display:flex;align-items:center;justify-content:center;color:var(--primary);transition:.3s;font-size:1.2rem}
+.acc.open .ic{background:var(--primary);color:#fff;transform:rotate(45deg)}
+.acc .panel{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc .panel p{padding:0 1rem 1.25rem;color:var(--muted);border-left:3px solid var(--primary);margin-left:1rem;padding-left:1rem}
+
+/* Contact / location */
+.contact{background:var(--ink);color:#fff}
+.contact-grid{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:clamp(28px,5vw,56px);align-items:center}
+.contact h2{font-size:clamp(2rem,4vw,3rem)}
+.cinfo{display:grid;gap:1.3rem;margin-top:1.6rem}
+.cinfo div{display:flex;gap:.9rem;align-items:flex-start}
+.cinfo .k{color:#9a9ab0;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.cinfo .v{font-size:1.08rem}
+.cinfo a.v:hover{color:var(--primary-2)}
+.map{border-radius:22px;overflow:hidden;aspect-ratio:1/1;border:1px solid #2a2a36}
+.map iframe{width:100%;height:100%;min-height:300px;border:0;filter:grayscale(.15) contrast(1.05)}
+.visit-card{background:linear-gradient(150deg,#eef7ff 0%,#d6ecff 100%);color:#0d2433;border-radius:26px;padding:clamp(28px,4vw,48px);box-shadow:0 34px 70px -24px rgba(0,0,0,.55)}
+.visit-card .eyebrow{color:#1f7ad1}
+.visit-card h2{color:#0d2433}
+.visit-card .lead{color:#3c5a6e;margin-top:1rem;max-width:42ch}
+.cinfo2{display:grid;gap:1.05rem;margin-top:1.6rem}
+.cinfo2 .k{color:#5a7488;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
+.cinfo2 .v{color:#0d2433;font-size:1.04rem;font-weight:500}
+.cinfo2 a.v:hover{color:#1f7ad1}
+.btn-blue{background:linear-gradient(120deg,#3aa0ff,#6fd0ff);color:#07263d;box-shadow:0 18px 40px -12px rgba(58,160,255,.7);font-weight:700}
+.btn-blue:hover{transform:translateY(-3px) scale(1.03);animation:wiggle .5s ease;box-shadow:0 22px 46px -12px rgba(58,160,255,.85)}
+@media(max-width:820px){.contact-grid{grid-template-columns:1fr}.map{order:2}}
+
+/* Footer */
+footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-top:1px solid var(--line)}
+.foot-grid{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:center}
+.foot-links{display:flex;gap:1.3rem;flex-wrap:wrap}
+.foot-links a:hover{color:var(--primary)}
+.foot-note{margin-top:1.6rem;font-size:.78rem;color:#9a9aa8;border-top:1px solid var(--line);padding-top:1.2rem;line-height:1.6}
+
+/* mobile menu */
+.mobile-menu{position:fixed;inset:0;background:rgba(255,255,255,.98);backdrop-filter:blur(8px);z-index:100;display:none;flex-direction:column;padding:90px 8vw;gap:1.4rem}
+.mobile-menu.show{display:flex}
+.mobile-menu a{font-family:'Fraunces';font-size:1.6rem}
+.mobile-menu .close{position:absolute;top:22px;right:8vw;font-size:2rem;background:none;border:0;cursor:pointer}
+
+/* reveal */
+[data-reveal]{opacity:0;transform:translateY(30px)}
+.is-in{opacity:1!important;transform:none!important;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+
+/* sticky mobile book bar */
+.book-bar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:.6rem;padding:.7rem;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);box-shadow:0 -1px 0 var(--line)}
+.book-bar .btn{flex:1;justify-content:center;padding:.85rem}
+@media(max-width:860px){.book-bar{display:flex}body{padding-bottom:74px}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <img src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/63be49e4dc38d74489a136c1.webp" alt="Teeth Whitening Lab" />
+    </a>
+    <nav class="nav-links">
+      <a href="#results">Results</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="tel:5625148383">Call / Text</a>
+      <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Now</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close" id="closeMenu" aria-label="Close menu">✕</button>
+  <a href="#results">Results</a>
+  <a href="#how">How it works</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Contact</a>
+  <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener" style="justify-content:center">Book Your Session</a>
+</div>
+
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="h-head" data-reveal>
+      <span class="eyebrow">Advanced Laser Teeth Whitening</span>
+      <h1>A brighter,<br><span class="tint">whiter smile</span><br>in 90 minutes.</h1>
+    </div>
+    <div class="h-media" data-reveal>
+      <div class="ba" id="ba" tabindex="0" role="slider" aria-label="Before and after teeth whitening. Drag to reveal." aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <img class="after-img" src="hero1.png" alt="Bright white teeth after whitening" />
+        <img class="before-img" id="beforeImg" src="hero2.png" alt="Stained teeth before whitening" />
+        <span class="ba-tag tag-before">Before</span>
+        <span class="ba-tag tag-after">After</span>
+        <div class="handle" id="baHandle"><div class="knob">⟺</div></div>
+      </div>
+      <p class="ba-caption">Drag the slider to see the transformation. Results vary per client.</p>
+    </div>
+    <p class="lede h-para" data-reveal>Say goodbye to yellow, dull, and stained teeth. Experience 6 to 16 shades brighter on your very first visit — with zero to minimal sensitivity.</p>
+    <div class="h-cta" data-reveal>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book a Whitening Session →</a>
+        <a class="btn btn-ghost btn-lg" href="#results">Look at our happy customers</a>
+      </div>
+    </div>
+    <div class="h-rate" data-reveal>
+      <div class="rating-line">
+        <span class="stars">★★★★★</span>
+        <span><b style="color:var(--ink)">7,000+ happy clients</b> · 5-star rated on Yelp &amp; Google</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stat" data-reveal><div class="n" data-count="7000" data-suffix="+">0</div><div class="l">Happy clients</div></div>
+    <div class="stat" data-reveal><div class="n" data-count="90" data-suffix=" min">0</div><div class="l">Same-day results</div></div>
+    <div class="stat" data-reveal><div class="n" data-count="16" data-suffix=" shades">0</div><div class="l">Brighter, first visit</div></div>
+    <div class="stat" data-reveal><div class="n" data-count="90" data-suffix="%">0</div><div class="l">Report no sensitivity</div></div>
+  </div>
+</section>
+
+<!-- RESULTS GALLERY -->
+<section class="sec-pad gallery" id="results">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <span class="eyebrow">Real results</span>
+      <h2>Making our community a brighter place, one smile at a time.</h2>
+      <p class="muted" style="margin-top:.8rem">Over 7,000 happy clients across Long Beach, Orange County, San Pedro &amp; Palos Verdes. Swipe through a few of their smiles.</p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:2.4rem" data-reveal>
+    <div class="deck-wrap">
+      <div class="deck" id="deck">
+        <div class="deck-card q-tl"><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cb12a886757729fa0c9d73.jpeg" alt="Before and after result"><div class="cap"><span class="stars">★★★★★</span> Real client · Long Beach</div></div>
+        <div class="deck-card q-tr"><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cab2640ac0a2bcff4e0e1b.jpeg" alt="Before and after result"><div class="cap"><span class="stars">★★★★★</span> Real client · Orange County</div></div>
+        <div class="deck-card q-bl"><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cb12a88675771fbe0c9d74.jpeg" alt="Before and after result"><div class="cap"><span class="stars">★★★★★</span> Real client · San Pedro</div></div>
+        <div class="deck-card q-br"><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cac98997fb7b00c71c2a4c.jpeg" alt="Before and after result"><div class="cap"><span class="stars">★★★★★</span> Real client · Palos Verdes</div></div>
+        <div class="deck-card q-tl"><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cac87943c7e918373e8dc1.jpeg" alt="Before and after result"><div class="cap"><span class="stars">★★★★★</span> Real client · Long Beach</div></div>
+        <div class="deck-card q-tr"><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cbb99e64e32630120deb93.jpeg" alt="Before and after result"><div class="cap"><span class="stars">★★★★★</span> Real client · Los Angeles</div></div>
+        <div class="deck-card q-bl"><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cbbe23c8ab657085aab91f.jpeg" alt="Before and after result"><div class="cap"><span class="stars">★★★★★</span> Real client · Long Beach</div></div>
+        <button class="deck-arrow prev" id="deckPrev" aria-label="Previous result">‹</button>
+        <button class="deck-arrow next" id="deckNext" aria-label="Next result">›</button>
+      </div>
+      <span class="deck-hint">Swipe or tap the arrows to shuffle through</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE BLOCKS: the science / the lab / the team -->
+<section class="sec-pad" style="background:var(--soft)">
+  <div class="wrap">
+
+    <div class="feature">
+      <div class="f-media" data-reveal><img class="f-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65c6bda80576cfcf30c1cdc9.jpeg" alt="Advanced laser whitening at Teeth Whitening Lab"></div>
+      <div data-reveal>
+        <span class="eyebrow">The science</span>
+        <h3>Advanced laser whitening, gentle on your smile.</h3>
+        <p class="muted">Our triple-threat, advanced laser system offers a gentle yet effective solution to an age-old problem — stained teeth. Every option is designed for the utmost safety of your gums, enamel, and existing dental work, with an exclusive mineral-rich formula that enriches your enamel.</p>
+        <ul>
+          <li>Zero to minimal sensitivity — 90% report none</li>
+          <li>Safe for gums, enamel &amp; existing dental work</li>
+          <li>Enamel-remineralizing &amp; mineral building</li>
+          <li>Long-lasting results: 6 months to a year with care</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature rev">
+      <div class="f-media" data-reveal><img class="f-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/659881e339de543a7026941d.jpeg" alt="The Teeth Whitening Lab studio experience"></div>
+      <div data-reveal>
+        <span class="eyebrow">The experience</span>
+        <h3>Think of it as a spa day — for your smile.</h3>
+        <p class="muted">Our skilled, knowledgeable staff create a welcoming, calm, and peaceful environment, delivering results with your satisfaction and comfort in mind. Every session includes the little extras that make it feel effortless.</p>
+        <ul>
+          <li>A free consultation &amp; personalized after-care plan</li>
+          <li>At-home whitening kit &amp; enamel remineralizing gel</li>
+          <li>Our exclusive moisturizing lip balm</li>
+          <li>Digital before &amp; after photos to take home</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec-pad" id="how">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Simple &amp; easy</span>
+      <h2>Your brighter smile, in four steps.</h2>
+    </div>
+    <div class="steps">
+      <div class="step" data-reveal><div class="thumb"><div class="num">1</div><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/66ad9da1ccffaf89e597530a.jpeg" alt="Free consultation"></div><h4>Free consult</h4><p class="muted">Call or text for same-day availability. Over-the-phone consultations are always free.</p></div>
+      <div class="step" data-reveal><div class="thumb"><div class="num">2</div><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/659881e339de543a7026941d.jpeg" alt="Laser whitening treatment"></div><h4>Laser whiten</h4><p class="muted">Relax in the chair for up to 90 minutes while our advanced laser system goes to work.</p></div>
+      <div class="step" data-reveal><div class="thumb"><div class="num">3</div><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65c69bb989e67841bf4e2583.jpeg" alt="Reveal your brighter smile"></div><h4>Reveal</h4><p class="muted">See 6–16 shades brighter on your first visit, with digital before &amp; after photos.</p></div>
+      <div class="step" data-reveal><div class="thumb"><div class="num">4</div><img loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/66ad41ff8899dc325d88acc2.jpeg" alt="After-care kit"></div><h4>After-care</h4><p class="muted">Leave with a take-home kit, remineralizing gel, lip balm &amp; a care plan to protect your investment.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec-pad pricing" id="pricing">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Transparent pricing</span>
+      <h2>Affordable, professional whitening.</h2>
+      <p class="muted" style="margin-top:.8rem">A guaranteed lower cost than Zoom — without the hefty price tag or the sensitivity.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card" data-reveal>
+        <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cd4a34b1ed0987b62b669a.jpeg" alt="One adult whitening session">
+        <h4>1 Adult</h4>
+        <div class="amt">$250<span> / 90 min</span></div>
+        <p>Our most popular single session — 6 to 16 shades brighter. Recommended for first-time whiteners.</p>
+        <a class="btn btn-ghost" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
+      </div>
+      <div class="price-card feat" data-reveal>
+        <span class="pop">Best for two</span>
+        <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65966008539b6dea58bea85e.jpeg" alt="Couples whitening session">
+        <h4>Party of 2</h4>
+        <div class="amt">$450<span> / 90 min</span></div>
+        <p>Book a party of two and save. You and a loved one, 6–16 shades brighter together — same day, same time.</p>
+        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book for two</a>
+      </div>
+      <div class="price-card" data-reveal>
+        <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/66adb21436ab420466a27f86.jpeg" alt="Teen whitening session">
+        <h4>1 Teenager</h4>
+        <div class="amt">$225<span> / 60 min</span></div>
+        <p>A 60-minute session perfect for teens with light to moderate staining — 4 to 12 shades brighter.</p>
+        <a class="btn btn-ghost" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
+      </div>
+    </div>
+    <div class="price-extra" data-reveal>
+      <span><b>+ Kit upgrade</b> — Adult $300 · Party of 2 $500</span>
+      <span><b>Model/Influencer Special</b> — $225</span>
+      <span><b>Follow-Up</b> (within 90 days) — $150</span>
+      <span><b>Forever White</b> — unlimited for a year</span>
+      <span><a href="https://squareup.com/gift/MLGPTZDZ0TGWD/order" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Gift cards →</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- vs ZOOM -->
+<section class="sec-pad compare">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Why not Zoom?</span>
+      <h2>The same wow, without the price or the pain.</h2>
+    </div>
+    <table class="ctable" data-reveal>
+      <thead>
+        <tr><th>&nbsp;</th><th class="us">Teeth Whitening Lab</th><th>Dentist Zoom</th><th>At-home strips</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Starting price</td><td class="us">$250</td><td>$400–$800+</td><td>$40–$80</td></tr>
+        <tr><td>Time to results</td><td class="us">90 min, same day</td><td>~60–90 min</td><td>Weeks</td></tr>
+        <tr><td>Shades brighter (1st visit)</td><td class="us">6–16</td><td>4–8</td><td>1–3</td></tr>
+        <tr><td>Sensitivity</td><td class="us"><span class="yes">Zero to minimal</span></td><td><span class="no">Common "zingers"</span></td><td>Varies</td></tr>
+        <tr><td>Same-day availability</td><td class="us"><span class="yes">Yes</span></td><td>Appointment</td><td>n/a</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="sec-pad">
+  <div class="wrap">
+    <div class="guarantee" data-reveal>
+      <div class="seal">90 MIN<br>OR LESS</div>
+      <h2>Your brightest smile, made easy.</h2>
+      <p>Advanced laser whitening with zero to minimal sensitivity — plus a free consultation, digital before &amp; after photos, and an after-care kit to take home. Call or text for same-day availability.</p>
+      <a class="btn btn-primary btn-lg" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Your Session</a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec-pad" id="reviews" style="background:var(--soft)">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">5-star rated</span>
+      <h2>What our clients are saying.</h2>
+    </div>
+    <div class="proof" data-reveal>
+      <div class="proof-card">
+        <img class="plat-img" src="https://assets.cdn.filesafe.space/g5y1PTow6r0JRAkSvooU/media/63b39b97408c0befba039c28.webp" alt="Yelp">
+        <div class="stars">★★★★★</div>
+        <div class="sub">5-star rated by clients across Long Beach &amp; surrounding areas.</div>
+        <a class="btn-bounce" href="https://www.yelp.com/biz/teeth-whitening-lab-long-beach-4" target="_blank" rel="noopener">Read our Yelp reviews →</a>
+      </div>
+      <div class="proof-card">
+        <img class="plat-img" src="https://assets.cdn.filesafe.space/g5y1PTow6r0JRAkSvooU/media/63b39b9e408c0b4f7a039c29.png" alt="Google">
+        <div class="stars">★★★★★</div>
+        <div class="sub">Consistent 5-star ratings from our community of 7,000+.</div>
+        <a class="btn-bounce" href="https://www.google.com/maps/place/Teeth+Whitening+Lab+Long+Beach/@33.7747889,-118.1800083,15z/data=!4m5!3m4!1s0x0:0x41704f25b7941cf8!8m2!3d33.7747889!4d-118.1800083" target="_blank" rel="noopener">Read our Google reviews →</a>
+      </div>
+    </div>
+    <div class="rev-carousel" id="revCarousel" data-reveal>
+      <div class="rev-slide active">
+        <span class="stars">★★★★★</span>
+        <div class="vr">Verified review</div>
+        <blockquote>"I took my teenage daughter today… I am stunned!! We were helped by Angel and Noel, both super friendly and professional. The results on my daughter's teeth are incredible — 20 shades lighter all in one session! I highly recommend."</blockquote>
+        <div class="who">— Blanca <span>· Los Angeles, CA</span></div>
+      </div>
+      <div class="rev-dots" id="revDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec-pad" id="faq">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Common questions</span>
+      <h2>Good to know.</h2>
+    </div>
+    <div class="faq" data-reveal>
+      <div class="acc"><button>Will I see a difference after my first visit?<span class="ic">+</span></button><div class="panel"><p>Yes — here at the Teeth Whitening Lab we pride ourselves on delivering noticeable, more often than not dramatic, same-day results.</p></div></div>
+      <div class="acc"><button>Does teeth whitening damage tooth enamel?<span class="ic">+</span></button><div class="panel"><p>When used as directed, professional whitening does not harm tooth enamel. Excessive or improper use of some products can lead to temporary sensitivity or gum irritation — which is why a professional, controlled treatment matters.</p></div></div>
+      <div class="acc"><button>Should I book the 90-minute or 60-minute option?<span class="ic">+</span></button><div class="panel"><p>We always recommend the 90-minute option so your chair is reserved should you want to complete it. If you're satisfied at 60 minutes, we only charge for services rendered.</p></div></div>
+      <div class="acc"><button>How long do the results last?<span class="ic">+</span></button><div class="panel"><p>Results typically last 6 months to one year, depending on your lifestyle, after-care, and maintenance.</p></div></div>
+      <div class="acc"><button>Do you offer discounts?<span class="ic">+</span></button><div class="panel"><p>Yes — we proudly offer discounts to veterans, seniors, students, educators, first responders, and dental professionals. Just ask at check-out.</p></div></div>
+      <div class="acc"><button>What if I have existing dental work?<span class="ic">+</span></button><div class="panel"><p>We can restore your existing dental work to its original installation shade.</p></div></div>
+      <div class="acc"><button>Can I whiten if I'm under 18?<span class="ic">+</span></button><div class="panel"><p>Yes — parental consent is required for anyone under the age of 18.</p></div></div>
+      <div class="acc"><button>Where can I park?<span class="ic">+</span></button><div class="panel"><p>Free parking is available one building north of the Teeth Whitening Lab. You're in the right lot if you see a wall-to-wall mural.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec-pad contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="map" data-reveal>
+      <iframe title="Teeth Whitening Lab location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=638+Alamitos+Avenue,+Long+Beach,+CA+90802&output=embed"></iframe>
+    </div>
+    <div class="visit-card" data-reveal>
+      <span class="eyebrow">Visit us</span>
+      <h2>Book your brightest smile today.</h2>
+      <p class="lead">Call or text for same-day availability — over-the-phone and via-text consultations are always free.</p>
+      <div class="cinfo2">
+        <div><div class="k">Location</div><a class="v" href="https://www.google.com/maps/place/Teeth+Whitening+Lab+Long+Beach/@33.7747889,-118.1800083,15z/data=!4m5!3m4!1s0x0:0x41704f25b7941cf8!8m2!3d33.7747889!4d-118.1800083" target="_blank" rel="noopener">638 Alamitos Avenue, Long Beach, CA 90802</a></div>
+        <div><div class="k">Call or text</div><a class="v" href="tel:5625148383">(562) 514-8383</a></div>
+        <div><div class="k">Email</div><a class="v" href="mailto:teethwhiteninglablongbeach@gmail.com">teethwhiteninglablongbeach@gmail.com</a></div>
+        <div><div class="k">Hours</div><div class="v">Tuesday – Saturday · 9:00 AM – 6:00 PM</div></div>
+      </div>
+      <a class="btn btn-blue btn-lg" style="margin-top:1.9rem;width:100%;justify-content:center" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Appointment →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="brand" style="color:var(--ink)"><img src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/63be49e4dc38d74489a136c1.webp" alt="Teeth Whitening Lab" style="height:40px"></div>
+      <div class="foot-links">
+        <a href="#results">Results</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+        <a href="https://www.instagram.com/teethwhiteninglablongbeach/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/TeethWhiteningLabLongBeach" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.yelp.com/biz/teeth-whitening-lab-long-beach-4" target="_blank" rel="noopener">Yelp</a>
+      </div>
+    </div>
+    <p class="foot-note">© 2026 Teeth Whitening Lab Long Beach. All rights reserved. · Serving Long Beach, Orange County, San Pedro &amp; Palos Verdes. Teeth whitening is a cosmetic service; results vary by individual.</p>
+  </div>
+</footer>
+
+<!-- sticky mobile book bar -->
+<div class="book-bar">
+  <a class="btn btn-ghost" href="tel:5625148383">Call / Text</a>
+  <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Now</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Nav scroll state */
+  var hdr=document.getElementById('hdr');
+  function onScroll(){hdr.classList.toggle('scrolled',window.scrollY>20);}
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  /* Mobile menu */
+  var mm=document.getElementById('mobileMenu');
+  document.getElementById('menuBtn').onclick=function(){mm.classList.add('show');};
+  document.getElementById('closeMenu').onclick=function(){mm.classList.remove('show');};
+  mm.querySelectorAll('a').forEach(function(a){a.onclick=function(){mm.classList.remove('show');};});
+
+  /* Before/After slider */
+  var ba=document.getElementById('ba'), bimg=document.getElementById('beforeImg'), hd=document.getElementById('baHandle');
+  function setPos(pct){pct=Math.max(0,Math.min(100,pct));bimg.style.clipPath='inset(0 '+(100-pct)+'% 0 0)';hd.style.left=pct+'%';ba.setAttribute('aria-valuenow',Math.round(pct));}
+  var dragging=false;
+  function fromEvent(e){var r=ba.getBoundingClientRect();var x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;return x/r.width*100;}
+  function start(e){dragging=true;setPos(fromEvent(e));}
+  function move(e){if(dragging){setPos(fromEvent(e));if(e.cancelable)e.preventDefault();}}
+  function end(){dragging=false;}
+  ba.addEventListener('mousedown',start);window.addEventListener('mousemove',move);window.addEventListener('mouseup',end);
+  ba.addEventListener('touchstart',start,{passive:true});window.addEventListener('touchmove',move,{passive:false});window.addEventListener('touchend',end);
+  ba.addEventListener('keydown',function(e){var v=parseFloat(ba.getAttribute('aria-valuenow'))||50;if(e.key==='ArrowLeft'){setPos(v-4);e.preventDefault();}if(e.key==='ArrowRight'){setPos(v+4);e.preventDefault();}});
+  setPos(50);
+  /* gentle invite nudge */
+  if(!reduce){setTimeout(function(){setPos(62);setTimeout(function(){setPos(40);setTimeout(function(){setPos(50);},420);},420);},900);}
+
+  /* Results swipe deck */
+  (function(){
+    var deck=document.getElementById('deck'); if(!deck) return;
+    var cards=[].slice.call(deck.querySelectorAll('.deck-card'));
+    var order=cards.slice();
+    function render(){
+      order.forEach(function(c,i){
+        c.style.zIndex=String(order.length-i);
+        if(i>2){c.style.opacity='0';c.style.transform='translateY(40px) scale(.88)';c.style.pointerEvents='none';return;}
+        c.style.opacity='1';c.style.pointerEvents=(i===0?'auto':'none');
+        c.style.transform='translateY('+(i*14)+'px) scale('+(1-i*0.05)+')';
+      });
+    }
+    function cycle(dir){
+      var front=order[0];
+      front.style.transition='transform .45s ease, opacity .45s';
+      front.style.transform='translateX('+(dir*140)+'%) rotate('+(dir*12)+'deg)';
+      front.style.opacity='0';
+      setTimeout(function(){order.push(order.shift());render();},340);
+    }
+    var pn=document.getElementById('deckNext'),pp=document.getElementById('deckPrev');
+    if(pn)pn.onclick=function(){cycle(1);};
+    if(pp)pp.onclick=function(){cycle(-1);};
+    var sx=0,dx=0,drag=false;
+    function down(e){if(e.target.closest&&e.target.closest('.deck-arrow'))return;drag=true;dx=0;sx=(e.touches?e.touches[0].clientX:e.clientX);order[0].classList.add('dragging');}
+    function mv(e){if(!drag)return;dx=(e.touches?e.touches[0].clientX:e.clientX)-sx;order[0].style.transform='translateX('+dx+'px) rotate('+(dx*0.05)+'deg)';}
+    function up(){if(!drag)return;drag=false;order[0].classList.remove('dragging');if(Math.abs(dx)>90){cycle(dx>0?1:-1);}else{render();}dx=0;}
+    deck.addEventListener('mousedown',down);window.addEventListener('mousemove',mv);window.addEventListener('mouseup',up);
+    deck.addEventListener('touchstart',down,{passive:true});window.addEventListener('touchmove',mv,{passive:true});window.addEventListener('touchend',up);
+    render();
+  })();
+
+  /* Reviews carousel */
+  (function(){
+    var car=document.getElementById('revCarousel'); if(!car) return;
+    var slides=[].slice.call(car.querySelectorAll('.rev-slide'));
+    var dotsWrap=document.getElementById('revDots');
+    var i=0;
+    if(slides.length<2){if(dotsWrap)dotsWrap.style.display='none';return;}
+    slides.forEach(function(_,idx){var b=document.createElement('button');b.setAttribute('aria-label','Review '+(idx+1));b.onclick=function(){go(idx);};dotsWrap.appendChild(b);});
+    var dots=[].slice.call(dotsWrap.children);
+    function go(n){slides[i].classList.remove('active');dots[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('active');dots[i].classList.add('on');}
+    dots[0].classList.add('on');
+    var sx=0;
+    car.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+    car.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(i+(dx<0?1:-1));});
+  })();
+
+  /* FAQ accordion */
+  document.querySelectorAll('.acc').forEach(function(acc){
+    var btn=acc.querySelector('button'),panel=acc.querySelector('.panel');
+    btn.onclick=function(){
+      var open=acc.classList.contains('open');
+      document.querySelectorAll('.acc').forEach(function(a){a.classList.remove('open');a.querySelector('.panel').style.maxHeight=null;});
+      if(!open){acc.classList.add('open');panel.style.maxHeight=panel.scrollHeight+'px';}
+    };
+  });
+
+  /* Reveals */
+  var reveals=document.querySelectorAll('[data-reveal]');
+  if(reduce){reveals.forEach(function(el){el.classList.add('is-in');});}
+  else{
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-in');io.unobserve(en.target);}});
+    },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){io.observe(el);});
+  }
+
+  /* Animated counters */
+  function animateCount(el){
+    var target=parseFloat(el.getAttribute('data-count'));var suffix=el.getAttribute('data-suffix')||'';
+    var dur=1400,t0=null;
+    function fmt(n){return (target>=1000)?Math.round(n).toLocaleString():Math.round(n);}
+    function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=1-Math.pow(1-p,3);el.textContent=fmt(target*e)+suffix;if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+  var counters=document.querySelectorAll('[data-count]');
+  if(reduce){counters.forEach(function(el){el.textContent=(parseFloat(el.getAttribute('data-count'))>=1000?parseFloat(el.getAttribute('data-count')).toLocaleString():el.getAttribute('data-count'))+(el.getAttribute('data-suffix')||'');});}
+  else{
+    var cio=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){animateCount(en.target);cio.unobserve(en.target);}});},{threshold:.5});
+    counters.forEach(function(el){cio.observe(el);});
+  }
+
+  /* Subtle scroll parallax on hero before/after (desktop, motion-ok) */
+  if(window.gsap && window.ScrollTrigger && !reduce && window.innerWidth>860){
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to('#ba',{yPercent:-6,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  }
+})();
+</script>
+</body>
+</html>
