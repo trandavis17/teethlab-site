@@ -33,8 +33,8 @@ section{position:relative}
 
 /* Buttons with the "dance" hover */
 .btn{display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.98rem;padding:1rem 1.7rem;border-radius:100px;border:0;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .3s;will-change:transform}
-.btn-primary{background:var(--grad);color:#fff;background-size:160% 160%;box-shadow:var(--shadow-sm)}
-.btn-primary:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 18px 36px -14px rgba(91,75,232,.6);animation:wiggle .5s ease}
+.btn-primary{background:linear-gradient(120deg,#16b85c,#0f9d4f);color:#fff;box-shadow:0 12px 30px -12px rgba(16,163,78,.55)}
+.btn-primary:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 18px 38px -14px rgba(16,163,78,.72);animation:wiggle .5s ease}
 .btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
 .btn-ghost:hover{transform:translateY(-3px);border-color:var(--primary);color:var(--primary)}
 .btn-lg{padding:1.15rem 2.1rem;font-size:1.05rem}
@@ -95,7 +95,7 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 /* Results swipe deck */
 .gallery{overflow:hidden}
 .deck-wrap{display:flex;flex-direction:column;align-items:center;gap:1.4rem}
-.deck{position:relative;width:min(380px,86vw);aspect-ratio:4/5;touch-action:pan-y}
+.deck{position:relative;width:min(680px,92vw);aspect-ratio:1/1;touch-action:pan-y}
 .deck-card{position:absolute;inset:0;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:var(--soft);cursor:grab;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s;will-change:transform}
 .deck-card.dragging{transition:none;cursor:grabbing}
 .deck-card img{width:100%;height:100%;object-fit:cover;pointer-events:none;transform:scale(2)}
@@ -426,26 +426,26 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     </div>
     <div class="price-grid">
       <div class="price-card" data-reveal>
-        <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cd4a34b1ed0987b62b669a.jpeg" alt="One adult whitening session">
-        <h4>1 Adult</h4>
-        <div class="amt">$250<span> / 90 min</span></div>
-        <p>Our most popular single session — 6 to 16 shades brighter. Recommended for first-time whiteners.</p>
-        <a class="btn btn-ghost" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
-      </div>
-      <div class="price-card feat" data-reveal>
-        <span class="pop">Best for two</span>
         <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65966008539b6dea58bea85e.jpeg" alt="Couples whitening session">
         <h4>Party of 2</h4>
         <div class="amt">$450<span> / 90 min</span></div>
         <p>Book a party of two and save. You and a loved one, 6–16 shades brighter together — same day, same time.</p>
         <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book for two</a>
       </div>
+      <div class="price-card feat" data-reveal>
+        <span class="pop">Most popular</span>
+        <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/65cd4a34b1ed0987b62b669a.jpeg" alt="One adult whitening session">
+        <h4>1 Adult</h4>
+        <div class="amt">$250<span> / 90 min</span></div>
+        <p>Our most popular single session — 6 to 16 shades brighter. Recommended for first-time whiteners.</p>
+        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
+      </div>
       <div class="price-card" data-reveal>
         <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/66adb21436ab420466a27f86.jpeg" alt="Teen whitening session">
         <h4>1 Teenager</h4>
         <div class="amt">$225<span> / 60 min</span></div>
         <p>A 60-minute session perfect for teens with light to moderate staining — 4 to 12 shades brighter.</p>
-        <a class="btn btn-ghost" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
+        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
       </div>
     </div>
     <div class="price-extra" data-reveal>
@@ -561,7 +561,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
         <div><div class="k">Email</div><a class="v" href="mailto:teethwhiteninglablongbeach@gmail.com">teethwhiteninglablongbeach@gmail.com</a></div>
         <div><div class="k">Hours</div><div class="v">Tuesday – Saturday · 9:00 AM – 6:00 PM</div></div>
       </div>
-      <a class="btn btn-blue btn-lg" style="margin-top:1.9rem;width:100%;justify-content:center" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Appointment →</a>
+      <a class="btn btn-primary btn-lg" style="margin-top:1.9rem;width:100%;justify-content:center" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Appointment →</a>
     </div>
   </div>
 </section>
@@ -680,12 +680,17 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 
   /* Reveals */
   var reveals=document.querySelectorAll('[data-reveal]');
-  if(reduce){reveals.forEach(function(el){el.classList.add('is-in');});}
+  function revealAll(){reveals.forEach(function(el){el.classList.add('is-in');});}
+  function revealInView(){var h=window.innerHeight||800;reveals.forEach(function(el){var r=el.getBoundingClientRect();if(r.top<h*0.92){el.classList.add('is-in');}});}
+  if(reduce || !('IntersectionObserver' in window)){revealAll();}
   else{
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-in');io.unobserve(en.target);}});
-    },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+    },{threshold:.08,rootMargin:'0px 0px -5% 0px'});
     reveals.forEach(function(el){io.observe(el);});
+    revealInView();                                   /* show anything already on screen at load */
+    window.addEventListener('load',revealInView);
+    setTimeout(revealAll,1600);                        /* failsafe: never leave content hidden */
   }
 
   /* Animated counters */
