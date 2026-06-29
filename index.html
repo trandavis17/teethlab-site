@@ -33,8 +33,9 @@ section{position:relative}
 
 /* Buttons with the "dance" hover */
 .btn{display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.98rem;padding:1rem 1.7rem;border-radius:100px;border:0;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .3s;will-change:transform}
-.btn-primary{background:linear-gradient(120deg,#16b85c,#0f9d4f);color:#fff;box-shadow:0 12px 30px -12px rgba(16,163,78,.55)}
-.btn-primary:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 18px 38px -14px rgba(16,163,78,.72);animation:wiggle .5s ease}
+.btn-primary{background:linear-gradient(120deg,#16b85c,#0f9d4f);color:#fff;box-shadow:0 12px 30px -12px rgba(16,163,78,.55);animation:cbounce 1.9s ease-in-out infinite}
+.btn-primary:hover{filter:brightness(1.07);box-shadow:0 20px 42px -12px rgba(16,163,78,.82)}
+@keyframes cbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
 .btn-ghost:hover{transform:translateY(-3px);border-color:var(--primary);color:var(--primary)}
 .btn-lg{padding:1.15rem 2.1rem;font-size:1.05rem}
@@ -65,10 +66,10 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 .hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);margin-top:.45rem}
 .hero h1 .tint{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
 .hero p.lede{font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--muted);margin:1.3rem 0 0;max-width:46ch}
-.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.hero-cta{display:flex;flex-direction:column;align-items:flex-start;gap:.7rem}
 .rating-line{display:flex;align-items:center;gap:.7rem;margin-top:1.4rem;font-size:.93rem;color:var(--muted);flex-wrap:wrap}
 .stars{color:#f5a623;letter-spacing:2px;font-size:1.05rem}
-@media(max-width:860px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"head" "media" "para" "cta" "rate";text-align:center}.hero p.lede{margin:1.4rem auto 0}.hero-cta,.rating-line{justify-content:center}.h-media{margin:.3rem 0}.h-cta{margin-top:1.2rem}}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"head" "media" "para" "cta" "rate";text-align:center}.hero p.lede{margin:1.4rem auto 0}.hero-cta{align-items:center}.rating-line{justify-content:center}.h-media{margin:.3rem 0}.h-cta{margin-top:1.2rem}}
 
 /* Before/After slider */
 .ba{position:relative;width:100%;max-width:560px;margin-inline:auto;aspect-ratio:1/1;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);user-select:none;touch-action:pan-y;background:#0d0d12}
@@ -175,8 +176,8 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 .proof-card .plat-img{height:46px;width:auto;margin:0 auto .7rem;display:block;object-fit:contain}
 .proof-card .brandlogo{font-family:'Inter';font-weight:800;font-size:2.1rem;letter-spacing:-.03em;line-height:1;margin-bottom:.6rem}
 .proof-card .ylogo{color:#FF1A1A}
-.proof-card .btn-bounce{display:inline-flex;align-items:center;gap:.4em;margin-top:1.1rem;padding:.7rem 1.3rem;border-radius:100px;background:var(--grad);color:#fff;font-weight:700;font-size:.92rem;box-shadow:var(--shadow-sm);transition:transform .2s}
-.proof-card .btn-bounce:hover{animation:bounce .6s ease infinite}
+.proof-card .btn-bounce{display:inline-flex;align-items:center;gap:.4em;margin-top:1.1rem;padding:.7rem 1.3rem;border-radius:100px;background:var(--grad);color:#fff;font-weight:700;font-size:.92rem;box-shadow:var(--shadow-sm);animation:bounce 1.9s ease-in-out infinite}
+.proof-card .btn-bounce:hover{filter:brightness(1.08)}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @media(max-width:680px){.proof{grid-template-columns:1fr}}
 .rev-carousel{max-width:780px;margin:clamp(28px,4vw,44px) auto 0;position:relative;text-align:center}
@@ -211,9 +212,11 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 .acc.open .ic{background:var(--primary);color:#fff;transform:rotate(45deg)}
 .acc .panel{max-height:0;overflow:hidden;transition:max-height .35s ease}
 .acc .panel p{padding:0 1rem 1.25rem;color:var(--muted);border-left:3px solid var(--primary);margin-left:1rem;padding-left:1rem}
+.acc .panel .faq-imgs{display:flex;gap:.6rem;flex-wrap:wrap;padding:0 1rem 1.3rem 2rem}
+.acc .panel .faq-imgs img{flex:1;min-width:150px;border-radius:12px;object-fit:cover;aspect-ratio:4/3;box-shadow:var(--shadow-sm)}
 
 /* Contact / location */
-.contact{background:var(--ink);color:#fff}
+.contact{background:linear-gradient(rgba(24,18,48,.60),rgba(15,11,32,.78)), url('contact-bg.jpg') center/cover;color:#fff}
 .contact-grid{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:clamp(28px,5vw,56px);align-items:center}
 .contact h2{font-size:clamp(2rem,4vw,3rem)}
 .cinfo{display:grid;gap:1.3rem;margin-top:1.6rem}
@@ -330,7 +333,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     <div class="h-rate" data-reveal>
       <div class="rating-line">
         <span class="stars">★★★★★</span>
-        <span><b style="color:var(--ink)">7,000+ happy clients</b> · 5-star rated on Yelp &amp; Google</span>
+        <span><b style="color:var(--ink)">7,000+ happy clients</b> · 5-star rated on <b style="color:#FF1A1A">Yelp</b> &amp; <b><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></b></span>
       </div>
     </div>
   </div>
@@ -358,11 +361,26 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   <div class="wrap" style="margin-top:2.4rem" data-reveal>
     <div class="deck-wrap">
       <div class="deck" id="deck">
-        <div class="deck-card"><img loading="lazy" src="res1.jpg" alt="Before and after whitening results"><div class="cap"><span class="stars">★★★★★</span> Real client results</div></div>
-        <div class="deck-card"><img loading="lazy" src="res2.jpg" alt="Before and after whitening results"><div class="cap"><span class="stars">★★★★★</span> Real client results</div></div>
-        <div class="deck-card"><img loading="lazy" src="res3.jpg" alt="Before and after whitening results"><div class="cap"><span class="stars">★★★★★</span> Real client results</div></div>
-        <div class="deck-card"><img loading="lazy" src="res4.jpg" alt="Before and after whitening results"><div class="cap"><span class="stars">★★★★★</span> Real client results</div></div>
-        <div class="deck-card"><img loading="lazy" src="res5.jpg" alt="Before and after whitening results"><div class="cap"><span class="stars">★★★★★</span> Real client results</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair01.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair02.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair03.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair04.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair05.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair06.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair07.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair08.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair09.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair10.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair11.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair12.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair13.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair14.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair15.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair16.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair17.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair18.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair19.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair20.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
         <button class="deck-arrow prev" id="deckPrev" aria-label="Previous result">‹</button>
         <button class="deck-arrow next" id="deckNext" aria-label="Next result">›</button>
       </div>
@@ -548,7 +566,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
       <div class="acc"><button>Do you offer discounts?<span class="ic">+</span></button><div class="panel"><p>Yes — we proudly offer discounts to veterans, seniors, students, educators, first responders, and dental professionals. Just ask at check-out.</p></div></div>
       <div class="acc"><button>What if I have existing dental work?<span class="ic">+</span></button><div class="panel"><p>We can restore your existing dental work to its original installation shade.</p></div></div>
       <div class="acc"><button>Can I whiten if I'm under 18?<span class="ic">+</span></button><div class="panel"><p>Yes — parental consent is required for anyone under the age of 18.</p></div></div>
-      <div class="acc"><button>Where can I park?<span class="ic">+</span></button><div class="panel"><p>Free parking is available one building north of the Teeth Whitening Lab. You're in the right lot if you see a wall-to-wall mural.</p></div></div>
+      <div class="acc"><button>Where can I park?<span class="ic">+</span></button><div class="panel"><p>Free parking is available one building north of the Teeth Whitening Lab. You are in the right parking lot if you see a wall-to-wall mural.</p><div class="faq-imgs"><img loading="lazy" src="park-lot.jpg" alt="Parking lot, one building north"><img loading="lazy" src="park-mural.jpg" alt="Wall-to-wall mural landmark"><img loading="lazy" src="park-store.jpg" alt="Teeth Whitening Lab storefront"></div></div></div>
     </div>
   </div>
 </section>
