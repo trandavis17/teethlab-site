@@ -71,7 +71,7 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"head" "media" "para" "cta" "rate";text-align:center}.hero p.lede{margin:1.4rem auto 0}.hero-cta,.rating-line{justify-content:center}.h-media{margin:.3rem 0}.h-cta{margin-top:1.2rem}}
 
 /* Before/After slider */
-.ba{position:relative;width:100%;max-width:660px;margin-inline:auto;aspect-ratio:16/9;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);user-select:none;touch-action:pan-y;background:#0d0d12}
+.ba{position:relative;width:100%;max-width:560px;margin-inline:auto;aspect-ratio:1/1;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);user-select:none;touch-action:pan-y;background:#0d0d12}
 .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .ba .after-img{z-index:1}
 .ba .before-img{z-index:2;clip-path:inset(0 50% 0 0)}
@@ -260,9 +260,10 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .is-in{opacity:1!important;transform:none!important;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
 
 /* sticky mobile book bar */
-.book-bar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:.6rem;padding:.7rem;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);box-shadow:0 -1px 0 var(--line)}
+.book-bar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:.6rem;padding:.7rem;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);box-shadow:0 -1px 0 var(--line);transform:translateY(125%);transition:transform .35s ease}
+.book-bar.show{transform:translateY(0)}
 .book-bar .btn{flex:1;justify-content:center;padding:.85rem}
-@media(max-width:860px){.book-bar{display:flex}body{padding-bottom:74px}}
+@media(max-width:860px){.book-bar{display:flex}}
 </style>
 </head>
 <body>
@@ -610,8 +611,13 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 
   /* Nav scroll state */
   var hdr=document.getElementById('hdr');
-  function onScroll(){hdr.classList.toggle('scrolled',window.scrollY>20);}
-  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  var bbar=document.querySelector('.book-bar');
+  function onScroll(){
+    var sc=window.scrollY||document.documentElement.scrollTop||0;
+    hdr.classList.toggle('scrolled',sc>20);
+    if(bbar){var max=document.documentElement.scrollHeight-window.innerHeight;var ratio=max>0?sc/max:0;bbar.classList.toggle('show',ratio>0.35);}
+  }
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll,{passive:true});
 
   /* Mobile menu */
   var mm=document.getElementById('mobileMenu');
