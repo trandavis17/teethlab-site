@@ -267,6 +267,33 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .book-bar.show{transform:translateY(0)}
 .book-bar .btn{flex:1;justify-content:center;padding:.85rem}
 @media(max-width:860px){.book-bar{display:flex}}
+
+/* ============ PREMIUM FX — each block is independent & removable ============ */
+/* FX1) Hero gloss sweep */
+.h-media{position:relative}
+.ba::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.40) 48%,rgba(255,255,255,.06) 58%,transparent 64%);transform:translateX(-130%);animation:gloss 5.5s ease-in-out 1.3s infinite}
+@keyframes gloss{0%{transform:translateX(-130%)}20%{transform:translateX(130%)}100%{transform:translateX(130%)}}
+/* FX5) Sparkle burst */
+.spark{position:absolute;z-index:7;pointer-events:none;font-size:1.05rem;will-change:transform,opacity;animation:sparkle .95s ease-out forwards}
+@keyframes sparkle{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}25%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.25)}}
+/* FX4) Trust marquee */
+.marquee{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;align-items:center;animation:marq 28s linear infinite;will-change:transform}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee .mi{display:inline-flex;align-items:center;padding:.85rem 1.5rem;font-weight:600;color:var(--ink-2);font-size:.95rem}
+.marquee .mi b{color:var(--primary)}
+.marquee .dot{color:var(--primary-2);font-size:.7rem}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* FX3) Shade meter */
+.shade-wrap{max-width:760px;margin:clamp(26px,4vw,42px) auto 0}
+.shade-row{display:flex;align-items:center;gap:1rem}
+.shade-row .sl-label{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;white-space:nowrap}
+.sl-track{position:relative;flex:1;height:48px;border-radius:100px;box-shadow:var(--shadow-sm);background:linear-gradient(90deg,#c7a05c,#dcc488,#e9d9b6 0,#ecdfb4,#f4eed7,#fbf9f1,#ffffff)}
+.sl-marker{position:absolute;top:-6px;bottom:-6px;width:5px;background:var(--ink);left:0;border-radius:5px;box-shadow:0 0 0 3px rgba(255,255,255,.8),0 4px 12px rgba(0,0,0,.25);transition:left 1.7s cubic-bezier(.2,.8,.2,1)}
+.shade-wrap.go .sl-marker{left:calc(100% - 5px)}
+.shade-num{color:var(--primary);font-style:italic}
+@media(max-width:560px){.shade-row .sl-label{font-size:.66rem}}
+/* ============ END PREMIUM FX ============ */
 </style>
 </head>
 <body>
@@ -339,6 +366,14 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   </div>
 </section>
 
+<!-- ===== TRUST MARQUEE (FX4 — removable) ===== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span>
+    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span>
+  </div>
+</div>
+
 <!-- STATS -->
 <section class="stats">
   <div class="wrap">
@@ -385,6 +420,24 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
         <button class="deck-arrow next" id="deckNext" aria-label="Next result">›</button>
       </div>
       <span class="deck-hint">Swipe or tap the arrows to shuffle through</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHADE METER (FX3 — removable) ===== -->
+<section class="sec-pad">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">The difference</span>
+      <h2>Up to <span class="shade-num">16 shades*</span> brighter.</h2>
+      <p class="muted" style="margin-top:.7rem">From dull and stained to bright and white — most clients jump several shades on their very first visit.</p>
+    </div>
+    <div class="shade-wrap" id="shadeWrap" data-reveal>
+      <div class="shade-row">
+        <span class="sl-label">Before</span>
+        <div class="sl-track"><div class="sl-marker"></div></div>
+        <span class="sl-label">After</span>
+      </div>
     </div>
   </div>
 </section>
@@ -646,14 +699,22 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   /* Before/After slider */
   var ba=document.getElementById('ba'), bimg=document.getElementById('beforeImg'), hd=document.getElementById('baHandle');
   function setPos(pct){pct=Math.max(0,Math.min(100,pct));bimg.style.clipPath='inset(0 '+(100-pct)+'% 0 0)';hd.style.left=pct+'%';ba.setAttribute('aria-valuenow',Math.round(pct));}
-  var dragging=false;
+  var dragging=false, sparkled=false;
+  /* FX5 sparkle burst */
+  function sparkle(){
+    if(reduce) return;
+    var host=ba.parentNode, pct=parseFloat(ba.getAttribute('aria-valuenow'))||50;
+    var cx=ba.offsetLeft+ba.offsetWidth*(pct/100), cy=ba.offsetTop+ba.offsetHeight/2;
+    for(var i=0;i<11;i++){var s=document.createElement('span');s.className='spark';s.textContent=(i%2?'✦':'✨');s.style.left=cx+'px';s.style.top=cy+'px';var a=Math.random()*6.283,d=35+Math.random()*80;s.style.setProperty('--dx',Math.round(Math.cos(a)*d)+'px');s.style.setProperty('--dy',Math.round(Math.sin(a)*d)+'px');host.appendChild(s);(function(el){setTimeout(function(){el.remove();},950);})(s);}
+  }
+  function maybeSpark(v){if(v>=98){if(!sparkled){sparkled=true;sparkle();}}else if(v<90){sparkled=false;}}
   function fromEvent(e){var r=ba.getBoundingClientRect();var x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;return x/r.width*100;}
   function start(e){dragging=true;setPos(fromEvent(e));}
-  function move(e){if(dragging){setPos(fromEvent(e));if(e.cancelable)e.preventDefault();}}
+  function move(e){if(dragging){var p=fromEvent(e);setPos(p);maybeSpark(p);if(e.cancelable)e.preventDefault();}}
   function end(){dragging=false;}
   ba.addEventListener('mousedown',start);window.addEventListener('mousemove',move);window.addEventListener('mouseup',end);
   ba.addEventListener('touchstart',start,{passive:true});window.addEventListener('touchmove',move,{passive:false});window.addEventListener('touchend',end);
-  ba.addEventListener('keydown',function(e){var v=parseFloat(ba.getAttribute('aria-valuenow'))||50;if(e.key==='ArrowLeft'){setPos(v-4);e.preventDefault();}if(e.key==='ArrowRight'){setPos(v+4);e.preventDefault();}});
+  ba.addEventListener('keydown',function(e){var v=parseFloat(ba.getAttribute('aria-valuenow'))||50;if(e.key==='ArrowLeft'){setPos(v-4);e.preventDefault();}if(e.key==='ArrowRight'){v=Math.min(100,v+4);setPos(v);maybeSpark(v);e.preventDefault();}});
   setPos(50);
   /* gentle invite nudge */
   if(!reduce){setTimeout(function(){setPos(62);setTimeout(function(){setPos(40);setTimeout(function(){setPos(50);},420);},420);},900);}
@@ -759,7 +820,17 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   if(window.gsap && window.ScrollTrigger && !reduce && window.innerWidth>860){
     gsap.registerPlugin(ScrollTrigger);
     gsap.to('#ba',{yPercent:-6,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+    /* FX2 scroll-scrubbed before->after wipe */
+    ScrollTrigger.create({trigger:'.hero',start:'top top',end:'bottom top',scrub:true,onUpdate:function(self){setPos(50+self.progress*50);}});
   }
+
+  /* FX3 shade meter reveal */
+  (function(){var sw=document.getElementById('shadeWrap'); if(!sw) return;
+    if(reduce || !('IntersectionObserver' in window)){sw.classList.add('go');return;}
+    var o=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){sw.classList.add('go');o.unobserve(sw);}});},{threshold:.4});
+    o.observe(sw);
+    setTimeout(function(){sw.classList.add('go');},2600);
+  })();
 })();
 </script>
 </body>
