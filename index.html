@@ -60,14 +60,14 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 @media(max-width:920px){.nav-links{display:none}.menu-btn{display:block}.nav-cta .btn-ghost{display:none}}
 
 /* Hero */
-.hero{padding-top:clamp(120px,16vw,170px);padding-bottom:clamp(40px,6vw,80px);background:radial-gradient(120% 90% at 85% 0%,var(--soft) 0%,#fff 55%)}
-.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(22px,4vw,60px);align-items:center;grid-template-areas:"head media" "para media" "cta media" "rate media"}
-.h-head{grid-area:head}.h-media{grid-area:media}.h-para{grid-area:para}.h-cta{grid-area:cta;margin-top:1.6rem}.h-rate{grid-area:rate}
-.hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);margin-top:.45rem}
-.hero h1 .tint{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
-.hero p.lede{font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--muted);margin:1.3rem 0 0;max-width:46ch}
+.hero{padding-top:clamp(92px,10vw,120px);padding-bottom:clamp(34px,5vw,60px);background:radial-gradient(120% 90% at 85% 0%,var(--soft) 0%,#fff 55%)}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;column-gap:clamp(22px,4vw,60px);row-gap:0;align-items:center;grid-template-areas:"head media" "para media" "cta media" "rate media"}
+.h-head{grid-area:head}.h-media{grid-area:media}.h-para{grid-area:para}.h-cta{grid-area:cta;margin-top:1.2rem}.h-rate{grid-area:rate}
+.hero h1{font-size:clamp(1.6rem,4.4vw,2.95rem);line-height:1.07;margin-top:.4rem;padding-right:.14em}
+.hero h1 .tint{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding-right:.06em}
+.hero p.lede{font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--muted);margin:.95rem 0 0;max-width:44ch}
 .hero-cta{display:flex;flex-direction:column;align-items:flex-start;gap:.7rem}
-.rating-line{display:flex;align-items:center;gap:.7rem;margin-top:1.4rem;font-size:.93rem;color:var(--muted);flex-wrap:wrap}
+.rating-line{display:flex;align-items:center;gap:.7rem;margin-top:1rem;font-size:.93rem;color:var(--muted);flex-wrap:wrap}
 .stars{color:#f5a623;letter-spacing:2px;font-size:1.05rem}
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"head" "media" "para" "cta" "rate";text-align:center}.hero p.lede{margin:1.4rem auto 0}.hero-cta{align-items:center}.rating-line{justify-content:center}.h-media{margin:.3rem 0}.h-cta{margin-top:1.2rem}}
 
@@ -284,15 +284,19 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .marquee .mi b{color:var(--primary)}
 .marquee .dot{color:var(--primary-2);font-size:.7rem}
 @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-/* FX3) Shade meter */
-.shade-wrap{max-width:760px;margin:clamp(26px,4vw,42px) auto 0}
-.shade-row{display:flex;align-items:center;gap:1rem}
-.shade-row .sl-label{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;white-space:nowrap}
-.sl-track{position:relative;flex:1;height:48px;border-radius:100px;box-shadow:var(--shadow-sm);background:linear-gradient(90deg,#c7a05c,#dcc488,#e9d9b6 0,#ecdfb4,#f4eed7,#fbf9f1,#ffffff)}
-.sl-marker{position:absolute;top:-6px;bottom:-6px;width:5px;background:var(--ink);left:0;border-radius:5px;box-shadow:0 0 0 3px rgba(255,255,255,.8),0 4px 12px rgba(0,0,0,.25);transition:left 1.7s cubic-bezier(.2,.8,.2,1)}
-.shade-wrap.go .sl-marker{left:calc(100% - 5px)}
+/* FX3) Interactive dental shade guide */
 .shade-num{color:var(--primary);font-style:italic}
-@media(max-width:560px){.shade-row .sl-label{font-size:.66rem}}
+.shade-wrap{max-width:840px;margin:clamp(28px,4vw,46px) auto 0}
+.sg-row{display:flex;gap:.5%;justify-content:center;align-items:flex-end;padding-top:28px}
+.tooth{flex:1 1 0;min-width:0;height:clamp(64px,11vw,120px);background:var(--c);border:0;padding:0;cursor:pointer;border-radius:46% 46% 40% 40%/26% 26% 64% 64%;box-shadow:inset 0 -8px 14px rgba(0,0,0,.13),0 4px 9px rgba(0,0,0,.12);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s;position:relative}
+.tooth:hover{transform:translateY(-12px) scale(1.06)}
+.tooth:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.tooth.sel{transform:translateY(-16px) scale(1.08);box-shadow:0 0 0 3px var(--primary),0 12px 22px rgba(0,0,0,.22)}
+.tooth.bright::after{content:"★ brightest";position:absolute;top:-22px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.6rem;font-weight:700;letter-spacing:.04em;color:#f5a623}
+.tooth .tn{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:.55rem;font-weight:700;color:rgba(0,0,0,.42)}
+.sg-read{text-align:center;margin-top:2.6rem;color:var(--muted);font-size:1.02rem;min-height:1.4em}
+.sg-read strong{color:var(--ink)} .sg-read b{color:var(--primary)}
+@media(max-width:620px){.sg-row{gap:1px}.tooth .tn{display:none}.tooth.bright::after{font-size:.5rem}}
 /* ============ END PREMIUM FX ============ */
 </style>
 </head>
@@ -338,7 +342,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   <div class="wrap hero-grid">
     <div class="h-head" data-reveal>
       <span class="eyebrow">Advanced Laser Teeth Whitening</span>
-      <h1>A brighter,<br><span class="tint">whiter smile</span><br>in 90 minutes.</h1>
+      <h1>A brighter, whiter <span class="tint">smile<br class="hbr">in just 90&nbsp;minutes.</span></h1>
     </div>
     <div class="h-media" data-reveal>
       <div class="ba" id="ba" tabindex="0" role="slider" aria-label="Before and after teeth whitening. Drag to reveal." aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
@@ -430,14 +434,11 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     <div class="head center" data-reveal>
       <span class="eyebrow">The difference</span>
       <h2>Up to <span class="shade-num">16 shades*</span> brighter.</h2>
-      <p class="muted" style="margin-top:.7rem">From dull and stained to bright and white — most clients jump several shades on their very first visit.</p>
+      <p class="muted" style="margin-top:.7rem">This is the shade guide we use in-studio. Tap a tooth to find your starting shade — we'll take you toward the brightest.</p>
     </div>
-    <div class="shade-wrap" id="shadeWrap" data-reveal>
-      <div class="shade-row">
-        <span class="sl-label">Before</span>
-        <div class="sl-track"><div class="sl-marker"></div></div>
-        <span class="sl-label">After</span>
-      </div>
+    <div class="shade-wrap" data-reveal>
+      <div class="sg-row" id="sgRow" role="group" aria-label="Dental shade guide"></div>
+      <div class="sg-read"><strong id="sgOut">Tap any shade above to see how many shades brighter you could go.</strong></div>
     </div>
   </div>
 </section>
@@ -820,16 +821,27 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   if(window.gsap && window.ScrollTrigger && !reduce && window.innerWidth>860){
     gsap.registerPlugin(ScrollTrigger);
     gsap.to('#ba',{yPercent:-6,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
-    /* FX2 scroll-scrubbed before->after wipe */
-    ScrollTrigger.create({trigger:'.hero',start:'top top',end:'bottom top',scrub:true,onUpdate:function(self){setPos(50+self.progress*50);}});
   }
 
-  /* FX3 shade meter reveal */
-  (function(){var sw=document.getElementById('shadeWrap'); if(!sw) return;
-    if(reduce || !('IntersectionObserver' in window)){sw.classList.add('go');return;}
-    var o=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){sw.classList.add('go');o.unobserve(sw);}});},{threshold:.4});
-    o.observe(sw);
-    setTimeout(function(){sw.classList.add('go');},2600);
+  /* FX3 interactive dental shade guide */
+  (function(){
+    var row=document.getElementById('sgRow'); if(!row) return;
+    var shades=[['C4','#9f8244'],['A4','#a98d50'],['C3','#b09659'],['B4','#b9a063'],['A3.5','#c0a96e'],['B3','#c8b27a'],['D3','#cdb985'],['A3','#d3c08e'],['D4','#d8c89b'],['C2','#ddcfa6'],['C1','#e3d6b3'],['A2','#e8dcbb'],['D2','#ece2c8'],['B2','#efe6cf'],['A1','#f3ecdc'],['B1','#f6f1e7']];
+    var out=document.getElementById('sgOut'), n=shades.length;
+    shades.forEach(function(s,i){
+      var b=document.createElement('button');
+      b.className='tooth'+(i===n-1?' bright':'');
+      b.style.setProperty('--c',s[1]);
+      b.setAttribute('aria-label','Shade '+s[0]);
+      b.innerHTML='<span class="tn">'+s[0]+'</span>';
+      b.addEventListener('click',function(){
+        row.querySelectorAll('.tooth').forEach(function(t){t.classList.remove('sel');});
+        b.classList.add('sel');
+        var br=(n-1)-i;
+        out.innerHTML = br<=0 ? "You're already at our brightest shade ✨" : "From <b>"+s[0]+"</b> &rarr; up to <b>"+br+" shade"+(br>1?'s':'')+" brighter</b>* at the Lab.";
+      });
+      row.appendChild(b);
+    });
   })();
 })();
 </script>
