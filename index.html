@@ -241,11 +241,13 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 .cinfo2 a.v:hover{color:#1f7ad1}
 .distance{margin-top:1.7rem}
 .distance .dlabel{display:block;font-size:.78rem;color:#5a7488;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.5rem;font-weight:700}
-.distance .drow{display:flex;gap:.6rem}
+.distance .drow,.leadcap .drow{display:flex;flex-direction:column;gap:.6rem}
 .distance .zip,.leadcap .zip{flex:1;min-width:0;border:1.5px solid #bcd6ee;border-radius:100px;padding:.85rem 1.1rem;font-size:1rem;background:#fff;color:#0d2433}
 .distance .zip:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(91,75,232,.18)}
 .distance .btn{white-space:nowrap}
-.distance .btn,.leadcap .btn{animation:none}
+.distance .btn,.leadcap .btn{animation:none;width:100%;justify-content:center}
+.btn-purple{background:linear-gradient(120deg,#5b4be8,#8174ff 55%,#3f7bff);color:#fff;box-shadow:0 12px 30px -12px rgba(91,75,232,.5)}
+.btn-purple:hover{filter:brightness(1.08);box-shadow:0 18px 40px -12px rgba(91,75,232,.72)}
 .leadcap .btn{flex:1 1 100%;justify-content:center;margin-top:.35rem}
 @media(max-width:480px){.distance .drow{flex-direction:column}}
 .btn-blue{background:linear-gradient(120deg,#3aa0ff,#6fd0ff);color:#07263d;box-shadow:0 18px 40px -12px rgba(58,160,255,.7);font-weight:700}
@@ -446,7 +448,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   <div class="wrap">
     <div class="stat" data-reveal><div class="n" data-count="7000" data-suffix="+">0</div><div class="l">Happy clients</div></div>
     <div class="stat" data-reveal><div class="n" data-count="90" data-suffix=" min">0</div><div class="l">Same-day results</div></div>
-    <div class="stat" data-reveal><div class="n" data-count="16" data-suffix=" shades">0</div><div class="l">Brighter, first visit</div></div>
+    <div class="stat" data-reveal><div class="n" data-count="16" data-suffix=" shades*">0</div><div class="l">Brighter, first visit</div></div>
     <div class="stat" data-reveal><div class="n" data-count="12" data-suffix=" mo">0</div><div class="l">Results can last, with care*</div></div>
   </div>
 </section>
@@ -714,7 +716,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
             <label class="dlabel" for="zipInput">See how far you are from us</label>
             <div class="drow">
               <input id="zipInput" class="zip" type="text" inputmode="numeric" maxlength="5" placeholder="Your ZIP code" aria-label="Your ZIP code" />
-              <button id="zipBtn" class="btn btn-primary" type="button">Check distance →</button>
+              <button id="zipBtn" class="btn btn-purple" type="button">Check distance →</button>
             </div>
           </div>
           <div class="vc-map"><iframe title="Teeth Whitening Lab location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=638+Alamitos+Avenue,+Long+Beach,+CA+90802&output=embed"></iframe></div>
@@ -724,7 +726,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
             <form id="leadForm" class="drow" novalidate>
               <input class="zip" name="name" type="text" placeholder="Your name" autocomplete="name" required />
               <input class="zip" name="phone" type="tel" inputmode="tel" placeholder="Phone number" autocomplete="tel" required />
-              <button class="btn btn-primary" type="submit">Get a free consult →</button>
+              <button class="btn btn-purple" type="submit">Get a free consult →</button>
             </form>
             <p class="lc-note">We&rsquo;ll text you back — consultations are always free.</p>
           </div>
@@ -958,7 +960,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   /* Animated counters */
   function animateCount(el){
     var target=parseFloat(el.getAttribute('data-count'));var suffix=el.getAttribute('data-suffix')||'';
-    var dur=1400,t0=null;
+    var dur=1700,t0=null;
     function fmt(n){return (target>=1000)?Math.round(n).toLocaleString():Math.round(n);}
     function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=1-Math.pow(1-p,3);el.textContent=fmt(target*e)+suffix;if(p<1)requestAnimationFrame(step);}
     requestAnimationFrame(step);
@@ -966,7 +968,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   var counters=document.querySelectorAll('[data-count]');
   if(reduce){counters.forEach(function(el){el.textContent=(parseFloat(el.getAttribute('data-count'))>=1000?parseFloat(el.getAttribute('data-count')).toLocaleString():el.getAttribute('data-count'))+(el.getAttribute('data-suffix')||'');});}
   else{
-    var cio=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){animateCount(en.target);cio.unobserve(en.target);}});},{threshold:.5});
+    var cio=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){animateCount(en.target);cio.unobserve(en.target);}});},{threshold:0,rootMargin:'0px 0px -22% 0px'});
     counters.forEach(function(el){cio.observe(el);});
   }
 
