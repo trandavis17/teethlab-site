@@ -185,8 +185,9 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @media(max-width:680px){.proof{grid-template-columns:1fr}}
 .rev-carousel{max-width:780px;margin:clamp(28px,4vw,44px) auto 0;position:relative;text-align:center}
-.rev-slide{display:none}
+.rev-slide{display:none;padding:0 52px}
 .rev-slide.active{display:block;animation:fade .5s ease}
+@media(max-width:840px){.rev-slide{padding:0 8px}}
 @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .rev-slide .stars{font-size:1.6rem;display:block;color:#f5a623;letter-spacing:3px}
 .rev-slide .vr{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);font-weight:700;margin:.55rem 0 1.2rem}
