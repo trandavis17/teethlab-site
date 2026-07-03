@@ -185,6 +185,8 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @media(max-width:680px){.proof{grid-template-columns:1fr}}
 .rev-carousel{max-width:780px;margin:clamp(28px,4vw,44px) auto 0;position:relative;text-align:center}
+.video-frame{max-width:620px;margin:0 auto;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 34px 80px -34px rgba(13,13,18,.5);line-height:0}
+.video-frame video{width:100%;max-height:76vh;display:block}
 .rev-slide{display:none;padding:0 52px}
 .rev-slide.active{display:block;animation:fade .5s ease}
 @media(max-width:840px){.rev-slide{padding:0 8px}}
@@ -584,6 +586,20 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   </div>
 </section>
 
+<!-- VIDEO -->
+<section class="sec-pad" style="padding-top:0">
+  <div class="wrap">
+    <div class="head center" data-reveal style="margin-bottom:1.6rem">
+      <span class="eyebrow">See it in action</span>
+      <h2>Come with us for a whitening session</h2>
+      <p class="muted">A quick look inside the studio — real clients, real same-day results.</p>
+    </div>
+    <div class="video-frame" data-reveal>
+      <video id="twlVideo" controls playsinline preload="none" poster="spa1.jpg"></video>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="sec-pad" id="how">
   <div class="wrap">
@@ -818,6 +834,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -892,6 +909,15 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     deck.addEventListener('mousedown',down);window.addEventListener('mousemove',mv);window.addEventListener('mouseup',up);
     deck.addEventListener('touchstart',down,{passive:true});window.addEventListener('touchmove',mv,{passive:true});window.addEventListener('touchend',up);
     render();
+  })();
+
+  /* Session video — hotlink client's hosted HLS stream */
+  (function(){
+    var v=document.getElementById('twlVideo'); if(!v) return;
+    var src='https://content.apisystem.tech/hls/medias/ZLXnU2RS6LXT98HUe0PV/media/transcoded_videos/cts-293082577557f200_,360,480,720,1080,1440,p.mp4.urlset/master.m3u8';
+    if(v.canPlayType('application/vnd.apple.mpegurl')){v.src=src;}
+    else if(window.Hls&&window.Hls.isSupported()){var h=new Hls();h.loadSource(src);h.attachMedia(v);}
+    else{v.src=src;}
   })();
 
   /* Reviews carousel */
