@@ -194,8 +194,15 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 .rev-slide .who{margin-top:1.2rem;font-weight:600}
 .rev-slide .who span{color:var(--muted);font-weight:400}
 .rev-dots{display:flex;gap:.5rem;justify-content:center;margin-top:1.7rem}
-.rev-dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;transition:.25s;padding:0}
-.rev-dots button.on{background:var(--primary);width:26px;border-radius:5px}
+.rev-dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;transition:width .3s,background .3s;padding:0;position:relative;overflow:hidden}
+.rev-dots button.on{background:var(--soft-2);width:40px;border-radius:5px}
+.rev-dots button i{display:block;position:absolute;left:0;top:0;bottom:0;width:0;background:var(--primary);border-radius:inherit}
+.rev-dots button.on i{animation:revfill 4.5s linear forwards}
+@keyframes revfill{from{width:0}to{width:100%}}
+.rev-arrow{position:absolute;top:44%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--primary);font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px -8px rgba(13,13,18,.25);transition:.2s;z-index:2}
+.rev-arrow:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.rev-prev{left:-8px}.rev-next{right:-8px}
+@media(max-width:840px){.rev-arrow{top:auto;bottom:-6px;transform:none}.rev-prev{left:calc(50% - 62px)}.rev-next{right:calc(50% - 62px)}.rev-dots{margin-top:2.6rem}}
 .review{background:var(--soft);border-radius:24px;padding:clamp(30px,4vw,56px);display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;margin-top:clamp(26px,4vw,40px)}
 .review .badge{width:120px;text-align:center}
 .review .badge .stars{font-size:1.4rem}
@@ -694,6 +701,8 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
         <blockquote>"Angel and Noel were very welcoming and informative with the process — definitely coming back next month!"</blockquote>
         <div class="who">— Yelp review <span>· Long Beach, CA</span></div>
       </div>
+      <button class="rev-arrow rev-prev" id="revPrev" type="button" aria-label="Previous review">‹</button>
+      <button class="rev-arrow rev-next" id="revNext" type="button" aria-label="Next review">›</button>
       <div class="rev-dots" id="revDots"></div>
     </div>
   </div>
@@ -891,15 +900,18 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     var dotsWrap=document.getElementById('revDots');
     var i=0;
     if(slides.length<2){if(dotsWrap)dotsWrap.style.display='none';return;}
-    slides.forEach(function(_,idx){var b=document.createElement('button');b.setAttribute('aria-label','Review '+(idx+1));b.onclick=function(){go(idx);};dotsWrap.appendChild(b);});
+    slides.forEach(function(_,idx){var b=document.createElement('button');b.setAttribute('aria-label','Review '+(idx+1));b.innerHTML='<i></i>';b.onclick=function(){go(idx);resetAuto();};dotsWrap.appendChild(b);});
     var dots=[].slice.call(dotsWrap.children);
-    function go(n){slides[i].classList.remove('active');dots[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('active');dots[i].classList.add('on');}
-    dots[0].classList.add('on');
+    function restartFill(){var f=dots[i].querySelector('i');if(!f)return;f.style.animation='none';void f.offsetWidth;f.style.animation='';}
+    function go(n){slides[i].classList.remove('active');dots[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('active');dots[i].classList.add('on');restartFill();}
+    dots[0].classList.add('on');restartFill();
     var auto;
     function startAuto(){auto=setInterval(function(){go(i+1);},4500);}
-    function resetAuto(){clearInterval(auto);startAuto();}
+    function resetAuto(){clearInterval(auto);restartFill();startAuto();}
     startAuto();
-    dotsWrap.addEventListener('click',resetAuto);
+    var prev=document.getElementById('revPrev'),next=document.getElementById('revNext');
+    if(prev)prev.onclick=function(){go(i-1);resetAuto();};
+    if(next)next.onclick=function(){go(i+1);resetAuto();};
     var sx=0;
     car.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
     car.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){go(i+(dx<0?1:-1));resetAuto();}});
