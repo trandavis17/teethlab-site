@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Teeth Whitening Lab — A Brighter Smile in 90 Minutes | Long Beach</title>
+<title>Teeth Whitening Lab — A Brighter Smile in 90 Minutes or Less, Guaranteed | Long Beach</title>
 <meta name="description" content="Premium laser teeth whitening in Long Beach. A brighter, whiter smile in 90 minutes or less — guaranteed, with zero to minimal sensitivity. Book your session today." />
-<meta property="og:title" content="Teeth Whitening Lab — A Brighter Smile in 90 Minutes" />
+<meta property="og:title" content="Teeth Whitening Lab — A Brighter Smile in 90 Minutes or Less, Guaranteed" />
 <meta property="og:description" content="Premium laser teeth whitening in Long Beach. Brighter, whiter, guaranteed — with zero to minimal sensitivity." />
 <meta property="og:type" content="website" />
+<meta property="og:image" content="https://teethlab-site.vercel.app/hero1.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -161,7 +162,7 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 @media(max-width:680px){.ctable th,.ctable td{padding:.8rem .7rem;font-size:.86rem}}
 
 /* Guarantee */
-.guarantee{background:var(--ink);color:#fff;text-align:center;border-radius:28px;padding:clamp(40px,6vw,72px);box-shadow:var(--shadow)}
+.guarantee{background:linear-gradient(140deg,#241a52 0%,#3b2a86 55%,#5a3fd6 100%);color:#fff;--g-body:#EDEAFF;text-align:center;border-radius:28px;padding:clamp(40px,6vw,72px);box-shadow:var(--shadow)}
 .guarantee .seal{width:88px;height:88px;border-radius:50%;border:2px dashed var(--primary-2);display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-size:.78rem;text-align:center;line-height:1.1;margin:0 auto 1.4rem;color:#cbbcff}
 .guarantee h2{font-size:clamp(2rem,4.5vw,3.2rem)}
 .guarantee p{color:#b6b6c6;max-width:52ch;margin:1rem auto 1.8rem}
@@ -213,19 +214,20 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 .acc .panel{max-height:0;overflow:hidden;transition:max-height .35s ease}
 .acc .panel p{padding:0 1rem 1.25rem;color:var(--muted);border-left:3px solid var(--primary);margin-left:1rem;padding-left:1rem}
 .acc .panel .faq-imgs{display:flex;gap:.6rem;flex-wrap:wrap;padding:0 1rem 1.3rem 2rem}
-.acc .panel .faq-imgs img{flex:1;min-width:150px;border-radius:12px;object-fit:cover;aspect-ratio:4/3;box-shadow:var(--shadow-sm)}
+.acc .panel .faq-imgs img{flex:1;min-width:150px;border-radius:12px;object-fit:contain;background:#eef2f7;aspect-ratio:4/3;box-shadow:var(--shadow-sm)}
 
 /* Contact / location */
-.contact{background:linear-gradient(rgba(24,18,48,.60),rgba(15,11,32,.78)), url('contact-bg.jpg') center/cover;color:#fff}
-.contact-grid{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:clamp(28px,5vw,56px);align-items:center}
+.contact{background:linear-gradient(rgba(20,16,42,.62),rgba(13,10,30,.78)), url('storefront.jpg') center/cover fixed;color:#fff}
+@media(max-width:860px){.contact{background-attachment:scroll}}
+.contact-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,56px);align-items:stretch}
 .contact h2{font-size:clamp(2rem,4vw,3rem)}
 .cinfo{display:grid;gap:1.3rem;margin-top:1.6rem}
 .cinfo div{display:flex;gap:.9rem;align-items:flex-start}
 .cinfo .k{color:#9a9ab0;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
 .cinfo .v{font-size:1.08rem}
 .cinfo a.v:hover{color:var(--primary-2)}
-.map{border-radius:22px;overflow:hidden;aspect-ratio:1/1;border:1px solid #2a2a36}
-.map iframe{width:100%;height:100%;min-height:300px;border:0;filter:grayscale(.15) contrast(1.05)}
+.map{border-radius:22px;overflow:hidden;border:1px solid #2a2a36;min-height:480px}
+.map iframe{width:100%;height:100%;min-height:480px;border:0;filter:grayscale(.15) contrast(1.05)}
 .visit-card{background:linear-gradient(150deg,#eef7ff 0%,#d6ecff 100%);color:#0d2433;border-radius:26px;padding:clamp(28px,4vw,48px);box-shadow:0 34px 70px -24px rgba(0,0,0,.55)}
 .visit-card .eyebrow{color:#1f7ad1}
 .visit-card h2{color:#0d2433}
@@ -237,9 +239,11 @@ header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-
 .distance{margin-top:1.7rem}
 .distance .dlabel{display:block;font-size:.78rem;color:#5a7488;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.5rem;font-weight:700}
 .distance .drow{display:flex;gap:.6rem}
-.distance .zip{flex:1;min-width:0;border:1.5px solid #bcd6ee;border-radius:100px;padding:.85rem 1.1rem;font-size:1rem;background:#fff;color:#0d2433}
+.distance .zip,.leadcap .zip{flex:1;min-width:0;border:1.5px solid #bcd6ee;border-radius:100px;padding:.85rem 1.1rem;font-size:1rem;background:#fff;color:#0d2433}
 .distance .zip:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(91,75,232,.18)}
 .distance .btn{white-space:nowrap}
+.distance .btn,.leadcap .btn{animation:none}
+.leadcap .btn{flex:1 1 100%;justify-content:center;margin-top:.35rem}
 @media(max-width:480px){.distance .drow{flex-direction:column}}
 .btn-blue{background:linear-gradient(120deg,#3aa0ff,#6fd0ff);color:#07263d;box-shadow:0 18px 40px -12px rgba(58,160,255,.7);font-weight:700}
 .btn-blue:hover{transform:translateY(-3px) scale(1.03);animation:wiggle .5s ease;box-shadow:0 22px 46px -12px rgba(58,160,255,.85)}
@@ -279,7 +283,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 /* FX4) Trust marquee */
 .marquee{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap}
 .marquee-track{display:inline-flex;align-items:center;animation:marq 28s linear infinite;will-change:transform}
-.marquee:hover .marquee-track{animation-play-state:paused}
+
 .marquee .mi{display:inline-flex;align-items:center;padding:.85rem 1.5rem;font-weight:600;color:var(--ink-2);font-size:.95rem}
 .marquee .mi b{color:var(--primary)}
 .marquee .dot{color:var(--primary-2);font-size:.7rem}
@@ -298,7 +302,61 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .sg-read strong{color:var(--ink)} .sg-read b{color:var(--primary)}
 @media(max-width:620px){.sg-row{gap:1px}.tooth .tn{display:none}.tooth.bright::after{font-size:.5rem}}
 /* ============ END PREMIUM FX ============ */
+
+/* Lead capture */
+.leadcap{margin-top:1.7rem;padding-top:1.35rem;border-top:1.5px dashed #bcd6ee}
+.leadcap .drow{flex-wrap:wrap;gap:.6rem}
+.leadcap .zip{flex:1 1 140px}
+.lc-note{font-size:.82rem;color:#5a7488;margin-top:.6rem}
+@media(max-width:480px){.leadcap .drow{flex-direction:column}.leadcap .btn{width:100%;justify-content:center}}
+
+/* Pricing recap band */
+.recap-band{background:var(--soft);padding:1.4rem 0;border-top:1px solid #eef0f4;border-bottom:1px solid #eef0f4}
+.recap-wrap{display:flex;align-items:center;justify-content:center;gap:1.1rem;flex-wrap:wrap}
+.recap-wrap .ri{color:var(--muted);font-size:.98rem}
+.recap-wrap .ri b{color:var(--ink)}
+.recap-wrap .ri-tel{color:var(--primary);font-weight:700;text-decoration:none;font-size:.95rem;white-space:nowrap}
+@media(max-width:560px){.recap-wrap{gap:.6rem}.recap-wrap .btn{width:100%;justify-content:center;order:9}}
+/* Hero phone line */
+.hero-tel{font-size:.92rem;color:var(--muted);text-decoration:none}
+.hero-tel b{color:var(--ink)}
+.hero-tel:hover{color:var(--primary)}
+
+/* Hero phone: desktop only */
+@media(max-width:860px){.hero-tel{display:none}}
+/* Address line under rating */
+.rl-addr{margin-top:.35rem;font-size:.92rem;color:var(--muted)}
+.rl-addr b{color:var(--ink)}
+@media(max-width:860px){.rl-addr{text-align:center}}
+/* Pricing card selection */
+.price-card{cursor:pointer;transition:box-shadow .2s,transform .2s}
+.price-card.sel{box-shadow:0 0 0 3px var(--primary),0 24px 48px -24px rgba(0,0,0,.3);transform:translateY(-3px)}
+/* Visit card with embedded map */
+.visit-wide{width:100%}
+.vc-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.vc-map{border-radius:16px;overflow:hidden;border:1px solid #bcd6ee;background:#dfeaf5;height:200px;margin-top:1.1rem}
+.vc-map iframe{width:100%;height:100%;border:0;filter:grayscale(.1) contrast(1.03)}
+@media(max-width:860px){.vc-grid{grid-template-columns:1fr}.vc-map{height:190px}}
+
+/* $25-off popup */
+.offpop{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:rgba(10,8,24,.62);backdrop-filter:blur(3px);padding:1rem}
+.offpop[hidden]{display:none}
+.op-card{position:relative;width:min(420px,94vw);background:linear-gradient(160deg,#241a52 0%,#3b2a86 55%,#5a3fd6 100%);color:#fff;border-radius:22px;padding:2rem 1.6rem 1.6rem;text-align:center;box-shadow:0 40px 90px -20px rgba(0,0,0,.6)}
+.op-x{position:absolute;top:.7rem;right:.7rem;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer}
+.op-x:hover{background:rgba(255,255,255,.3)}
+.op-kicker{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#cfc4ff;font-weight:700}
+.op-card h3{font-size:1.85rem;line-height:1.15;margin:.5rem 0 1.1rem}
+.op-card h3 span{color:#ffd76a}
+.op-tel{width:100%;border:0;border-radius:100px;padding:.95rem 1.2rem;font-size:1.05rem;color:#0d2433}
+.op-consent{display:flex;gap:.55rem;align-items:flex-start;text-align:left;font-size:.72rem;color:#cfc4ff;margin:.8rem 0 1rem}
+.op-consent input{margin-top:.15rem;flex:none}
+.op-btn{width:100%;border:0;border-radius:100px;padding:.95rem 1rem;font-size:1rem;font-weight:800;color:#3b2a86;background:#fff;cursor:pointer;letter-spacing:.02em}
+.op-btn:hover{transform:translateY(-1px)}
+.op-sub{font-size:.74rem;color:#cfc4ff;margin-top:.6rem}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HealthAndBeautyBusiness","name":"Teeth Whitening Lab","description":"Advanced laser teeth whitening in Long Beach — a brighter smile in 90 minutes or less, guaranteed.","url":"https://teethlab-site.vercel.app/","telephone":"+1-562-514-8383","email":"teethwhiteninglablongbeach@gmail.com","address":{"@type":"PostalAddress","streetAddress":"638 Alamitos Avenue","addressLocality":"Long Beach","addressRegion":"CA","postalCode":"90802","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":33.7747889,"longitude":-118.1800083},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"18:00"},"priceRange":"$225-$450","sameAs":["https://www.instagram.com/teethwhiteninglablongbeach/","https://www.facebook.com/TeethWhiteningLabLongBeach","https://www.yelp.com/biz/teeth-whitening-lab-long-beach-4"]}
+</script>
 </head>
 <body>
 
@@ -341,8 +399,8 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="h-head" data-reveal>
-      <span class="eyebrow">Advanced Laser Teeth Whitening</span>
-      <h1>A brighter, whiter <span class="tint">smile<br class="hbr">in just 90&nbsp;minutes.</span></h1>
+      <span class="eyebrow">Teeth Whitening Specialists</span>
+      <h1>A brighter smile in 90&nbsp;minutes<br class="hbr">or less &mdash; <span class="tint">guaranteed.</span></h1>
     </div>
     <div class="h-media" data-reveal>
       <div class="ba" id="ba" tabindex="0" role="slider" aria-label="Before and after teeth whitening. Drag to reveal." aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
@@ -352,13 +410,14 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
         <span class="ba-tag tag-after">After</span>
         <div class="handle" id="baHandle"><div class="knob">⟺</div></div>
       </div>
-      <p class="ba-caption">Drag the slider to see the transformation. Results vary per client.</p>
+      <p class="ba-caption">Results vary per client.</p>
     </div>
-    <p class="lede h-para" data-reveal>Say goodbye to yellow, dull, and stained teeth. Experience up to 16 shades* brighter on your very first visit — with zero to minimal sensitivity.</p>
+    <p class="lede h-para" data-reveal>Say goodbye to yellow, stained teeth. Up to 16 shades* brighter on your very first visit <b style="color:var(--ink)">or your session is free!</b></p>
     <div class="h-cta" data-reveal>
       <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book a Whitening Session →</a>
+        <a class="btn btn-primary btn-lg" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book a Teeth Whitening Session →</a>
         <a class="link-cta" href="#results">Look at our happy customers</a>
+        <a class="hero-tel" href="tel:5625148383">Or call / text <b>(562) 514-8383</b> — consults are always free</a>
       </div>
     </div>
     <div class="h-rate" data-reveal>
@@ -366,6 +425,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
         <span class="stars">★★★★★</span>
         <span><b style="color:var(--ink)">7,000+ happy clients</b> · 5-star rated on <b style="color:#FF1A1A">Yelp</b> &amp; <b><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></b></span>
       </div>
+      <div class="rl-addr"><b>Address:</b> <a href="https://www.google.com/maps/place/Teeth+Whitening+Lab+Long+Beach/@33.7747889,-118.1800083,15z/data=!4m5!3m4!1s0x0:0x41704f25b7941cf8!8m2!3d33.7747889!4d-118.1800083" target="_blank" rel="noopener" style="color:inherit">638 Alamitos Avenue, Long Beach, CA 90802</a></div>
     </div>
   </div>
 </section>
@@ -373,8 +433,8 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 <!-- ===== TRUST MARQUEE (FX4 — removable) ===== -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span>
-    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span>
+    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span><span class="mi"><b>Results</b>&nbsp;&mdash; or your session is free</span><span class="dot">✦</span>
+    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span><span class="mi"><b>Results</b>&nbsp;&mdash; or your session is free</span><span class="dot">✦</span>
   </div>
 </div>
 
@@ -384,7 +444,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     <div class="stat" data-reveal><div class="n" data-count="7000" data-suffix="+">0</div><div class="l">Happy clients</div></div>
     <div class="stat" data-reveal><div class="n" data-count="90" data-suffix=" min">0</div><div class="l">Same-day results</div></div>
     <div class="stat" data-reveal><div class="n" data-count="16" data-suffix=" shades">0</div><div class="l">Brighter, first visit</div></div>
-    <div class="stat" data-reveal><div class="n" data-count="90" data-suffix="%">0</div><div class="l">Report no sensitivity</div></div>
+    <div class="stat" data-reveal><div class="n" data-count="12" data-suffix=" mo">0</div><div class="l">Results can last, with care*</div></div>
   </div>
 </section>
 
@@ -394,36 +454,63 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     <div class="head" data-reveal>
       <span class="eyebrow">Real results</span>
       <h2>Making our community a brighter place, one smile at a time.</h2>
-      <p class="muted" style="margin-top:.8rem">Over 7,000 happy clients across Long Beach, Orange County, San Pedro &amp; Palos Verdes. Swipe through a few of their smiles.</p>
+      <p class="muted" style="margin-top:.8rem">Over 7,000 happy clients across Long Beach, Orange County, San Pedro &amp; Palos Verdes. Swipe through some of our most dramatic transformations.</p>
     </div>
   </div>
   <div class="wrap" style="margin-top:2.4rem" data-reveal>
     <div class="deck-wrap">
       <div class="deck" id="deck">
-        <div class="deck-card"><img loading="lazy" src="pair01.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair02.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair03.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair04.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair05.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair06.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair07.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair08.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair09.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair10.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair11.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair12.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair13.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair14.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair15.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
         <div class="deck-card"><img loading="lazy" src="pair16.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair17.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair18.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair19.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
-        <div class="deck-card"><img loading="lazy" src="pair20.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair02.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair04.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair12.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="pair01.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
         <button class="deck-arrow prev" id="deckPrev" aria-label="Previous result">‹</button>
         <button class="deck-arrow next" id="deckNext" aria-label="Next result">›</button>
       </div>
       <span class="deck-hint">Swipe or tap the arrows to shuffle through</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec-pad pricing" id="pricing">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Transparent pricing</span>
+      <h2>Affordable, professional whitening.</h2>
+      <p class="muted" style="margin-top:.8rem">A guaranteed lower cost than Zoom — without the hefty price tag or the sensitivity. Questions? <a href="tel:5625148383" style="color:var(--primary);font-weight:700;text-decoration:none">Call or text (562) 514-8383</a> — consults are always free.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card" data-reveal>
+        <img class="pc-img" loading="lazy" src="party2.jpg" alt="Couples whitening session">
+        <h4>Party of 2</h4>
+        <div class="amt">$450<span> / 90 min</span></div>
+        <p>You and a loved one, up to 16 shades* brighter together — same day, same time. Think of it as a spa day (a tooth spa). Grab a pal and get to booking!</p>
+        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book for two</a>
+      </div>
+      <div class="price-card feat" data-reveal>
+        <span class="pop">Most popular</span>
+        <img class="pc-img" loading="lazy" src="adult.jpg" alt="One adult whitening session">
+        <h4>1 Adult</h4>
+        <div class="amt">$250<span> / 90 min</span></div>
+        <p>Our most popular session — up to 16 shades* brighter, recommended for first-time whiteners. A smile so bright, even the sun will be jealous.</p>
+        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
+      </div>
+      <div class="price-card" data-reveal>
+        <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/66adb21436ab420466a27f86.jpeg" alt="Teen whitening session">
+        <h4>1 Teenager</h4>
+        <div class="amt">$225<span> / 60 min</span></div>
+        <p>A 60-minute session perfect for teens with light to moderate staining — up to 12 shades* brighter.</p>
+        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
+      </div>
+    </div>
+    <div class="price-extra" data-reveal>
+      <span><b>+ Kit upgrade</b> — Adult $300 · Party of 2 $500</span>
+      <span><b>Model/Influencer Special</b> — $225</span>
+      <span><b>Follow-Up</b> (within 90 days) — $150</span>
+      <span><b>Forever White</b> — unlimited for a year</span>
+      <span><a href="https://squareup.com/gift/MLGPTZDZ0TGWD/order" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Gift cards →</a></span>
     </div>
   </div>
 </section>
@@ -496,45 +583,12 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="sec-pad pricing" id="pricing">
-  <div class="wrap">
-    <div class="head center" data-reveal>
-      <span class="eyebrow">Transparent pricing</span>
-      <h2>Affordable, professional whitening.</h2>
-      <p class="muted" style="margin-top:.8rem">A guaranteed lower cost than Zoom — without the hefty price tag or the sensitivity.</p>
-    </div>
-    <div class="price-grid">
-      <div class="price-card" data-reveal>
-        <img class="pc-img" loading="lazy" src="party2.jpg" alt="Couples whitening session">
-        <h4>Party of 2</h4>
-        <div class="amt">$450<span> / 90 min</span></div>
-        <p>Book a party of two and save. You and a loved one, up to 16 shades* brighter together — same day, same time.</p>
-        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book for two</a>
-      </div>
-      <div class="price-card feat" data-reveal>
-        <span class="pop">Most popular</span>
-        <img class="pc-img" loading="lazy" src="adult.jpg" alt="One adult whitening session">
-        <h4>1 Adult</h4>
-        <div class="amt">$250<span> / 90 min</span></div>
-        <p>Our most popular single session — up to 16 shades* brighter. Recommended for first-time whiteners.</p>
-        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
-      </div>
-      <div class="price-card" data-reveal>
-        <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/66adb21436ab420466a27f86.jpeg" alt="Teen whitening session">
-        <h4>1 Teenager</h4>
-        <div class="amt">$225<span> / 60 min</span></div>
-        <p>A 60-minute session perfect for teens with light to moderate staining — up to 12 shades* brighter.</p>
-        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
-      </div>
-    </div>
-    <div class="price-extra" data-reveal>
-      <span><b>+ Kit upgrade</b> — Adult $300 · Party of 2 $500</span>
-      <span><b>Model/Influencer Special</b> — $225</span>
-      <span><b>Follow-Up</b> (within 90 days) — $150</span>
-      <span><b>Forever White</b> — unlimited for a year</span>
-      <span><a href="https://squareup.com/gift/MLGPTZDZ0TGWD/order" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Gift cards →</a></span>
-    </div>
+<!-- PRICING RECAP -->
+<section class="recap-band">
+  <div class="wrap recap-wrap" data-reveal>
+    <span class="ri"><b>Party of 2</b> $450</span><span class="ri"><b>1 Adult</b> $250</span><span class="ri"><b>1 Teenager</b> $225</span>
+    <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book a Teeth Whitening Session →</a>
+    <a class="ri-tel" href="tel:5625148383">or call / text (562) 514-8383</a>
   </div>
 </section>
 
@@ -551,10 +605,10 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
       </thead>
       <tbody>
         <tr><td>Starting price</td><td class="us">$250</td><td>$400–$800+</td><td>$40–$80</td></tr>
-        <tr><td>Time to results</td><td class="us">90 min, same day</td><td>~60–90 min</td><td>Weeks</td></tr>
-        <tr><td>Shades brighter (1st visit)</td><td class="us">Up to 16*</td><td>4–8</td><td>1–3</td></tr>
+        <tr><td>Time to results</td><td class="us">90 min, same day</td><td>~60–90 min</td><td><span class="no">Weeks</span></td></tr>
+        <tr><td>Shades brighter (1st visit)</td><td class="us">Up to 16*</td><td>4–8</td><td><span class="no">1–3</span></td></tr>
         <tr><td>Sensitivity</td><td class="us"><span class="yes">Zero to minimal</span></td><td><span class="no">Common "zingers"</span></td><td>Varies</td></tr>
-        <tr><td>Same-day availability</td><td class="us"><span class="yes">Yes</span></td><td>Appointment</td><td>n/a</td></tr>
+        <tr><td>Same-day availability</td><td class="us"><span class="yes">Yes</span></td><td>Appointment</td><td><span class="no">No</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -565,9 +619,10 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   <div class="wrap">
     <div class="guarantee" data-reveal>
       <div class="seal">90 MIN<br>OR LESS</div>
-      <h2>Your brightest smile, made easy.</h2>
-      <p>Advanced laser whitening with zero to minimal sensitivity — plus a free consultation, digital before &amp; after photos, and an after-care kit to take home. Call or text for same-day availability.</p>
+      <h2>Your brightest smile &mdash; guaranteed.</h2>
+      <p style="color:#EDEAFF"><b style="color:#fff">See a remarkable improvement on your very first visit — or your session is free.</b> Advanced laser whitening with zero to minimal sensitivity, plus a free consultation, digital before &amp; after photos, and an after-care kit to take home. Call or text for same-day availability.</p>
       <a class="btn btn-primary btn-lg" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Your Session</a>
+      <div style="margin-top:.8rem"><a href="tel:5625148383" style="color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px">or call / text (562) 514-8383</a></div>
     </div>
   </div>
 </section>
@@ -596,9 +651,15 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     <div class="rev-carousel" id="revCarousel" data-reveal>
       <div class="rev-slide active">
         <span class="stars">★★★★★</span>
-        <div class="vr">Verified review</div>
+        <div class="vr">Verified reviews</div>
         <blockquote>"I took my teenage daughter today… I am stunned!! We were helped by Angel and Noel, both super friendly and professional. The results on my daughter's teeth are incredible — 20 shades lighter all in one session! I highly recommend."</blockquote>
         <div class="who">— Blanca <span>· Los Angeles, CA</span></div>
+      </div>
+      <div class="rev-slide">
+        <span class="stars">★★★★★</span>
+        <div class="vr">Verified reviews</div>
+        <blockquote>"Angel and Noel were very welcoming and informative with the process." Clients mention the team by name again and again — and book their next visit before they leave.</blockquote>
+        <div class="who">— Yelp review <span>· Long Beach, CA</span></div>
       </div>
       <div class="rev-dots" id="revDots"></div>
     </div>
@@ -609,8 +670,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 <section class="sec-pad" id="faq">
   <div class="wrap">
     <div class="head center" data-reveal>
-      <span class="eyebrow">Common questions</span>
-      <h2>Good to know.</h2>
+      <h2>Frequently asked questions</h2>
     </div>
     <div class="faq" data-reveal>
       <div class="acc"><button>Will I see a difference after my first visit?<span class="ic">+</span></button><div class="panel"><p>Yes — here at the Teeth Whitening Lab we pride ourselves on delivering noticeable, more often than not dramatic, same-day results.</p></div></div>
@@ -620,35 +680,48 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
       <div class="acc"><button>Do you offer discounts?<span class="ic">+</span></button><div class="panel"><p>Yes — we proudly offer discounts to veterans, seniors, students, educators, first responders, and dental professionals. Just ask at check-out.</p></div></div>
       <div class="acc"><button>What if I have existing dental work?<span class="ic">+</span></button><div class="panel"><p>We can restore your existing dental work to its original installation shade.</p></div></div>
       <div class="acc"><button>Can I whiten if I'm under 18?<span class="ic">+</span></button><div class="panel"><p>Yes — parental consent is required for anyone under the age of 18.</p></div></div>
-      <div class="acc"><button>Where can I park?<span class="ic">+</span></button><div class="panel"><p>Free parking is available one building north of the Teeth Whitening Lab. You are in the right parking lot if you see a wall-to-wall mural.</p><div class="faq-imgs"><img loading="lazy" src="park-lot.jpg" alt="Parking lot, one building north"><img loading="lazy" src="park-mural.jpg" alt="Wall-to-wall mural landmark"><img loading="lazy" src="park-store.jpg" alt="Teeth Whitening Lab storefront"></div></div></div>
+      <div class="acc"><button>Where can I park?<span class="ic">+</span></button><div class="panel"><p>Free parking is available one building north of the Teeth Whitening Lab. You are in the right parking lot if you see a wall-to-wall mural.</p><div class="faq-imgs"><img loading="lazy" src="park-lot.jpg" alt="Parking lot, one building north"><img loading="lazy" src="park-mural.jpg" alt="Wall-to-wall mural landmark"><img loading="lazy" src="storefront.jpg" alt="Teeth Whitening Lab storefront"></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="sec-pad contact" id="contact">
-  <div class="wrap contact-grid">
-    <div class="map" data-reveal>
-      <iframe title="Teeth Whitening Lab location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=638+Alamitos+Avenue,+Long+Beach,+CA+90802&output=embed"></iframe>
-    </div>
-    <div class="visit-card" data-reveal>
-      <span class="eyebrow">Visit us</span>
-      <h2>Book your brightest smile today.</h2>
-      <p class="lead">Call or text for same-day availability — over-the-phone and via-text consultations are always free.</p>
-      <div class="cinfo2">
-        <div><div class="k">Location</div><a class="v" href="https://www.google.com/maps/place/Teeth+Whitening+Lab+Long+Beach/@33.7747889,-118.1800083,15z/data=!4m5!3m4!1s0x0:0x41704f25b7941cf8!8m2!3d33.7747889!4d-118.1800083" target="_blank" rel="noopener">638 Alamitos Avenue, Long Beach, CA 90802</a></div>
-        <div><div class="k">Call or text</div><a class="v" href="tel:5625148383">(562) 514-8383</a></div>
-        <div><div class="k">Email</div><a class="v" href="mailto:teethwhiteninglablongbeach@gmail.com">teethwhiteninglablongbeach@gmail.com</a></div>
-        <div><div class="k">Hours</div><div class="v">Tuesday – Saturday · 9:00 AM – 6:00 PM</div></div>
-      </div>
-      <div class="distance">
-        <label class="dlabel" for="zipInput">See how far you are from us</label>
-        <div class="drow">
-          <input id="zipInput" class="zip" type="text" inputmode="numeric" maxlength="5" placeholder="Your ZIP code" aria-label="Your ZIP code" />
-          <button id="zipBtn" class="btn btn-primary" type="button">Check distance →</button>
+  <div class="wrap">
+    <div class="visit-card visit-wide" data-reveal>
+      <div class="vc-grid">
+        <div class="vc-info">
+          <span class="eyebrow">Visit us</span>
+          <h2>Book your brightest smile today.</h2>
+          <p class="lead">Call or text for same-day availability — over-the-phone and via-text consultations are always free.</p>
+          <div class="cinfo2">
+            <div><div class="k">Location</div><a class="v" href="https://www.google.com/maps/place/Teeth+Whitening+Lab+Long+Beach/@33.7747889,-118.1800083,15z/data=!4m5!3m4!1s0x0:0x41704f25b7941cf8!8m2!3d33.7747889!4d-118.1800083" target="_blank" rel="noopener">638 Alamitos Avenue, Long Beach, CA 90802</a></div>
+            <div><div class="k">Call or text</div><a class="v" href="tel:5625148383">(562) 514-8383</a></div>
+            <div><div class="k">Email</div><a class="v" href="mailto:teethwhiteninglablongbeach@gmail.com">teethwhiteninglablongbeach@gmail.com</a></div>
+            <div><div class="k">Hours</div><div class="v">Tuesday – Saturday · 9:00 AM – 6:00 PM</div></div>
+          </div>
+        </div>
+        <div class="vc-actions">
+          <div class="distance" style="margin-top:0">
+            <label class="dlabel" for="zipInput">See how far you are from us</label>
+            <div class="drow">
+              <input id="zipInput" class="zip" type="text" inputmode="numeric" maxlength="5" placeholder="Your ZIP code" aria-label="Your ZIP code" />
+              <button id="zipBtn" class="btn btn-primary" type="button">Check distance →</button>
+            </div>
+          </div>
+          <div class="vc-map"><iframe title="Teeth Whitening Lab location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=638+Alamitos+Avenue,+Long+Beach,+CA+90802&output=embed"></iframe></div>
+          <a class="btn btn-primary btn-lg" style="margin-top:1.1rem;width:100%;justify-content:center" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Appointment →</a>
+          <div class="leadcap">
+            <label class="dlabel">Not ready to book yet? Get your free consultation here.</label>
+            <form id="leadForm" class="drow" novalidate>
+              <input class="zip" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+              <input class="zip" name="phone" type="tel" inputmode="tel" placeholder="Phone number" autocomplete="tel" required />
+              <button class="btn btn-primary" type="submit">Get a free consult →</button>
+            </form>
+            <p class="lc-note">We&rsquo;ll text you back — consultations are always free.</p>
+          </div>
         </div>
       </div>
-      <a class="btn btn-primary btn-lg" style="margin-top:1.4rem;width:100%;justify-content:center" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Appointment →</a>
     </div>
   </div>
 </section>
@@ -663,11 +736,28 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
         <a href="https://www.instagram.com/teethwhiteninglablongbeach/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/TeethWhiteningLabLongBeach" target="_blank" rel="noopener">Facebook</a>
         <a href="https://www.yelp.com/biz/teeth-whitening-lab-long-beach-4" target="_blank" rel="noopener">Yelp</a>
+        <!-- TikTok: no public handle found as of 7/3 — confirm with founder, then enable:
+        <a href="https://www.tiktok.com/@HANDLE" target="_blank" rel="noopener">TikTok</a> -->
       </div>
     </div>
     <p class="foot-note">© 2026 Teeth Whitening Lab Long Beach. All rights reserved. · Serving Long Beach, Orange County, San Pedro &amp; Palos Verdes. Teeth whitening is a cosmetic service. *Results may vary.</p>
   </div>
 </footer>
+
+<!-- $25-OFF POPUP — parity with client's existing offer (their live popup, their terms) -->
+<div class="offpop" id="offPop" role="dialog" aria-modal="true" aria-labelledby="opTitle" hidden>
+  <div class="op-card">
+    <button class="op-x" id="opClose" aria-label="Close">&times;</button>
+    <div class="op-kicker">For all new customers</div>
+    <h3 id="opTitle">Take <span>$25 off</span> your treatment</h3>
+    <form id="opForm" novalidate>
+      <input class="op-tel" name="phone" type="tel" inputmode="tel" placeholder="Phone*" autocomplete="tel" required />
+      <label class="op-consent"><input type="checkbox" id="opConsent" required /> <span>By submitting your details, you agree to receive messages at the phone number provided. Message &amp; data rates may apply.</span></label>
+      <button class="op-btn" type="submit">Claim my $25 off now</button>
+      <div class="op-sub">Valid for (1) person 90-minute treatment</div>
+    </form>
+  </div>
+</div>
 
 <!-- sticky mobile book bar -->
 <div class="book-bar">
@@ -680,6 +770,8 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SUPA_URL='PASTE_SUPABASE_PROJECT_URL'; /* dedicated teethlab Supabase project */
+  var SUPA_KEY='PASTE_SUPABASE_ANON_KEY';    /* publishable anon key; RLS = anonymous INSERT only */
 
   /* Nav scroll state */
   var hdr=document.getElementById('hdr');
@@ -687,7 +779,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
   function onScroll(){
     var sc=window.scrollY||document.documentElement.scrollTop||0;
     hdr.classList.toggle('scrolled',sc>20);
-    if(bbar){var max=document.documentElement.scrollHeight-window.innerHeight;var ratio=max>0?sc/max:0;bbar.classList.toggle('show',ratio>0.35);}
+    if(bbar){var max=document.documentElement.scrollHeight-window.innerHeight;var ratio=max>0?sc/max:0;bbar.classList.toggle('show',ratio>0.12);}
   }
   onScroll();window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll,{passive:true});
 
@@ -763,9 +855,53 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     var dots=[].slice.call(dotsWrap.children);
     function go(n){slides[i].classList.remove('active');dots[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('active');dots[i].classList.add('on');}
     dots[0].classList.add('on');
+    var auto=setInterval(function(){go(i+1);},5000);
+    function stopAuto(){if(auto){clearInterval(auto);auto=null;}}
+    dotsWrap.addEventListener('click',stopAuto);
+    car.addEventListener('touchstart',stopAuto,{passive:true});
     var sx=0;
     car.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
     car.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(i+(dx<0?1:-1));});
+  })();
+
+  /* $25-off popup — parity with client's existing offer */
+  (function(){
+    var pop=document.getElementById('offPop'); if(!pop) return;
+    var KEY='twl_pop_seen';
+    try{var seen=localStorage.getItem(KEY); if(seen && (Date.now()-(+seen))<6048e5) return;}catch(e){}
+    var shown=false;
+    function show(){if(shown)return;shown=true;pop.hidden=false;try{localStorage.setItem(KEY,String(Date.now()));}catch(e){}}
+    function hide(){pop.hidden=true;}
+    setTimeout(show,6000);
+    if(window.innerWidth>860){document.addEventListener('mouseout',function(e){if(!e.relatedTarget && e.clientY<=0) show();});}
+    document.getElementById('opClose').onclick=hide;
+    pop.addEventListener('click',function(e){if(e.target===pop) hide();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape') hide();});
+    document.getElementById('opForm').addEventListener('submit',function(e){e.preventDefault();
+      var f=e.target, phone=(new FormData(f).get('phone')||'').trim(), ok=document.getElementById('opConsent').checked;
+      if(!phone||!ok){return;}
+      var row={name:'',phone:phone,source:'popup_25off'};
+      try{var k='twl_leads';var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(Object.assign({ts:new Date().toISOString(),consent:true},row));localStorage.setItem(k,JSON.stringify(a));}catch(err){}
+      if(typeof SUPA_URL!=='undefined'&&/^https:\/\//.test(SUPA_URL)){
+        fetch(SUPA_URL+'/rest/v1/teethlab_leads',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}).catch(function(){});
+      }
+      f.outerHTML='<p style="font-weight:700;margin:.6rem 0 0">You\u2019re in! \u2728 Mention this when you call or book \u2014 $25 off your 90-minute treatment.</p>';
+    });
+  })();
+
+  /* Lead capture — Supabase anon-insert + localStorage backup (supabase-lead-capture pattern) */
+  (function(){
+    var f=document.getElementById('leadForm'); if(!f) return;
+    f.addEventListener('submit',function(e){e.preventDefault();
+      var fd=new FormData(f);
+      var row={name:(fd.get('name')||'').trim(),phone:(fd.get('phone')||'').trim(),source:'website'};
+      if(!row.name||!row.phone){return;}
+      try{var k='twl_leads';var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(Object.assign({ts:new Date().toISOString()},row));localStorage.setItem(k,JSON.stringify(a));}catch(err){}
+      if(/^https:\/\//.test(SUPA_URL)){
+        fetch(SUPA_URL+'/rest/v1/teethlab_leads',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}).catch(function(){});
+      }
+      f.outerHTML='<p class="lc-note" style="font-weight:700;color:#0d2433">Thank you! We\u2019ll text you shortly \u2014 talk soon. \u2728</p>';
+    });
   })();
 
   /* Distance / ZIP -> Google Maps directions */
@@ -775,6 +911,17 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
       window.open('https://www.google.com/maps/dir/'+encodeURIComponent(z)+'/638+Alamitos+Ave,+Long+Beach,+CA+90802','_blank','noopener');}
     zb.onclick=go;
     zi.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();go();}});
+  })();
+
+  /* Pricing card select highlight */
+  (function(){
+    var cards=[].slice.call(document.querySelectorAll('.price-card')); if(!cards.length) return;
+    var feat=document.querySelector('.price-card.feat'); if(feat) feat.classList.add('sel');
+    cards.forEach(function(c){c.addEventListener('click',function(e){
+      if(e.target.closest('a')) return;
+      cards.forEach(function(x){x.classList.remove('sel');});
+      c.classList.add('sel');
+    });});
   })();
 
   /* FAQ accordion */
