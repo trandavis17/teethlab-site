@@ -372,6 +372,30 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"HealthAndBeautyBusiness","name":"Teeth Whitening Lab","description":"Advanced laser teeth whitening in Long Beach — a brighter smile in 90 minutes or less, guaranteed.","url":"https://teethlab-site.vercel.app/","telephone":"+1-562-514-8383","email":"teethwhiteninglablongbeach@gmail.com","address":{"@type":"PostalAddress","streetAddress":"638 Alamitos Avenue","addressLocality":"Long Beach","addressRegion":"CA","postalCode":"90802","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":33.7747889,"longitude":-118.1800083},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"18:00"},"priceRange":"$225-$450","sameAs":["https://www.instagram.com/teethwhiteninglablongbeach/","https://www.facebook.com/TeethWhiteningLabLongBeach","https://www.yelp.com/biz/teeth-whitening-lab-long-beach-4"]}
 </script>
+<!-- Google tag (gtag.js) — Google Ads conversion tracking, account 794-048-9537 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-10941549968"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-10941549968');
+
+/* Conversion labels — verified against the Ads UI event snippets on Jul 14, 2026 */
+var TWL_CONV = {
+  book: 'AW-10941549968/XAfXCML8y9AcEJCbq-Eo',  /* Book appointment (1) — fires on Book Now click-through to Square */
+  lead: 'AW-10941549968/xwq8CMX8y9AcEJCbq-Eo',  /* CP - Lead form submit — consult form + $25 popup */
+  call: 'AW-10941549968/qGXQCMj8y9AcEJCbq-Eo',  /* Click to call — tel: link clicks */
+  kit:  'AW-10941549968/9rY3CMv8y9AcEJCbq-Eo'   /* CP - Kit purchase — $69.99 set account-side (same-each) */
+};
+
+/* Google's click-to-call wrapper (kept for parity with the Ads UI snippet).
+   Our tel: links keep default behavior, so url is normally omitted. */
+function gtag_report_conversion(url){
+  var callback = function(){ if (typeof url !== 'undefined'){ window.location = url; } };
+  gtag('event','conversion',{ send_to: TWL_CONV.call, value: 1.0, currency: 'USD', event_callback: callback });
+  return false;
+}
+</script>
 </head>
 <body>
 
@@ -587,7 +611,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="sec-pad" id="how">
+<section class="sec-pad" id="how" style="padding-bottom:clamp(28px,4vw,52px)">
   <div class="wrap">
     <div class="head center" data-reveal>
       <span class="eyebrow">Simple &amp; easy</span>
@@ -603,7 +627,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 </section>
 
 <!-- VIDEO -->
-<section class="sec-pad">
+<section class="sec-pad" style="padding-top:clamp(28px,4vw,52px)">
   <div class="wrap">
     <div class="head center" data-reveal style="margin-bottom:1.6rem">
       <span class="eyebrow">See it in action</span>
@@ -838,8 +862,8 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var SUPA_URL='PASTE_SUPABASE_PROJECT_URL'; /* dedicated teethlab Supabase project */
-  var SUPA_KEY='PASTE_SUPABASE_ANON_KEY';    /* publishable anon key; RLS = anonymous INSERT only */
+  var SUPA_URL='https://pjrcbpbuujxtvjttylgc.supabase.co'; /* dedicated teethlab-leads Supabase project */
+  var SUPA_KEY='sb_publishable_ygFhbx4wSDfyaGUHKVd8cg_T8jWMicp'; /* publishable key — safe client-side; RLS = anonymous INSERT only */
 
   /* Nav scroll state */
   var hdr=document.getElementById('hdr');
@@ -868,14 +892,14 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     var cx=ba.offsetLeft+ba.offsetWidth*(pct/100), cy=ba.offsetTop+ba.offsetHeight/2;
     for(var i=0;i<11;i++){var s=document.createElement('span');s.className='spark';s.textContent=(i%2?'✦':'✨');s.style.left=cx+'px';s.style.top=cy+'px';var a=Math.random()*6.283,d=35+Math.random()*80;s.style.setProperty('--dx',Math.round(Math.cos(a)*d)+'px');s.style.setProperty('--dy',Math.round(Math.sin(a)*d)+'px');host.appendChild(s);(function(el){setTimeout(function(){el.remove();},950);})(s);}
   }
-  function maybeSpark(v){if(v>=98){if(!sparkled){sparkled=true;sparkle();}}else if(v<90){sparkled=false;}}
+  function maybeSpark(v){if(v<=2){if(!sparkled){sparkled=true;sparkle();}}else if(v>10){sparkled=false;}}
   function fromEvent(e){var r=ba.getBoundingClientRect();var x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;return x/r.width*100;}
   function start(e){dragging=true;setPos(fromEvent(e));}
   function move(e){if(dragging){var p=fromEvent(e);setPos(p);maybeSpark(p);if(e.cancelable)e.preventDefault();}}
   function end(){dragging=false;}
   ba.addEventListener('mousedown',start);window.addEventListener('mousemove',move);window.addEventListener('mouseup',end);
   ba.addEventListener('touchstart',start,{passive:true});window.addEventListener('touchmove',move,{passive:false});window.addEventListener('touchend',end);
-  ba.addEventListener('keydown',function(e){var v=parseFloat(ba.getAttribute('aria-valuenow'))||50;if(e.key==='ArrowLeft'){setPos(v-4);e.preventDefault();}if(e.key==='ArrowRight'){v=Math.min(100,v+4);setPos(v);maybeSpark(v);e.preventDefault();}});
+  ba.addEventListener('keydown',function(e){var v=parseFloat(ba.getAttribute('aria-valuenow'))||50;if(e.key==='ArrowLeft'){v=Math.max(0,v-4);setPos(v);maybeSpark(v);e.preventDefault();}if(e.key==='ArrowRight'){setPos(v+4);e.preventDefault();}});
   setPos(50);
   /* invite nudge removed — was causing the divider to jump on load */
 
@@ -960,10 +984,12 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     document.getElementById('opForm').addEventListener('submit',function(e){e.preventDefault();
       var f=e.target, phone=(new FormData(f).get('phone')||'').trim(), ok=document.getElementById('opConsent').checked;
       if(!phone||!ok){return;}
-      var row={name:'',phone:phone,source:'popup_25off'};
+      var row={name:'',phone:phone,source:'popup_25off',page_url:location.href};
       try{var k='twl_leads';var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(Object.assign({ts:new Date().toISOString(),consent:true},row));localStorage.setItem(k,JSON.stringify(a));}catch(err){}
+      /* Google Ads: CP - Lead form submit */
+      try{gtag('event','conversion',{send_to:TWL_CONV.lead,value:1.0,currency:'USD'});}catch(err){}
       if(typeof SUPA_URL!=='undefined'&&/^https:\/\//.test(SUPA_URL)){
-        fetch(SUPA_URL+'/rest/v1/teethlab_leads',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}).catch(function(){});
+        fetch(SUPA_URL+'/rest/v1/leads',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}).catch(function(){});
       }
       f.outerHTML='<p style="font-weight:700;margin:.6rem 0 0">You\u2019re in! \u2728 Mention this when you call or book \u2014 $25 off your 90-minute treatment.</p>';
     });
@@ -974,15 +1000,35 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
     var f=document.getElementById('leadForm'); if(!f) return;
     f.addEventListener('submit',function(e){e.preventDefault();
       var fd=new FormData(f);
-      var row={name:(fd.get('name')||'').trim(),phone:(fd.get('phone')||'').trim(),source:'website'};
+      var row={name:(fd.get('name')||'').trim(),phone:(fd.get('phone')||'').trim(),source:'website',page_url:location.href};
       if(!row.name||!row.phone){return;}
       try{var k='twl_leads';var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(Object.assign({ts:new Date().toISOString()},row));localStorage.setItem(k,JSON.stringify(a));}catch(err){}
+      /* Google Ads: CP - Lead form submit */
+      try{gtag('event','conversion',{send_to:TWL_CONV.lead,value:1.0,currency:'USD'});}catch(err){}
       if(/^https:\/\//.test(SUPA_URL)){
-        fetch(SUPA_URL+'/rest/v1/teethlab_leads',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}).catch(function(){});
+        fetch(SUPA_URL+'/rest/v1/leads',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}).catch(function(){});
       }
       f.outerHTML='<p class="lc-note" style="font-weight:700;color:#0d2433">Thank you! We\u2019ll text you shortly \u2014 talk soon. \u2728</p>';
     });
   })();
+
+  /* Google Ads conversion clicks — delegated so every current & future CTA is covered */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a'); if(!a) return;
+    var href=a.getAttribute('href')||'';
+    try{
+      if(a.hasAttribute('data-conv-kit')){
+        /* Kit purchase — value $69.99 is configured account-side (same-each) */
+        gtag('event','conversion',{send_to:TWL_CONV.kit,transaction_id:''});
+      }else if(href.indexOf('squareup.com/appointments')>-1){
+        /* Book appointment — opens Square in a new tab, page stays alive so the hit sends */
+        gtag('event','conversion',{send_to:TWL_CONV.book,value:1.0,currency:'USD'});
+      }else if(href.indexOf('tel:')===0){
+        /* Click to call — tel: doesn't unload the page; fire and let default proceed */
+        gtag('event','conversion',{send_to:TWL_CONV.call,value:1.0,currency:'USD'});
+      }
+    }catch(err){}
+  },true);
 
   /* Distance / ZIP -> Google Maps directions */
   (function(){
