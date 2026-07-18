@@ -323,7 +323,15 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .sg-read{text-align:center;margin-top:2.6rem;color:var(--muted);font-size:1.02rem;min-height:1.4em}
 .sg-read strong{color:var(--ink)} .sg-read b{color:var(--primary)}
 @media(max-width:620px){.sg-row{gap:1px}.tooth .tn{display:none}.tooth.bright::after{font-size:.5rem}}
-@media(max-width:900px){.tooth .tn{font-size:.45rem}}
+/* 40-shade slider */
+.sg-stage{max-width:560px;margin:0 auto;text-align:center}
+.sg-big{width:104px;height:126px;margin:0 auto 20px;border-radius:46% 46% 40% 40%/26% 26% 64% 64%;box-shadow:inset 0 -10px 18px rgba(0,0,0,.15),0 10px 22px rgba(0,0,0,.16);display:flex;align-items:flex-end;justify-content:center;transition:background .15s}
+.sg-big span{font-weight:800;font-size:.9rem;color:rgba(0,0,0,.45);margin-bottom:12px}
+#sgSlide{-webkit-appearance:none;appearance:none;width:100%;height:16px;border-radius:99px;background:linear-gradient(90deg,#96783b,#f8f4ee);outline:none;box-shadow:inset 0 2px 6px rgba(0,0,0,.2);cursor:pointer}
+#sgSlide::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;border:3px solid var(--primary);box-shadow:0 3px 9px rgba(0,0,0,.28)}
+#sgSlide::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:#fff;border:3px solid var(--primary);box-shadow:0 3px 9px rgba(0,0,0,.28)}
+.sg-ends{display:flex;justify-content:space-between;font-size:.74rem;font-weight:700;color:var(--muted);margin-top:9px}
+.sg-star{color:#f5a623}
 .sg-tool{margin:2.2rem auto 0;max-width:560px;text-align:center}
 .sg-tool img{width:100%;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.12)}
 .sg-tool figcaption{margin-top:.7rem;font-size:.85rem;color:var(--muted)}
@@ -580,11 +588,11 @@ function gtag_report_conversion(url){
     <div class="head center" data-reveal>
       <span class="eyebrow">The difference</span>
       <h2>Up to <span class="shade-num">16 shades*</span> brighter.</h2>
-      <p class="muted" style="margin-top:.7rem">This is the exact 40-shade professional guide we use in-studio. Tap a tooth to find your starting shade — we'll take you toward the brightest.</p>
+      <p class="muted" style="margin-top:.7rem">The same 40-shade professional scale we use in-studio. Slide to your starting shade — we'll take you toward the brightest.</p>
     </div>
     <div class="shade-wrap" data-reveal>
       <div class="sg-row" id="sgRow" role="group" aria-label="Dental shade guide"></div>
-      <div class="sg-read"><strong id="sgOut">Tap any shade above to see how many shades brighter you could go.</strong></div>
+      <div class="sg-read"><strong id="sgOut">Drag the slider to see how many shades brighter you could go.</strong></div>
       <figure class="sg-tool" data-reveal><img loading="lazy" src="shade-tool.png" alt="The professional 40-shade bleaching guide used in-studio" onerror="this.src='shade-tool.jpg';this.onerror=function(){this.closest('figure').style.display='none'};"><figcaption>The real thing: in-studio, we match your smile against this professional 40-shade guide. The chart above is your online preview.</figcaption></figure>
     </div>
   </div>
@@ -1122,26 +1130,22 @@ function gtag_report_conversion(url){
   /* FX3 interactive dental shade guide */
   (function(){
     var row=document.getElementById('sgRow'); if(!row) return;
-    /* Full 40-shade professional scale (mirrors the in-studio R-20 tool: 20 labeled positions × 2 shades each) */
-    var D=[0x96,0x78,0x3b], L=[0xf8,0xf4,0xee], n=40;
+    /* 40-shade slider — full professional S1–S40 scale as a draggable gradient (mirrors the in-studio R-20 tool) */
+    var D=[0x96,0x78,0x3b], L=[0xf8,0xf4,0xee];
     var out=document.getElementById('sgOut');
     function mix(t){var c=[0,1,2].map(function(k){return Math.round(D[k]+(L[k]-D[k])*t);});return 'rgb('+c.join(',')+')';}
-    for(var i=0;i<n;i++){(function(i){
-      var num=40-i, name='S'+num;
-      var b=document.createElement('button');
-      b.className='tooth'+(num===1?' bright':'');
-      b.style.setProperty('--c',mix(i/(n-1)));
-      b.setAttribute('aria-label','Shade '+name);
-      if(num%2===0){b.innerHTML='<span class="tn">'+name+'</span>';}
-      b.addEventListener('click',function(){
-        row.querySelectorAll('.tooth').forEach(function(t){t.classList.remove('sel');});
-        b.classList.add('sel');
-        var toBright=num-1;
-        var br=Math.min(16,toBright);
-        out.innerHTML = toBright<=0 ? "You're already at our brightest shade ✨" : "From <b>"+name+"</b> &rarr; up to <b>"+br+" shade"+(br>1?'s':'')+" brighter</b>* on your very first visit.";
-      });
-      row.appendChild(b);
-    })(i);}
+    row.setAttribute('style','display:block;padding-top:10px');
+    row.innerHTML='<div class="sg-stage"><div class="sg-big" id="sgBig"><span id="sgBigL"></span></div><input type="range" id="sgSlide" min="1" max="40" value="13" step="1" aria-label="Slide to your starting shade"><div class="sg-ends"><span>S40 · deepest stain</span><span class="sg-star">★ S1 · brightest</span></div></div>';
+    var slide=document.getElementById('sgSlide'), big=document.getElementById('sgBig'), bigL=document.getElementById('sgBigL');
+    function upd(){
+      var num=41-(+slide.value);            /* left = S40 (dark), right = S1 (bright) */
+      var t=(40-num)/39;
+      big.style.background=mix(t);
+      bigL.textContent='S'+num;
+      var toBright=num-1, br=Math.min(16,toBright);
+      out.innerHTML = toBright<=0 ? "You're already at our brightest shade ✨" : "From <b>S"+num+"</b> &rarr; up to <b>"+br+" shade"+(br>1?'s':'')+" brighter</b>* on your very first visit.";
+    }
+    slide.addEventListener('input',upd); upd();
   })();
 })();
 </script>
