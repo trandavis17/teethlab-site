@@ -323,6 +323,10 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .sg-read{text-align:center;margin-top:2.6rem;color:var(--muted);font-size:1.02rem;min-height:1.4em}
 .sg-read strong{color:var(--ink)} .sg-read b{color:var(--primary)}
 @media(max-width:620px){.sg-row{gap:1px}.tooth .tn{display:none}.tooth.bright::after{font-size:.5rem}}
+@media(max-width:900px){.tooth .tn{font-size:.45rem}}
+.sg-tool{margin:2.2rem auto 0;max-width:560px;text-align:center}
+.sg-tool img{width:100%;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.12)}
+.sg-tool figcaption{margin-top:.7rem;font-size:.85rem;color:var(--muted)}
 /* ============ END PREMIUM FX ============ */
 
 /* Lead capture */
@@ -581,6 +585,7 @@ function gtag_report_conversion(url){
     <div class="shade-wrap" data-reveal>
       <div class="sg-row" id="sgRow" role="group" aria-label="Dental shade guide"></div>
       <div class="sg-read"><strong id="sgOut">Tap any shade above to see how many shades brighter you could go.</strong></div>
+      <figure class="sg-tool" data-reveal><img loading="lazy" src="shade-tool.jpg" alt="The professional 40-shade bleaching guide used in-studio" onerror="this.closest('figure').style.display='none'"><figcaption>The real thing: in-studio, we match your smile against this professional 40-shade guide. The chart above is your online preview.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -993,7 +998,8 @@ function gtag_report_conversion(url){
     var shown=false;
     function show(){if(shown)return;shown=true;pop.hidden=false;try{localStorage.setItem(KEY,String(Date.now()));}catch(e){}}
     function hide(){pop.hidden=true;}
-    setTimeout(show,6000);
+    /* Exit-intent first (desktop); slow 45s fallback so it never feels pushy */
+    setTimeout(show,45000);
     if(window.innerWidth>860){document.addEventListener('mouseout',function(e){if(!e.relatedTarget && e.clientY<=0) show();});}
     document.getElementById('opClose').onclick=hide;
     pop.addEventListener('click',function(e){if(e.target===pop) hide();});
@@ -1116,24 +1122,26 @@ function gtag_report_conversion(url){
   /* FX3 interactive dental shade guide */
   (function(){
     var row=document.getElementById('sgRow'); if(!row) return;
-    /* R-20 bleaching shade guide — the exact 20-position tool used in-studio (each position = 2 shades on the 40-shade scale) */
-    var shades=[['S40','#997b3e'],['S38','#a1854a'],['S36','#a98e55'],['S34','#b19760'],['S32','#b8a06b'],['S30','#bfa876'],['S28','#c6b081'],['S26','#ccb88c'],['S24','#d2bf97'],['S22','#d7c6a2'],['S20','#dccdac'],['S18','#e1d3b6'],['S16','#e5d9c0'],['S14','#e9dfc9'],['S12','#ece4d1'],['S10','#efe8d9'],['S8','#f2ece0'],['S6','#f4efe6'],['S4','#f6f1ea'],['S2','#f8f4ee']];
-    var out=document.getElementById('sgOut'), n=shades.length;
-    shades.forEach(function(s,i){
+    /* Full 40-shade professional scale (mirrors the in-studio R-20 tool: 20 labeled positions × 2 shades each) */
+    var D=[0x96,0x78,0x3b], L=[0xf8,0xf4,0xee], n=40;
+    var out=document.getElementById('sgOut');
+    function mix(t){var c=[0,1,2].map(function(k){return Math.round(D[k]+(L[k]-D[k])*t);});return 'rgb('+c.join(',')+')';}
+    for(var i=0;i<n;i++){(function(i){
+      var num=40-i, name='S'+num;
       var b=document.createElement('button');
-      b.className='tooth'+(i===n-1?' bright':'');
-      b.style.setProperty('--c',s[1]);
-      b.setAttribute('aria-label','Shade '+s[0]);
-      b.innerHTML='<span class="tn">'+s[0]+'</span>';
+      b.className='tooth'+(num===1?' bright':'');
+      b.style.setProperty('--c',mix(i/(n-1)));
+      b.setAttribute('aria-label','Shade '+name);
+      if(num%2===0){b.innerHTML='<span class="tn">'+name+'</span>';}
       b.addEventListener('click',function(){
         row.querySelectorAll('.tooth').forEach(function(t){t.classList.remove('sel');});
         b.classList.add('sel');
-        var toBright=parseInt(s[0].slice(1),10)-2;
+        var toBright=num-1;
         var br=Math.min(16,toBright);
-        out.innerHTML = toBright<=0 ? "You're already at our brightest shade ✨" : "From <b>"+s[0]+"</b> &rarr; up to <b>"+br+" shade"+(br>1?'s':'')+" brighter</b>* on your very first visit.";
+        out.innerHTML = toBright<=0 ? "You're already at our brightest shade ✨" : "From <b>"+name+"</b> &rarr; up to <b>"+br+" shade"+(br>1?'s':'')+" brighter</b>* on your very first visit.";
       });
       row.appendChild(b);
-    });
+    })(i);}
   })();
 })();
 </script>
