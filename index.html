@@ -587,7 +587,6 @@ function gtag_report_conversion(url){
     <div class="shade-wrap" data-reveal>
       <div class="sg-row" id="sgRow" role="group" aria-label="Dental shade guide"></div>
       <div class="sg-read"><strong id="sgOut">Click a shade to see how many shades brighter you could go.</strong></div>
-      <figure class="sg-tool" data-reveal><img loading="lazy" src="shade-tool.png" alt="The professional 40-shade bleaching guide used in-studio" onerror="this.src='shade-tool.jpg';this.onerror=function(){this.closest('figure').style.display='none'};"><figcaption>The real thing: in-studio, we match your smile against this professional 40-shade guide. The chart above is your online preview.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1125,11 +1124,11 @@ function gtag_report_conversion(url){
   (function(){
     var row=document.getElementById('sgRow'); if(!row) return;
     var out=document.getElementById('sgOut');
-    var shades=[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40];
+    var shades=[40,38,36,34,32,30,28,26,24,22,20,18,16,14,12,10,8,6,4,2];
     var D=[0x96,0x78,0x3b], L=[0xf8,0xf4,0xee];
     function mix(t){var c=[0,1,2].map(function(k){return Math.round(D[k]+(L[k]-D[k])*t);});return 'rgb('+c.join(',')+')';}
     shades.forEach(function(num,i){
-      var t=1-(i/19); /* shade 2 (i=0) = t=1 = lightest; shade 40 (i=19) = t=0 = darkest */
+      var t=i/19; /* shade 40 (i=0) = t=0 = darkest; shade 2 (i=19) = t=1 = lightest */
       var btn=document.createElement('button');
       btn.className='tooth'+(num===2?' bright':'');
       btn.style.cssText='--c:'+mix(t);
