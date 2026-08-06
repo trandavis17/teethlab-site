@@ -1,0 +1,36 @@
+/**
+ * TWL — Vercel Edge Middleware for the A/B landing-page split.  ⚠️ NOT ACTIVE.
+ *
+ * Rename this file to `middleware.js` ONLY when:
+ *   1. a `b/index.html` variant actually exists, and
+ *   2. it has been verified on a Vercel PREVIEW deployment first
+ *      (a bad middleware config can take the whole site down).
+ *
+ * Until then, variant assignment happens client-side (see the twl_variant
+ * cookie snippet in index.html) — same 50/50, same cookie, same data,
+ * just no server-side content rewrite (none is needed while A == B).
+ *
+ * Requires `@vercel/edge` (add package.json with that dependency when activating).
+ */
+import { next, rewrite } from "@vercel/edge";
+
+export const config = { matcher: ["/", "/index.html"] };
+
+export default function middleware(request) {
+  const cookies = request.headers.get("cookie") || "";
+  const match = cookies.match(/(?:^|; )twl_variant=(a|b)/);
+  let variant = match ? match[1] : null;
+  const headers = {};
+
+  if (!variant) {
+    variant = Math.random() < 0.5 ? "a" : "b";
+    headers["Set-Cookie"] = `twl_variant=${variant}; Path=/; Max-Age=7776000; SameSite=Lax`;
+  }
+
+  // Variant B gets the rewritten page once /b/index.html exists.
+  if (variant === "b") {
+    const url = new URL("/b/index.html", request.url);
+    return rewrite(url, { headers });
+  }
+  return next({ headers });
+}

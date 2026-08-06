@@ -408,6 +408,22 @@ function gtag_report_conversion(url){
   gtag('event','conversion',{ send_to: TWL_CONV.call, value: 1.0, currency: 'USD', event_callback: callback });
   return false;
 }
+
+/* Attribution capture (gclid/gbraid/wbraid + UTMs) + sticky A/B variant.
+   Persisted 90 days in first-party cookies; read by /book/ and attached to leads. */
+(function(){
+  function rc(n){var m=document.cookie.match('(?:^|; )'+n+'=([^;]*)');return m?decodeURIComponent(m[1]):null;}
+  function wc(n,v,d){document.cookie=n+'='+encodeURIComponent(v)+'; path=/; max-age='+(d*86400)+'; SameSite=Lax';}
+  var qs=new URLSearchParams(location.search), attr={};
+  try{ attr=JSON.parse(rc('twl_attr')||'{}'); }catch(e){ attr={}; }
+  ['gclid','gbraid','wbraid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){ if(qs.get(k)) attr[k]=qs.get(k); });
+  if(!attr.landing) attr.landing=location.href;
+  wc('twl_attr', JSON.stringify(attr), 90);
+  try{ localStorage.setItem('twl_attr', JSON.stringify(attr)); }catch(e){}
+  var v=rc('twl_variant');
+  if(v!=='a'&&v!=='b'){ v=Math.random()<0.5?'a':'b'; wc('twl_variant',v,90); }
+  window.TWL_ATTR=attr; window.TWL_VARIANT=v;
+})();
 </script>
 </head>
 <body>
@@ -428,7 +444,7 @@ function gtag_report_conversion(url){
     </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="tel:5625148383">Call / Text</a>
-      <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Now</a>
+      <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=nav">Book Now</a>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
   </div>
@@ -442,7 +458,7 @@ function gtag_report_conversion(url){
   <a href="#reviews">Reviews</a>
   <a href="#faq">FAQ</a>
   <a href="#contact">Contact</a>
-  <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener" style="justify-content:center">Book Your Session</a>
+  <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=mobile_menu" style="justify-content:center">Book Your Session</a>
 </div>
 
 <a id="top"></a>
@@ -467,7 +483,7 @@ function gtag_report_conversion(url){
     <p class="lede h-para" data-reveal>Say goodbye to yellow, stained teeth. Up to 16 shades* brighter on your very first visit <b style="color:var(--ink)">or your session is free!</b></p>
     <div class="h-cta" data-reveal>
       <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book a Teeth Whitening Session →</a>
+        <a class="btn btn-primary btn-lg" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=hero">Book a Teeth Whitening Session →</a>
         <a class="link-cta" href="#results">Look at our happy customers</a>
         <a class="hero-tel" href="tel:5625148383">Or call / text <b>(562) 514-8383</b> — consults are always free</a>
       </div>
@@ -539,7 +555,7 @@ function gtag_report_conversion(url){
         <h4>Party of 2</h4>
         <div class="amt">$450<span> / 90 min</span></div>
         <p>You and a loved one, up to 16 shades* brighter together — same day, same time. Think of it as a spa day (a tooth spa). Grab a pal and get to booking!</p>
-        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book for two</a>
+        <a class="btn btn-primary" href="/book/?offer=party2&utm_source=twl_site&utm_medium=cta&utm_content=pricing_party2">Book for two</a>
       </div>
       <div class="price-card feat" data-reveal>
         <span class="pop">Most popular</span>
@@ -547,7 +563,7 @@ function gtag_report_conversion(url){
         <h4>1 Adult</h4>
         <div class="amt">$250<span> / 90 min</span></div>
         <p>Our most popular session — up to 16 shades* brighter, recommended for first-time whiteners. A smile so bright, even the sun will be jealous.</p>
-        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
+        <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=pricing_adult">Book</a>
       </div>
       <div class="price-card" data-reveal>
         <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/66adb21436ab420466a27f86.jpeg" alt="Teen whitening session">
@@ -566,11 +582,10 @@ function gtag_report_conversion(url){
     </div>
     <div class="price-extra" data-reveal>
       <div class="px-head">More options — all bookable online</div>
-      <a class="px-row" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener"><span class="px-name">1 Adult 90 Min + Home Kit</span><span class="px-val">$300 · 90 min</span></a>
-      <a class="px-row" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener"><span class="px-name">Party of 2 90 Min + Home Kits</span><span class="px-val">$500 · 90 min</span></a>
+      <a class="px-row" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=px_adult_kit"><span class="px-name">1 Adult 90 Min + Home Kit</span><span class="px-val">$300 · 90 min</span></a>
+      <a class="px-row" href="/book/?offer=party2&utm_source=twl_site&utm_medium=cta&utm_content=px_party2_kits"><span class="px-name">Party of 2 90 Min + Home Kits</span><span class="px-val">$500 · 90 min</span></a>
       <a class="px-row" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener"><span class="px-name">Model / Influencer Special</span><span class="px-val">$225</span></a>
       <a class="px-row" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener"><span class="px-name">Follow-Up</span><span class="px-val">$150 · within 90 days</span></a>
-      <a class="px-row" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener"><span class="px-name">Forever White</span><span class="px-val">Unlimited whitening for 1 year</span></a>
       <a class="px-row" href="https://squareup.com/gift/MLGPTZDZ0TGWD/order" target="_blank" rel="noopener"><span class="px-name">Gift Cards</span><span class="px-val">Send a brighter smile →</span></a>
     </div>
   </div>
@@ -666,7 +681,7 @@ function gtag_report_conversion(url){
 <section class="recap-band">
   <div class="wrap recap-wrap" data-reveal>
     <span class="ri"><b>Party of 2</b> $450</span><span class="ri"><b>1 Adult</b> $250</span><span class="ri"><b>1 Teenager</b> $225</span>
-    <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book a Teeth Whitening Session →</a>
+    <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=mid_cta">Book a Teeth Whitening Session →</a>
     <a class="ri-tel" href="tel:5625148383">or call / text (562) 514-8383</a>
   </div>
 </section>
@@ -700,7 +715,7 @@ function gtag_report_conversion(url){
       <div class="seal">90 MIN<br>OR LESS</div>
       <h2>Your brightest smile &mdash; guaranteed*.</h2>
       <p style="color:#EDEAFF"><b style="color:#fff">See a remarkable improvement on your very first visit — or your session is free.</b> Advanced LED whitening with zero to minimal sensitivity, plus a free consultation, digital before &amp; after photos, and an after-care kit to take home. Call or text for same-day availability.</p>
-      <a class="btn btn-primary btn-lg" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Your Session</a>
+      <a class="btn btn-primary btn-lg" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=session_cta">Book Your Session</a>
       <div style="margin-top:.8rem"><a href="tel:5625148383" style="color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px">or call / text (562) 514-8383</a></div>
       <p style="font-size:.72rem;color:#b6b6c6;margin-top:1.4rem;max-width:60ch;margin-inline:auto">*Guarantee: see a noticeable improvement on your very first visit or your session is free. Individual results vary depending on starting shade, staining type, and aftercare.</p>
     </div>
@@ -825,7 +840,7 @@ function gtag_report_conversion(url){
             </div>
           </div>
           <div class="vc-map"><iframe title="Teeth Whitening Lab location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=638+Alamitos+Avenue,+Long+Beach,+CA+90802&output=embed"></iframe></div>
-          <a class="btn btn-primary btn-lg" style="margin-top:1.1rem;width:100%;justify-content:center" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">⭐ Book Appointment →</a>
+          <a class="btn btn-primary btn-lg" style="margin-top:1.1rem;width:100%;justify-content:center" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=proof_card">⭐ Book Appointment →</a>
           <div class="leadcap">
             <label class="dlabel">Not ready to book yet? Get your free consultation here.</label>
             <form id="leadForm" class="drow" novalidate>
@@ -876,7 +891,7 @@ function gtag_report_conversion(url){
 <!-- sticky mobile book bar -->
 <div class="book-bar">
   <a class="btn btn-ghost" href="tel:5625148383">Call / Text</a>
-  <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/start" target="_blank" rel="noopener">Book Now</a>
+  <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=book_bar">Book Now</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -1008,7 +1023,7 @@ function gtag_report_conversion(url){
     document.getElementById('opForm').addEventListener('submit',function(e){e.preventDefault();
       var f=e.target, phone=(new FormData(f).get('phone')||'').trim(), ok=document.getElementById('opConsent').checked;
       if(!phone||!ok){return;}
-      var row={name:'',phone:phone,source:'popup_25off',page_url:location.href};
+      var row={name:'',phone:phone,source:'popup_25off',page_url:location.href,gclid:(window.TWL_ATTR&&TWL_ATTR.gclid)||null,variant:window.TWL_VARIANT||null};
       try{var k='twl_leads';var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(Object.assign({ts:new Date().toISOString(),consent:true},row));localStorage.setItem(k,JSON.stringify(a));}catch(err){}
       /* Google Ads: CP - Lead form submit */
       try{gtag('event','conversion',{send_to:TWL_CONV.lead,value:1.0,currency:'USD'});}catch(err){}
@@ -1024,7 +1039,7 @@ function gtag_report_conversion(url){
     var f=document.getElementById('leadForm'); if(!f) return;
     f.addEventListener('submit',function(e){e.preventDefault();
       var fd=new FormData(f);
-      var row={name:(fd.get('name')||'').trim(),phone:(fd.get('phone')||'').trim(),source:'website',page_url:location.href};
+      var row={name:(fd.get('name')||'').trim(),phone:(fd.get('phone')||'').trim(),source:'website',page_url:location.href,gclid:(window.TWL_ATTR&&TWL_ATTR.gclid)||null,variant:window.TWL_VARIANT||null};
       if(!row.name||!row.phone){return;}
       try{var k='twl_leads';var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(Object.assign({ts:new Date().toISOString()},row));localStorage.setItem(k,JSON.stringify(a));}catch(err){}
       /* Google Ads: CP - Lead form submit */
@@ -1044,7 +1059,7 @@ function gtag_report_conversion(url){
       if(a.hasAttribute('data-conv-kit')){
         /* Kit purchase — value $69.99 is configured account-side (same-each) */
         gtag('event','conversion',{send_to:TWL_CONV.kit,transaction_id:''});
-      }else if(href.indexOf('squareup.com/appointments')>-1){
+      }else if(href.indexOf('/book/')===0 || href.indexOf('squareup.com/appointments')>-1){
         /* Book appointment — opens Square in a new tab, page stays alive so the hit sends */
         gtag('event','conversion',{send_to:TWL_CONV.book,value:1.0,currency:'USD'});
       }else if(href.indexOf('tel:')===0){

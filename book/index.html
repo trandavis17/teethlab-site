@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Whitening Session — The Teeth Whitening Lab, Long Beach</title>
+<meta name="description" content="Pick a time, pay a small deposit, and you're booked. Advanced laser teeth whitening in Long Beach — same-day results, zero to minimal sensitivity.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Google tag (gtag.js) — same Ads account as the landing page -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-10941549968"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-10941549968');
+</script>
+
+<!-- Square Web Payments SDK (production) -->
+<script src="https://web.squarecdn.com/v1/square.js"></script>
+
+<style>
+:root{
+  color-scheme: light only;
+  --ink:#0d0d12; --ink-2:#1a1a22; --bg:#ffffff; --soft:#f5f4ff; --soft-2:#efeefc;
+  --primary:#5b4be8; --primary-2:#8174ff; --blue:#3f7bff; --muted:#6d6d7a; --line:#e9e8f2;
+  --grad:linear-gradient(120deg,#5b4be8 0%,#8174ff 55%,#3f7bff 100%);
+  --green:#16b85c; --green-2:#0f9d4f;
+  --shadow:0 24px 60px -24px rgba(40,30,120,.35); --shadow-sm:0 10px 30px -16px rgba(40,30,120,.4);
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.wrap{width:min(920px,92vw);margin-inline:auto}
+.eyebrow{font-weight:600;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--primary)}
+.muted{color:var(--muted)}
+
+/* Header */
+header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0}
+.brand img{height:44px;width:auto}
+.nav-right{display:flex;align-items:center;gap:1rem;font-size:.92rem;font-weight:600}
+.nav-right a.call{color:var(--primary)}
+
+/* Preview ribbon */
+.preview-ribbon{background:#fff7e6;border-bottom:1px solid #f2dfae;color:#7a5b00;font-size:.85rem;font-weight:600;text-align:center;padding:.45rem .8rem}
+
+/* Steps */
+.steps{display:flex;gap:.6rem;justify-content:center;margin:1.6rem 0 .4rem;font-size:.82rem;font-weight:600;flex-wrap:wrap}
+.step-pill{display:flex;align-items:center;gap:.45em;padding:.42rem .95rem;border-radius:100px;border:1.5px solid var(--line);color:var(--muted);background:#fff;transition:all .25s}
+.step-pill .dot{width:22px;height:22px;border-radius:50%;background:var(--soft-2);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:.75rem}
+.step-pill.active{border-color:var(--primary);color:var(--ink);box-shadow:var(--shadow-sm)}
+.step-pill.active .dot{background:var(--grad);color:#fff}
+.step-pill.done{border-color:#bfe8cf;color:#0f7a3d;background:#f2fbf5}
+.step-pill.done .dot{background:var(--green);color:#fff}
+
+main{padding:0 0 90px}
+.panel{margin-top:2rem}
+.panel[hidden]{display:none}
+.panel-title{text-align:center;margin-bottom:.4rem;font-size:clamp(1.6rem,4vw,2.3rem)}
+.panel-sub{text-align:center;max-width:560px;margin:0 auto 1.6rem}
+
+/* Offer cards */
+.offers{display:grid;grid-template-columns:1.35fr 1fr;gap:1.2rem;align-items:stretch}
+.offer{position:relative;border:2px solid var(--line);border-radius:var(--r);padding:1.6rem 1.5rem 1.4rem;background:#fff;cursor:pointer;text-align:left;transition:border-color .25s,box-shadow .25s,transform .25s;display:flex;flex-direction:column}
+.offer:hover{transform:translateY(-3px)}
+.offer.selected{border-color:var(--primary);box-shadow:var(--shadow)}
+.offer .tag{position:absolute;top:-13px;left:1.3rem;background:var(--grad);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.28rem .85rem;border-radius:100px;box-shadow:var(--shadow-sm)}
+.offer h3{font-size:1.25rem;margin-bottom:.2rem}
+.offer .price-row{display:flex;align-items:baseline;gap:.5rem;margin:.35rem 0 .5rem}
+.offer .amt{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:600;color:var(--primary)}
+.offer.secondary .amt{font-size:2rem}
+.offer .per{font-size:.85rem;color:var(--muted)}
+.offer ul{list-style:none;margin:.5rem 0 1rem;font-size:.92rem;display:grid;gap:.42rem}
+.offer ul li{padding-left:1.45em;position:relative}
+.offer ul li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+.offer .dep{margin-top:auto;background:var(--soft);border-radius:12px;padding:.65rem .9rem;font-size:.88rem}
+.offer .dep b{color:var(--ink)}
+.offer .pick{margin-top:1rem;width:100%;justify-content:center}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.98rem;padding:1rem 1.7rem;border-radius:100px;border:0;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .3s,opacity .3s}
+.btn-primary{background:linear-gradient(120deg,var(--green),var(--green-2));color:#fff;box-shadow:0 12px 30px -12px rgba(16,163,78,.55)}
+.btn-primary:hover{filter:brightness(1.07);box-shadow:0 20px 42px -12px rgba(16,163,78,.82)}
+.btn-primary:disabled{opacity:.55;cursor:not-allowed;filter:none}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{transform:translateY(-3px);border-color:var(--primary);color:var(--primary)}
+.btn-lg{padding:1.15rem 2.1rem;font-size:1.05rem;width:100%;justify-content:center}
+
+/* Calendar */
+.cal-card{border:1.5px solid var(--line);border-radius:var(--r);padding:1.4rem;background:#fff;box-shadow:var(--shadow-sm)}
+.tz-note{font-size:.8rem;color:var(--muted);text-align:right;margin-bottom:.6rem}
+.day-strip{display:flex;gap:.55rem;overflow-x:auto;padding-bottom:.6rem;scrollbar-width:thin}
+.day-chip{flex:0 0 auto;min-width:74px;text-align:center;border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:.55rem .6rem;cursor:pointer;transition:all .2s}
+.day-chip .dow{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.day-chip .dom{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600}
+.day-chip .n{font-size:.68rem;color:var(--green-2);font-weight:600}
+.day-chip.selected{border-color:var(--primary);background:var(--soft);box-shadow:var(--shadow-sm)}
+.day-chip:disabled{opacity:.38;cursor:default}
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:.6rem;margin-top:1rem}
+.slot{border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:.6rem .4rem;font-weight:600;font-size:.92rem;cursor:pointer;transition:all .18s}
+.slot:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px)}
+.slot.selected{background:var(--grad);border-color:transparent;color:#fff;box-shadow:var(--shadow-sm)}
+.cal-status{padding:1.6rem .5rem;text-align:center;color:var(--muted);font-size:.95rem}
+.spinner{width:26px;height:26px;border-radius:50%;border:3px solid var(--soft-2);border-top-color:var(--primary);animation:spin .8s linear infinite;margin:0 auto .7rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Payment */
+.pay-grid{display:grid;grid-template-columns:1fr .9fr;gap:1.4rem;align-items:start}
+.sum-card{border:1.5px solid var(--line);border-radius:var(--r);background:var(--soft);padding:1.3rem 1.4rem}
+.sum-card h3{font-size:1.1rem;margin-bottom:.7rem}
+.sum-row{display:flex;justify-content:space-between;gap:1rem;font-size:.94rem;padding:.34rem 0}
+.sum-row b{font-weight:700}
+.sum-row.total{border-top:1.5px solid #dcd9f0;margin-top:.5rem;padding-top:.7rem;font-size:1.02rem}
+.sum-row .due-badge{background:var(--grad);color:#fff;border-radius:100px;padding:.1rem .7rem;font-size:.8rem;font-weight:700}
+.kit-box{display:flex;gap:.7rem;align-items:flex-start;background:#fff;border:1.5px dashed var(--primary-2);border-radius:12px;padding:.8rem .9rem;margin:.9rem 0 .2rem;cursor:pointer}
+.kit-box input{margin-top:.3rem;accent-color:var(--primary);width:17px;height:17px;flex:0 0 auto}
+.kit-box .kb-t{font-weight:700;font-size:.92rem}
+.kit-box .kb-d{font-size:.82rem;color:var(--muted)}
+.form-card{border:1.5px solid var(--line);border-radius:var(--r);background:#fff;padding:1.3rem 1.4rem;box-shadow:var(--shadow-sm)}
+.field{margin-bottom:.85rem}
+.field label{display:block;font-size:.82rem;font-weight:700;margin-bottom:.3rem}
+.field input{width:100%;padding:.78rem .9rem;border:1.5px solid var(--line);border-radius:12px;font-size:1rem;font-family:inherit;transition:border-color .2s}
+.field input:focus{outline:none;border-color:var(--primary)}
+#card-container{border:1.5px solid var(--line);border-radius:12px;padding:.35rem .6rem;background:#fff;min-height:48px}
+.pay-err{display:none;background:#fdecec;border:1.5px solid #f3b8b8;color:#8c1f1f;border-radius:12px;padding:.7rem .9rem;font-size:.88rem;margin:.8rem 0}
+.trust-row{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;margin-top:1rem;font-size:.8rem;color:var(--muted)}
+.trust-row span{display:inline-flex;align-items:center;gap:.35em}
+.back-link{background:none;border:0;color:var(--muted);font-weight:600;font-size:.88rem;cursor:pointer;padding:.4rem;margin-bottom:.6rem}
+.back-link:hover{color:var(--primary)}
+
+/* Confirmation */
+.confirm-card{border:2px solid #bfe8cf;background:#f2fbf5;border-radius:var(--r);padding:2rem 1.6rem;text-align:center;max-width:620px;margin:0 auto}
+.confirm-card .big{font-size:2.4rem}
+.confirm-details{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.2rem;margin:1.2rem auto;text-align:left;max-width:420px;font-size:.94rem}
+.notice-card{border:2px solid #f2dfae;background:#fff7e6;border-radius:var(--r);padding:1.6rem;text-align:center;max-width:620px;margin:1rem auto 0}
+
+/* Proof strip */
+.proof-strip{display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:center;margin:2.6rem auto 0;padding-top:1.6rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted);text-align:center}
+.proof-strip b{display:block;font-family:'Fraunces',serif;font-size:1.25rem;color:var(--ink);font-weight:600}
+
+@media(max-width:760px){
+  .offers{grid-template-columns:1fr}
+  .pay-grid{grid-template-columns:1fr}
+  .brand img{height:38px}
+  .nav-right .back-site{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="previewRibbon" class="preview-ribbon" hidden>Preview build — payments are disabled. No card will be charged.</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="The Teeth Whitening Lab — home">
+      <img src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/63be49e4dc38d74489a136c1.webp" alt="Teeth Whitening Lab">
+    </a>
+    <div class="nav-right">
+      <a class="back-site" href="/">← Back to site</a>
+      <a class="call" href="tel:5625148383">Call / Text (562) 514-8383</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="steps" aria-label="Booking progress">
+      <div class="step-pill active" id="pill1"><span class="dot">1</span> Your session</div>
+      <div class="step-pill" id="pill2"><span class="dot">2</span> Pick a time</div>
+      <div class="step-pill" id="pill3"><span class="dot">3</span> Confirm &amp; pay deposit</div>
+    </div>
+
+    <!-- STEP 1 · OFFER -->
+    <section class="panel" id="panelOffer">
+      <p class="eyebrow" style="text-align:center">Advanced laser whitening · Long Beach</p>
+      <h1 class="panel-title">Book your whitening session</h1>
+      <p class="panel-sub muted">Same-day results in about 90 minutes, with zero to minimal sensitivity. Reserve with a small deposit — the rest is due at your visit.</p>
+
+      <div class="offers">
+        <button class="offer selected" id="offerAdult" data-offer="adult" type="button">
+          <span class="tag">Most popular</span>
+          <h3>1 Adult — 90-Minute Session</h3>
+          <div class="price-row"><span class="amt">$250</span><span class="per">full session</span></div>
+          <ul>
+            <li>6–16 shades brighter, most often on the very first visit</li>
+            <li>About 90 minutes in the chair — walk out same-day</li>
+            <li>Zero to minimal sensitivity</li>
+            <li>Free touch-up whitening pen included</li>
+          </ul>
+          <div class="dep">Reserve today for a <b>$50 deposit</b> · $200 due at your visit · 100% refundable with 24-hour notice</div>
+          <span class="btn btn-primary pick">Choose &amp; pick a time ↓</span>
+        </button>
+
+        <button class="offer secondary" id="offerParty" data-offer="party2" type="button">
+          <h3>Party of 2 — 90 Minutes</h3>
+          <div class="price-row"><span class="amt">$450</span><span class="per">for two people</span></div>
+          <ul>
+            <li>Whiten together, side by side</li>
+            <li>Same session, same results — ×2</li>
+            <li>Two free touch-up pens</li>
+          </ul>
+          <div class="dep">Reserve for a <b>$100 deposit</b> · $350 due at your visit</div>
+          <span class="btn btn-ghost pick">Book for two ↓</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 2 · TIME -->
+    <section class="panel" id="panelTime" hidden>
+      <h2 class="panel-title" style="font-size:clamp(1.4rem,3.4vw,1.9rem)">Pick a day &amp; time</h2>
+      <p class="panel-sub muted" style="margin-bottom:1rem">Live availability at our Long Beach studio, 638 Alamitos Ave.</p>
+      <div class="cal-card">
+        <div class="tz-note">All times Pacific (Long Beach)</div>
+        <div id="calStatus" class="cal-status"><div class="spinner"></div>Checking live availability…</div>
+        <div class="day-strip" id="dayStrip" hidden></div>
+        <div class="slot-grid" id="slotGrid" hidden></div>
+      </div>
+    </section>
+
+    <!-- STEP 3 · PAY -->
+    <section class="panel" id="panelPay" hidden>
+      <button class="back-link" id="backToTime" type="button">← Change time</button>
+      <h2 class="panel-title" style="font-size:clamp(1.4rem,3.4vw,1.9rem)">Confirm your booking</h2>
+      <p class="panel-sub muted" style="margin-bottom:1.2rem">Pay the deposit now — the remainder is due at the studio.</p>
+
+      <div class="pay-grid">
+        <div class="sum-card">
+          <h3>Your session</h3>
+          <div class="sum-row"><span id="sumService">1 Adult — 90-Minute Whitening</span><b id="sumPrice">$250</b></div>
+          <div class="sum-row"><span>When</span><b id="sumWhen">—</b></div>
+          <div class="sum-row"><span>Where</span><b>638 Alamitos Ave, Long Beach</b></div>
+
+          <label class="kit-box" for="kitCheck">
+            <input type="checkbox" id="kitCheck">
+            <span>
+              <span class="kb-t" id="kitTitle">Add take-home whitening kit — +$50</span><br>
+              <span class="kb-d" id="kitDesc">Our premium home kit (online price $85+) keeps your results going between visits. Added to your studio balance — deposit stays the same.</span>
+            </span>
+          </label>
+
+          <div class="sum-row total"><span>Due today <span class="due-badge">deposit</span></span><b id="sumDeposit">$50</b></div>
+          <div class="sum-row"><span class="muted">Due at your visit</span><span class="muted" id="sumBalance">$200</span></div>
+        </div>
+
+        <form class="form-card" id="payForm" novalidate>
+          <div class="field"><label for="fName">Full name</label><input id="fName" name="name" type="text" autocomplete="name" required placeholder="Jane Smith"></div>
+          <div class="field"><label for="fEmail">Email</label><input id="fEmail" name="email" type="email" autocomplete="email" required placeholder="jane@email.com"></div>
+          <div class="field"><label for="fPhone">Mobile phone</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" required placeholder="(562) 555-1234"></div>
+          <div class="field"><label>Card</label><div id="card-container"></div></div>
+          <div class="pay-err" id="payErr"></div>
+          <button class="btn btn-primary btn-lg" id="payBtn" type="submit">Pay <span id="payAmt">$50</span> deposit &amp; confirm</button>
+          <div class="trust-row">
+            <span>🔒 Secured by Square</span><span>↩︎ Deposit 100% refundable with 24-hr notice</span><span>💳 HSA / FSA accepted in studio</span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- CONFIRMATION -->
+    <section class="panel" id="panelDone" hidden>
+      <div class="confirm-card">
+        <div class="big">✨</div>
+        <h2>You're booked!</h2>
+        <p class="muted" style="margin-top:.4rem">A confirmation is on its way to your email with everything you need before your visit.</p>
+        <div class="confirm-details" id="doneDetails"></div>
+        <a class="btn btn-ghost" id="gcalLink" target="_blank" rel="noopener">＋ Add to Google Calendar</a>
+      </div>
+    </section>
+
+    <!-- PREVIEW-MODE NOTICE -->
+    <section class="panel" id="panelPreviewDone" hidden>
+      <div class="notice-card">
+        <h2 style="font-size:1.4rem">Preview mode — no charge was made</h2>
+        <p class="muted" style="margin-top:.5rem">This build has live availability but payments are switched off. In the live version, this click charges the deposit and confirms the appointment in Square.</p>
+        <div class="confirm-details" id="previewDetails" style="margin-top:1rem"></div>
+      </div>
+    </section>
+
+    <div class="proof-strip">
+      <div><b>2,000+</b> smiles brightened</div>
+      <div><b>6–16</b> shades, first visit</div>
+      <div><b>~90 min</b> same-day results</div>
+      <div><b>Zero</b> to minimal sensitivity</div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+/* ============ CONFIG — every ID verified against the live Square catalog on 2026-08-06 ============ */
+var CFG = {
+  CHECKOUT_LIVE: false,                    /* flip to true only when square-bridge v3 write actions are deployed */
+  SUPA_URL: 'https://pjrcbpbuujxtvjttylgc.supabase.co',
+  SUPA_KEY: 'sb_publishable_ygFhbx4wSDfyaGUHKVd8cg_T8jWMicp', /* publishable — safe client-side */
+  BRIDGE: 'https://pjrcbpbuujxtvjttylgc.supabase.co/functions/v1/square-bridge',
+  SQUARE_APP_ID: 'sq0idp-JyfU-XukbVVd6r568ODldg',   /* public application id */
+  LOCATION_ID: 'LBT6DHXGMSP0S',
+  CONV_BOOKED: '',                          /* Google Ads conversion label for booking_confirmed — set after Davis creates the action */
+  DAYS_AHEAD: 14
+};
+
+var OFFERS = {
+  adult: {
+    label: '1 Adult — 90-Minute Whitening',
+    variation: 'C7U5ILFM2XBZNABYVTO4AX23',       /* 1 Adult $250 */
+    kitVariation: 'XNBJKEJ5WQDT3XBRNG2DGMJJ',    /* 1 Adult + Kit $300 */
+    full: 25000, kitFull: 30000, deposit: 5000, minutes: 90,
+    kitTitle: 'Add take-home whitening kit — +$50',
+    kitDesc: 'Our premium home kit (online price $85+) keeps your results going between visits. Added to your studio balance — deposit stays the same.'
+  },
+  party2: {
+    label: 'Party of 2 — 90-Minute Whitening',
+    variation: 'OUOPFLGAOM4J75DVMTUJZYT3',       /* Party of 2 $450 */
+    kitVariation: 'OSBUUUYMXBFW7DEPZS4RC6OU',    /* Party of 2 + Kits $500 */
+    full: 45000, kitFull: 50000, deposit: 10000, minutes: 90,
+    kitTitle: 'Add 2 take-home whitening kits — +$50',
+    kitDesc: 'One premium home kit each (online price $85+ apiece). Added to your studio balance — deposit stays the same.'
+  }
+};
+
+/* ============ Attribution: gclid + UTMs + variant, persisted 90 days ============ */
+function readCookie(n){var m=document.cookie.match('(?:^|; )'+n+'=([^;]*)');return m?decodeURIComponent(m[1]):null;}
+function writeCookie(n,v,days){document.cookie=n+'='+encodeURIComponent(v)+'; path=/; max-age='+(days*86400)+'; SameSite=Lax';}
+
+var qs = new URLSearchParams(location.search);
+var attr = {};
+try{ attr = JSON.parse(readCookie('twl_attr')||'{}'); }catch(e){ attr={}; }
+['gclid','gbraid','wbraid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+  if(qs.get(k)) attr[k]=qs.get(k);
+});
+if(!attr.landing) attr.landing = location.href;
+writeCookie('twl_attr', JSON.stringify(attr), 90);
+try{ localStorage.setItem('twl_attr', JSON.stringify(attr)); }catch(e){}
+
+/* A/B variant — sticky 50/50, shared with the landing page */
+var variant = readCookie('twl_variant');
+if(variant!=='a' && variant!=='b'){ variant = Math.random()<0.5?'a':'b'; writeCookie('twl_variant', variant, 90); }
+
+/* ============ Events ============ */
+function track(name, params){
+  var p = Object.assign({ offer: state.offer, variant: variant }, params||{});
+  try{ gtag('event', name, p); }catch(e){}
+  try{ if(window.fbq) fbq('trackCustom', name, p); }catch(e){}
+}
+
+/* ============ State ============ */
+var state = { offer:'adult', slot:null, slotsByDay:{}, dayKeys:[], selectedDay:null, card:null, payments:null, busy:false };
+if(qs.get('offer')==='party2') state.offer='party2';
+
+var $ = function(id){ return document.getElementById(id); };
+var fmtUSD = function(cents){ return '$'+(cents/100).toLocaleString('en-US',{maximumFractionDigits:0}); };
+var LA = 'America/Los_Angeles';
+
+function pill(n, cls){ ['pill1','pill2','pill3'].forEach(function(id,i){ $(id).className='step-pill'+(i+1===n?' active':(i+1<n?' done':'')); }); }
+
+/* ============ Offer selection ============ */
+function applyOffer(){
+  var o = OFFERS[state.offer];
+  $('offerAdult').classList.toggle('selected', state.offer==='adult');
+  $('offerParty').classList.toggle('selected', state.offer==='party2');
+  $('sumService').textContent = o.label;
+  $('kitTitle').textContent = o.kitTitle;
+  $('kitDesc').textContent = o.kitDesc;
+  updateTotals();
+}
+function updateTotals(){
+  var o = OFFERS[state.offer], kit = $('kitCheck').checked;
+  var full = kit ? o.kitFull : o.full;
+  $('sumPrice').textContent = fmtUSD(full);
+  $('sumDeposit').textContent = fmtUSD(o.deposit);
+  $('payAmt').textContent = fmtUSD(o.deposit);
+  $('sumBalance').textContent = fmtUSD(full - o.deposit);
+}
+['offerAdult','offerParty'].forEach(function(id){
+  $(id).addEventListener('click', function(){
+    var chosen = this.getAttribute('data-offer');
+    var changed = chosen!==state.offer;
+    state.offer = chosen; applyOffer();
+    showTime(changed);
+  });
+});
+$('kitCheck').addEventListener('change', updateTotals);
+
+/* ============ Availability ============ */
+function bridge(body){
+  return fetch(CFG.BRIDGE, {
+    method:'POST',
+    headers:{ 'Authorization':'Bearer '+CFG.SUPA_KEY, 'apikey':CFG.SUPA_KEY, 'Content-Type':'application/json' },
+    body: JSON.stringify(body)
+  }).then(function(r){ return r.json(); });
+}
+
+function loadAvailability(){
+  var o = OFFERS[state.offer];
+  $('calStatus').innerHTML = '<div class="spinner"></div>Checking live availability…';
+  $('calStatus').style.display='block'; $('dayStrip').hidden=true; $('slotGrid').hidden=true;
+  var start = new Date(Date.now()+60*60*1000).toISOString();
+  var end   = new Date(Date.now()+CFG.DAYS_AHEAD*86400*1000).toISOString();
+  bridge({ action:'availability', env:'production', service_variation_id:o.variation, start_at:start, end_at:end })
+    .then(function(res){
+      if(!res.ok) throw new Error(res.error||'availability failed');
+      groupSlots(res.slots||[]);
+      renderDays();
+    })
+    .catch(function(){
+      $('calStatus').innerHTML = 'We couldn’t load live availability just now. <br><br><a class="btn btn-ghost" href="javascript:void 0" id="retryBtn">Try again</a> &nbsp; or call/text <a href="tel:5625148383" style="color:var(--primary);font-weight:700">(562) 514-8383</a>';
+      var rb=$('retryBtn'); if(rb) rb.onclick=loadAvailability;
+    });
+}
+
+function groupSlots(slots){
+  state.slotsByDay={}; state.dayKeys=[];
+  var dayFmt = new Intl.DateTimeFormat('en-CA',{timeZone:LA,year:'numeric',month:'2-digit',day:'2-digit'});
+  slots.forEach(function(s){
+    var key = dayFmt.format(new Date(s.start_at));
+    if(!state.slotsByDay[key]){ state.slotsByDay[key]=[]; state.dayKeys.push(key); }
+    state.slotsByDay[key].push(s);
+  });
+  state.dayKeys.sort();
+  state.selectedDay = state.dayKeys[0]||null;
+}
+
+function renderDays(){
+  var strip=$('dayStrip'); strip.innerHTML='';
+  if(!state.dayKeys.length){
+    $('calStatus').innerHTML='No online openings in the next two weeks. Call or text <a href="tel:5625148383" style="color:var(--primary);font-weight:700">(562) 514-8383</a> — same-day spots often open up.';
+    return;
+  }
+  $('calStatus').style.display='none'; strip.hidden=false; $('slotGrid').hidden=false;
+  var dowF=new Intl.DateTimeFormat('en-US',{timeZone:LA,weekday:'short'});
+  var domF=new Intl.DateTimeFormat('en-US',{timeZone:LA,day:'numeric'});
+  state.dayKeys.forEach(function(key){
+    var d=new Date(key+'T12:00:00-07:00');
+    var b=document.createElement('button');
+    b.type='button'; b.className='day-chip'+(key===state.selectedDay?' selected':'');
+    b.innerHTML='<div class="dow">'+dowF.format(d)+'</div><div class="dom">'+domF.format(d)+'</div><div class="n">'+state.slotsByDay[key].length+' open</div>';
+    b.onclick=function(){ state.selectedDay=key; renderDays(); };
+    strip.appendChild(b);
+  });
+  renderSlots();
+}
+
+function renderSlots(){
+  var grid=$('slotGrid'); grid.innerHTML='';
+  var tF=new Intl.DateTimeFormat('en-US',{timeZone:LA,hour:'numeric',minute:'2-digit'});
+  (state.slotsByDay[state.selectedDay]||[]).forEach(function(s){
+    var b=document.createElement('button');
+    b.type='button'; b.className='slot'; b.textContent=tF.format(new Date(s.start_at));
+    b.onclick=function(){
+      state.slot=s;
+      [].forEach.call(grid.children,function(c){c.classList.remove('selected');});
+      b.classList.add('selected');
+      track('time_selected',{ slot: s.start_at });
+      showPay();
+    };
+    grid.appendChild(b);
+  });
+}
+
+/* ============ Panels ============ */
+function showTime(reload){
+  $('panelTime').hidden=false; pill(2);
+  if(reload!==false) loadAvailability();
+  $('panelTime').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function showPay(){
+  var o=OFFERS[state.offer];
+  var whenF=new Intl.DateTimeFormat('en-US',{timeZone:LA,weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+  $('sumWhen').textContent = whenF.format(new Date(state.slot.start_at))+' PT';
+  updateTotals();
+  $('panelPay').hidden=false; pill(3);
+  initCard();
+  track('payment_started',{});
+  $('panelPay').scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('backToTime').onclick=function(){ $('panelPay').hidden=true; pill(2); $('panelTime').scrollIntoView({behavior:'smooth'}); };
+
+/* ============ Square card element ============ */
+function initCard(){
+  if(state.card || !window.Square) return;
+  try{
+    state.payments = Square.payments(CFG.SQUARE_APP_ID, CFG.LOCATION_ID);
+    state.payments.card().then(function(card){ state.card=card; return card.attach('#card-container'); })
+      .catch(function(){ payError('Card form failed to load. Refresh the page or call us at (562) 514-8383.'); });
+  }catch(e){ payError('Card form failed to load. Refresh the page or call us at (562) 514-8383.'); }
+}
+function payError(msg){ var el=$('payErr'); el.textContent=msg; el.style.display='block'; }
+function clearError(){ $('payErr').style.display='none'; }
+
+/* ============ Submit ============ */
+$('payForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  if(state.busy) return;
+  clearError();
+  var name=$('fName').value.trim(), email=$('fEmail').value.trim(), phone=$('fPhone').value.trim();
+  if(!name||!email||!phone){ payError('Please fill in your name, email and phone.'); return; }
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ payError('That email doesn’t look right.'); return; }
+  if(!state.slot){ payError('Please pick a time first.'); return; }
+  if(!state.card){ payError('Card form is still loading — one second and try again.'); return; }
+
+  var o=OFFERS[state.offer], kit=$('kitCheck').checked;
+  state.busy=true; $('payBtn').disabled=true; $('payBtn').innerHTML='Confirming…';
+
+  state.card.tokenize().then(function(tok){
+    if(tok.status!=='OK'){ throw new Error((tok.errors&&tok.errors[0]&&tok.errors[0].message)||'Card was not accepted.'); }
+
+    var payload = {
+      action:'create_checkout', env:'production',
+      source_id: tok.token,
+      service_variation_id: kit? o.kitVariation : o.variation,
+      offer: state.offer, kit: kit,
+      start_at: state.slot.start_at,
+      team_member_id: state.slot.team_member_id,
+      deposit_cents: o.deposit, price_cents: kit? o.kitFull : o.full,
+      customer:{ name:name, email:email, phone:phone },
+      attribution: attr, variant: variant, page_url: location.href
+    };
+
+    if(!CFG.CHECKOUT_LIVE){
+      /* Preview build: everything validated & tokenized, nothing charged, nothing written */
+      renderDetails('previewDetails', o, kit);
+      $('panelPay').hidden=true; $('panelPreviewDone').hidden=false;
+      $('panelPreviewDone').scrollIntoView({behavior:'smooth'});
+      done();
+      return;
+    }
+
+    bridge(payload).then(function(res){
+      if(!res.ok) throw new Error(res.error||'Booking failed.');
+      track('booking_confirmed',{ value:(kit?o.kitFull:o.full)/100, currency:'USD', booking_id:res.booking_id });
+      if(CFG.CONV_BOOKED){
+        try{ gtag('event','conversion',{ send_to:CFG.CONV_BOOKED, value:(kit?o.kitFull:o.full)/100, currency:'USD', transaction_id:res.booking_id }); }catch(err){}
+      }
+      renderDetails('doneDetails', o, kit);
+      var start=new Date(state.slot.start_at), end=new Date(start.getTime()+o.minutes*60000);
+      var z=function(d){return d.toISOString().replace(/[-:]|\.\d{3}/g,'');};
+      $('gcalLink').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Teeth Whitening Lab — '+o.label)+'&dates='+z(start)+'/'+z(end)+'&location='+encodeURIComponent('638 Alamitos Ave, Long Beach, CA 90802');
+      $('panelPay').hidden=true; $('panelDone').hidden=false;
+      $('panelDone').scrollIntoView({behavior:'smooth'});
+      done();
+    }).catch(fail);
+  }).catch(fail);
+
+  function fail(err){ done(); payError(err.message||'Something went wrong — you have not been charged. Try again or call (562) 514-8383.'); }
+  function done(){ state.busy=false; $('payBtn').disabled=false; $('payBtn').innerHTML='Pay <span id="payAmt">'+fmtUSD(OFFERS[state.offer].deposit)+'</span> deposit &amp; confirm'; }
+});
+
+function renderDetails(id, o, kit){
+  var whenF=new Intl.DateTimeFormat('en-US',{timeZone:LA,weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'});
+  $(id).innerHTML =
+    '<div class="sum-row"><span>Session</span><b>'+o.label+(kit?' + kit':'')+'</b></div>'+
+    '<div class="sum-row"><span>When</span><b>'+whenF.format(new Date(state.slot.start_at))+' PT</b></div>'+
+    '<div class="sum-row"><span>Where</span><b>638 Alamitos Ave, Long Beach</b></div>'+
+    '<div class="sum-row"><span>Deposit</span><b>'+fmtUSD(o.deposit)+'</b></div>'+
+    '<div class="sum-row"><span>Balance at visit</span><b>'+fmtUSD((kit?o.kitFull:o.full)-o.deposit)+'</b></div>';
+}
+
+/* ============ Boot ============ */
+if(!CFG.CHECKOUT_LIVE) $('previewRibbon').hidden=false;
+applyOffer();
+track('checkout_view',{});
+showTime(true);
+})();
+</script>
+</body>
+</html>
