@@ -73,6 +73,8 @@ main{padding:0 0 90px}
 .offer{position:relative;border:2px solid var(--line);border-radius:var(--r);padding:1.6rem 1.5rem 1.4rem;background:#fff;cursor:pointer;text-align:left;transition:border-color .25s,box-shadow .25s,transform .25s;display:flex;flex-direction:column}
 .offer:hover{transform:translateY(-3px)}
 .offer.selected{border-color:var(--primary);box-shadow:var(--shadow)}
+.offer .of-img{width:calc(100% + 3rem);margin:-1.6rem -1.5rem 1.05rem;height:200px;object-fit:cover;object-position:center 30%;border-radius:16px 16px 0 0}
+.offer.secondary .of-img{height:160px}
 .offer .tag{position:absolute;top:-13px;left:1.3rem;background:var(--grad);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.28rem .85rem;border-radius:100px;box-shadow:var(--shadow-sm)}
 .offer h3{font-size:1.25rem;margin-bottom:.2rem}
 .offer .price-row{display:flex;align-items:baseline;gap:.5rem;margin:.35rem 0 .5rem}
@@ -113,10 +115,19 @@ main{padding:0 0 90px}
 .spinner{width:26px;height:26px;border-radius:50%;border:3px solid var(--soft-2);border-top-color:var(--primary);animation:spin .8s linear infinite;margin:0 auto .7rem}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* Results proof strip */
+.results-band{margin-top:2.2rem;text-align:center}
+.results-band h3{font-size:1.15rem;margin-bottom:.2rem}
+.results-band .rb-sub{font-size:.85rem;color:var(--muted);margin-bottom:.9rem}
+.rb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.rb-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;border:1.5px solid var(--line);box-shadow:var(--shadow-sm)}
+
 /* Payment */
 .pay-grid{display:grid;grid-template-columns:1fr .9fr;gap:1.4rem;align-items:start}
 .sum-card{border:1.5px solid var(--line);border-radius:var(--r);background:var(--soft);padding:1.3rem 1.4rem}
 .sum-card h3{font-size:1.1rem;margin-bottom:.7rem}
+.sum-head{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem}
+.sum-head img{width:56px;height:56px;border-radius:12px;object-fit:cover;object-position:center 30%;border:1.5px solid #dcd9f0}
 .sum-row{display:flex;justify-content:space-between;gap:1rem;font-size:.94rem;padding:.34rem 0}
 .sum-row b{font-weight:700}
 .sum-row.total{border-top:1.5px solid #dcd9f0;margin-top:.5rem;padding-top:.7rem;font-size:1.02rem}
@@ -141,6 +152,8 @@ main{padding:0 0 90px}
 .confirm-card{border:2px solid #bfe8cf;background:#f2fbf5;border-radius:var(--r);padding:2rem 1.6rem;text-align:center;max-width:620px;margin:0 auto}
 .confirm-card .big{font-size:2.4rem}
 .confirm-details{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.2rem;margin:1.2rem auto;text-align:left;max-width:420px;font-size:.94rem}
+.confirm-photo{width:100%;max-width:420px;border-radius:14px;margin:1rem auto 0;border:1.5px solid var(--line)}
+.park-tip{font-size:.85rem;color:var(--muted);max-width:420px;margin:.5rem auto 0}
 .notice-card{border:2px solid #f2dfae;background:#fff7e6;border-radius:var(--r);padding:1.6rem;text-align:center;max-width:620px;margin:1rem auto 0}
 
 /* Proof strip */
@@ -152,6 +165,8 @@ main{padding:0 0 90px}
   .pay-grid{grid-template-columns:1fr}
   .brand img{height:38px}
   .nav-right .back-site{display:none}
+  .rb-grid{grid-template-columns:repeat(2,1fr)}
+  .offer .of-img,.offer.secondary .of-img{height:170px}
 }
 </style>
 </head>
@@ -188,6 +203,7 @@ main{padding:0 0 90px}
 
       <div class="offers">
         <button class="offer selected" id="offerAdult" data-offer="adult" type="button">
+          <img class="of-img" src="/adult.jpg" alt="Client relaxing in the whitening chair at the Teeth Whitening Lab">
           <span class="tag">Most popular</span>
           <h3>1 Adult — 90-Minute Session</h3>
           <div class="price-row"><span class="amt">$250</span><span class="per">full session</span></div>
@@ -202,6 +218,7 @@ main{padding:0 0 90px}
         </button>
 
         <button class="offer secondary" id="offerParty" data-offer="party2" type="button">
+          <img class="of-img" src="/party2.jpg" alt="Two happy clients after their couples whitening session">
           <h3>Party of 2 — 90 Minutes</h3>
           <div class="price-row"><span class="amt">$450</span><span class="per">for two people</span></div>
           <ul>
@@ -212,6 +229,17 @@ main{padding:0 0 90px}
           <div class="dep">Reserve for a <b>$100 deposit</b> · $350 due at your visit</div>
           <span class="btn btn-ghost pick">Book for two ↓</span>
         </button>
+      </div>
+
+      <div class="results-band">
+        <h3>Real clients, real results</h3>
+        <div class="rb-sub">Before &amp; after — same-day, at our Long Beach studio</div>
+        <div class="rb-grid">
+          <img loading="lazy" src="/pair01.jpg" alt="Before and after — client result 1">
+          <img loading="lazy" src="/pair02.jpg" alt="Before and after — client result 2">
+          <img loading="lazy" src="/res1.jpg" alt="Before and after — client result 3">
+          <img loading="lazy" src="/res3.jpg" alt="Before and after — client result 4">
+        </div>
       </div>
     </section>
 
@@ -235,7 +263,7 @@ main{padding:0 0 90px}
 
       <div class="pay-grid">
         <div class="sum-card">
-          <h3>Your session</h3>
+          <div class="sum-head"><img id="sumImg" src="/adult.jpg" alt=""><h3 style="margin:0">Your session</h3></div>
           <div class="sum-row"><span id="sumService">1 Adult — 90-Minute Whitening</span><b id="sumPrice">$250</b></div>
           <div class="sum-row"><span>When</span><b id="sumWhen">—</b></div>
           <div class="sum-row"><span>Where</span><b>638 Alamitos Ave, Long Beach</b></div>
@@ -274,6 +302,8 @@ main{padding:0 0 90px}
         <p class="muted" style="margin-top:.4rem">A confirmation is on its way to your email with everything you need before your visit.</p>
         <div class="confirm-details" id="doneDetails"></div>
         <a class="btn btn-ghost" id="gcalLink" target="_blank" rel="noopener">＋ Add to Google Calendar</a>
+        <img class="confirm-photo" loading="lazy" src="/storefront.jpg" alt="Teeth Whitening Lab storefront, 638 Alamitos Ave, Long Beach">
+        <p class="park-tip">Free parking one building north — you're in the right lot if you see the wall-to-wall mural.</p>
       </div>
     </section>
 
@@ -283,6 +313,7 @@ main{padding:0 0 90px}
         <h2 style="font-size:1.4rem">Preview mode — no charge was made</h2>
         <p class="muted" style="margin-top:.5rem">This build has live availability but payments are switched off. In the live version, this click charges the deposit and confirms the appointment in Square.</p>
         <div class="confirm-details" id="previewDetails" style="margin-top:1rem"></div>
+        <img class="confirm-photo" loading="lazy" src="/storefront.jpg" alt="Teeth Whitening Lab storefront, 638 Alamitos Ave, Long Beach">
       </div>
     </section>
 
@@ -372,6 +403,7 @@ function applyOffer(){
   $('offerAdult').classList.toggle('selected', state.offer==='adult');
   $('offerParty').classList.toggle('selected', state.offer==='party2');
   $('sumService').textContent = o.label;
+  $('sumImg').src = state.offer==='party2' ? '/party2.jpg' : '/adult.jpg';
   $('kitTitle').textContent = o.kitTitle;
   $('kitDesc').textContent = o.kitDesc;
   updateTotals();
