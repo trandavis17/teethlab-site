@@ -757,8 +757,10 @@ $('payForm').addEventListener('submit', function(e){
     if(!CFG.CHECKOUT_LIVE){
       /* Preview build: everything validated & tokenized, nothing charged, nothing written */
       renderDetails('previewDetails', o, kit);
-      $('panelPay').hidden=true; $('panelPreviewDone').hidden=false;
-      $('panelPreviewDone').scrollIntoView({behavior:'smooth'});
+      $('panelOffer').hidden=true; $('panelTime').hidden=true; $('panelPay').hidden=true;
+      pill(4);
+      $('panelPreviewDone').hidden=false;
+      window.scrollTo({top:0,behavior:'smooth'});
       done();
       return;
     }
@@ -773,8 +775,11 @@ $('payForm').addEventListener('submit', function(e){
       var start=new Date(state.slot.start_at), end=new Date(start.getTime()+o.minutes*60000);
       var z=function(d){return d.toISOString().replace(/[-:]|\.\d{3}/g,'');};
       $('gcalLink').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Teeth Whitening Lab — '+o.label)+'&dates='+z(start)+'/'+z(end)+'&location='+encodeURIComponent('638 Alamitos Ave, Long Beach, CA 90802');
-      $('panelPay').hidden=true; $('panelDone').hidden=false;
-      $('panelDone').scrollIntoView({behavior:'smooth'});
+      /* collapse the whole checkout flow — confirmation becomes the page */
+      $('panelOffer').hidden=true; $('panelTime').hidden=true; $('panelPay').hidden=true;
+      pill(4);
+      $('panelDone').hidden=false;
+      window.scrollTo({top:0,behavior:'smooth'});
       done();
     }).catch(fail);
   }).catch(fail);
