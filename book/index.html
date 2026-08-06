@@ -73,9 +73,8 @@ main{padding:0 0 90px}
 .offer{position:relative;border:2px solid var(--line);border-radius:var(--r);padding:1.6rem 1.5rem 1.4rem;background:#fff;cursor:pointer;text-align:left;transition:border-color .25s,box-shadow .25s,transform .25s;display:flex;flex-direction:column}
 .offer:hover{transform:translateY(-3px)}
 .offer.selected{border-color:var(--primary);box-shadow:var(--shadow)}
-.offer .of-img{width:calc(100% + 3rem);margin:-1.6rem -1.5rem 1.05rem;height:230px;object-fit:cover;border-radius:16px 16px 0 0}
-#offerAdult .of-img{object-position:center 38%}
-#offerParty .of-img{object-position:center 22%}
+/* identical to the landing page's .price-card .pc-img */
+.offer .of-img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:13px;margin-bottom:1.2rem}
 .offer .tag{position:absolute;top:-13px;left:1.3rem;background:var(--grad);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.28rem .85rem;border-radius:100px;box-shadow:var(--shadow-sm)}
 .offer h3{font-size:1.25rem;margin-bottom:.2rem}
 .offer .price-row{display:flex;align-items:baseline;gap:.5rem;margin:.35rem 0 .5rem}
@@ -154,8 +153,6 @@ main{padding:0 0 90px}
   .offers{grid-template-columns:1fr}
   .pay-grid{grid-template-columns:1fr}
   .brand img{height:38px}
-  .nav-right .back-site{display:none}
-  .offer .of-img{height:190px}
 }
 
 /* ===== Components lifted 1:1 from the landing page ===== */
@@ -246,11 +243,10 @@ main{padding:0 0 90px}
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="/" aria-label="The Teeth Whitening Lab — home">
+    <span class="brand" aria-label="The Teeth Whitening Lab">
       <img src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/63be49e4dc38d74489a136c1.webp" alt="Teeth Whitening Lab">
-    </a>
+    </span>
     <div class="nav-right">
-      <a class="back-site" href="/">← Back to site</a>
       <a class="call" href="tel:5625148383">Call / Text (562) 514-8383</a>
     </div>
   </div>
@@ -512,7 +508,7 @@ main{padding:0 0 90px}
 
 /* ============ CONFIG — every ID verified against the live Square catalog on 2026-08-06 ============ */
 var CFG = {
-  CHECKOUT_LIVE: false,                    /* flip to true only when square-bridge v3 write actions are deployed */
+  CHECKOUT_LIVE: true,                     /* square-bridge v3 deployed 2026-08-06 — payments are REAL from here on */
   SUPA_URL: 'https://pjrcbpbuujxtvjttylgc.supabase.co',
   SUPA_KEY: 'sb_publishable_ygFhbx4wSDfyaGUHKVd8cg_T8jWMicp', /* publishable — safe client-side */
   BRIDGE: 'https://pjrcbpbuujxtvjttylgc.supabase.co/functions/v1/square-bridge',

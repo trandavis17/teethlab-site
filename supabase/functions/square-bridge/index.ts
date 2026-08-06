@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
 /**
- * ClickPogo — Square bridge for The Teeth Whitening Lab.  v3 (DRAFT — NOT DEPLOYED)
+ * ClickPogo — Square bridge for The Teeth Whitening Lab.  v3 (deployed 2026-08-06 with Davis's go-ahead)
  *
  * v2 shipped read-only actions: ping, locations, services, team, availability,
  * plus the sandbox-only seed_sandbox. v3 adds ONE production write action:
@@ -11,7 +11,6 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
  *                     -> bookings row (service role). Guarded, see GUARDS below.
  *
  * The access token lives ONLY in Supabase secrets and is never returned.
- * DO NOT deploy until Davis gives explicit go-ahead on create_checkout.
  */
 
 const SQUARE_VERSION = "2025-01-23";
@@ -218,11 +217,15 @@ Deno.serve(async (req: Request) => {
         let gclid: string | null = attr.gclid ?? null;
         let gclidSource = gclid ? "direct" : "none";
         if (!gclid) {
-          const { data: lead } = await db.from("leads")
-            .select("gclid").not("gclid", "is", null)
-            .or(`email.eq.${c.email},phone.eq.${c.phone}`)
-            .order("created_at", { ascending: false }).limit(1).maybeSingle();
-          if (lead?.gclid) { gclid = lead.gclid; gclidSource = "lead_match"; }
+          // sanitize values so commas/parens can't break the PostgREST or() syntax
+          const safe = (s: unknown) => String(s ?? "").replace(/[,()]/g, "").trim();
+          try {
+            const { data: lead } = await db.from("leads")
+              .select("gclid").not("gclid", "is", null)
+              .or(`email.eq.${safe(c.email)},phone.eq.${safe(c.phone)}`)
+              .order("created_at", { ascending: false }).limit(1).maybeSingle();
+            if (lead?.gclid) { gclid = lead.gclid; gclidSource = "lead_match"; }
+          } catch { /* lead match is best-effort */ }
         }
 
         // 1) customer (search by email first to avoid duplicates)
@@ -313,8 +316,11 @@ Deno.serve(async (req: Request) => {
           return json({ ok: false, error: "That time was just taken — your deposit was refunded. Please pick another slot." }, 409);
         }
 
-        // 4) DB row (service role — anon has no access to bookings)
+        // 4) DB row (service role — anon has no access to bookings).
+        // Payment + booking already succeeded — a DB error must not fail the customer.
         const bookingId = booking.booking?.id ?? null;
+        let dbError: string | null = null;
+        try {
         await db.from("bookings").insert({
           square_booking_id: bookingId,
           square_payment_id: paymentId ?? null,
@@ -332,8 +338,9 @@ Deno.serve(async (req: Request) => {
           status: "confirmed",
           raw: { attribution: attr, offer: body.offer ?? null, kit: Boolean(body.kit) },
         });
+        } catch (e) { dbError = String(e); }
 
-        return json({ ok: true, booking_id: bookingId, payment_id: paymentId });
+        return json({ ok: true, booking_id: bookingId, payment_id: paymentId, db_error: dbError });
       }
 
       case "seed_sandbox": {
