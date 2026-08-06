@@ -73,8 +73,9 @@ main{padding:0 0 90px}
 .offer{position:relative;border:2px solid var(--line);border-radius:var(--r);padding:1.6rem 1.5rem 1.4rem;background:#fff;cursor:pointer;text-align:left;transition:border-color .25s,box-shadow .25s,transform .25s;display:flex;flex-direction:column}
 .offer:hover{transform:translateY(-3px)}
 .offer.selected{border-color:var(--primary);box-shadow:var(--shadow)}
-.offer .of-img{width:calc(100% + 3rem);margin:-1.6rem -1.5rem 1.05rem;height:200px;object-fit:cover;object-position:center 30%;border-radius:16px 16px 0 0}
-.offer.secondary .of-img{height:160px}
+.offer .of-img{width:calc(100% + 3rem);margin:-1.6rem -1.5rem 1.05rem;height:230px;object-fit:cover;border-radius:16px 16px 0 0}
+#offerAdult .of-img{object-position:center 38%}
+#offerParty .of-img{object-position:center 22%}
 .offer .tag{position:absolute;top:-13px;left:1.3rem;background:var(--grad);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.28rem .85rem;border-radius:100px;box-shadow:var(--shadow-sm)}
 .offer h3{font-size:1.25rem;margin-bottom:.2rem}
 .offer .price-row{display:flex;align-items:baseline;gap:.5rem;margin:.35rem 0 .5rem}
@@ -115,13 +116,6 @@ main{padding:0 0 90px}
 .spinner{width:26px;height:26px;border-radius:50%;border:3px solid var(--soft-2);border-top-color:var(--primary);animation:spin .8s linear infinite;margin:0 auto .7rem}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Results proof strip */
-.results-band{margin-top:2.2rem;text-align:center}
-.results-band h3{font-size:1.15rem;margin-bottom:.2rem}
-.results-band .rb-sub{font-size:.85rem;color:var(--muted);margin-bottom:.9rem}
-.rb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
-.rb-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;border:1.5px solid var(--line);box-shadow:var(--shadow-sm)}
-
 /* Payment */
 .pay-grid{display:grid;grid-template-columns:1fr .9fr;gap:1.4rem;align-items:start}
 .sum-card{border:1.5px solid var(--line);border-radius:var(--r);background:var(--soft);padding:1.3rem 1.4rem}
@@ -156,18 +150,94 @@ main{padding:0 0 90px}
 .park-tip{font-size:.85rem;color:var(--muted);max-width:420px;margin:.5rem auto 0}
 .notice-card{border:2px solid #f2dfae;background:#fff7e6;border-radius:var(--r);padding:1.6rem;text-align:center;max-width:620px;margin:1rem auto 0}
 
-/* Proof strip */
-.proof-strip{display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:center;margin:2.6rem auto 0;padding-top:1.6rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted);text-align:center}
-.proof-strip b{display:block;font-family:'Fraunces',serif;font-size:1.25rem;color:var(--ink);font-weight:600}
-
 @media(max-width:760px){
   .offers{grid-template-columns:1fr}
   .pay-grid{grid-template-columns:1fr}
   .brand img{height:38px}
   .nav-right .back-site{display:none}
-  .rb-grid{grid-template-columns:repeat(2,1fr)}
-  .offer .of-img,.offer.secondary .of-img{height:170px}
+  .offer .of-img{height:190px}
 }
+
+/* ===== Components lifted 1:1 from the landing page ===== */
+.sec-pad{padding:clamp(64px,9vw,130px) 0}
+.head{max-width:60ch}
+.head h2{font-size:clamp(2rem,4.2vw,3.2rem);margin-top:.6rem}
+.head.center{margin-inline:auto;text-align:center}
+/* FX4) Trust marquee */
+.marquee{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;align-items:center;animation:marq 28s linear infinite;will-change:transform}
+
+.marquee .mi{display:inline-flex;align-items:center;padding:.85rem 1.5rem;font-weight:600;color:var(--ink-2);font-size:.95rem}
+.marquee .mi b{color:var(--primary)}
+.marquee .dot{color:var(--primary-2);font-size:.7rem}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* Results swipe deck */
+.gallery{overflow:hidden}
+.deck-wrap{display:flex;flex-direction:column;align-items:center;gap:1.4rem}
+.deck{position:relative;width:min(680px,92vw);aspect-ratio:1/1;touch-action:pan-y}
+.deck-card{position:absolute;inset:0;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:var(--soft);cursor:grab;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s;will-change:transform}
+.deck-card.dragging{transition:none;cursor:grabbing}
+.deck-card img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.deck-card .cap{position:absolute;left:0;right:0;bottom:0;padding:1.1rem 1.2rem;background:linear-gradient(transparent,rgba(13,13,18,.82));color:#fff;font-size:.95rem;font-weight:500;display:flex;align-items:center;gap:.55rem;z-index:3}
+.deck-card .cap .stars{color:#ffd35c;font-size:.9rem;letter-spacing:1px}
+.deck-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.28);backdrop-filter:blur(7px);color:#fff;font-size:1.7rem;line-height:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.deck-arrow:hover{background:rgba(255,255,255,.5);transform:translateY(-50%) scale(1.08)}
+.deck-arrow.prev{left:12px}.deck-arrow.next{right:12px}
+.deck-hint{font-size:.82rem;color:var(--muted)}
+
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:clamp(26px,4vw,42px) 0}
+.proof-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.9rem;text-align:center;box-shadow:var(--shadow-sm);transition:transform .3s}
+.proof-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.proof-card .plat{font-family:'Fraunces';font-size:1.5rem;font-weight:600}
+.proof-card .stars{color:#f5a623;font-size:1.5rem;letter-spacing:3px;margin:.5rem 0}
+.proof-card .sub{color:var(--muted);font-size:.92rem}
+.proof-card .plat-img{height:46px;width:auto;margin:0 auto .7rem;display:block;object-fit:contain}
+.proof-card .brandlogo{font-family:'Inter';font-weight:800;font-size:2.1rem;letter-spacing:-.03em;line-height:1;margin-bottom:.6rem}
+.proof-card .ylogo{color:#FF1A1A}
+.proof-card .btn-bounce{display:inline-flex;align-items:center;gap:.4em;margin-top:1.1rem;padding:.7rem 1.3rem;border-radius:100px;background:var(--grad);color:#fff;font-weight:700;font-size:.92rem;box-shadow:var(--shadow-sm);animation:bounce 1.9s ease-in-out infinite}
+.proof-card .btn-bounce:hover{filter:brightness(1.08)}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media(max-width:680px){.proof{grid-template-columns:1fr}}
+.rev-carousel{max-width:780px;margin:clamp(28px,4vw,44px) auto 0;position:relative;text-align:center}
+.rev-slide{display:none;padding:0 52px}
+.rev-slide.active{display:block;animation:fade .5s ease}
+@media(max-width:840px){.rev-slide{padding:0 8px}}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.rev-slide .stars{font-size:1.6rem;display:block;color:#f5a623;letter-spacing:3px}
+.rev-slide .vr{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);font-weight:700;margin:.55rem 0 1.2rem}
+.rev-slide blockquote{font-family:'Fraunces';font-size:clamp(1.15rem,2vw,1.5rem);font-style:italic;line-height:1.45;color:var(--ink)}
+.rev-slide .who{margin-top:1.2rem;font-weight:600}
+.rev-slide .who span{color:var(--muted);font-weight:400}
+.rev-dots{display:flex;gap:.5rem;justify-content:center;margin-top:1.7rem}
+.rev-dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;transition:width .3s,background .3s;padding:0;position:relative;overflow:hidden}
+.rev-dots button.on{background:var(--soft-2);width:40px;border-radius:5px}
+.rev-dots button i{display:block;position:absolute;left:0;top:0;bottom:0;width:0;background:var(--primary);border-radius:inherit}
+.rev-dots button.on i{animation:revfill 4.5s linear forwards}
+@keyframes revfill{from{width:0}to{width:100%}}
+.rev-arrow{position:absolute;top:44%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--primary);font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px -8px rgba(13,13,18,.25);transition:.2s;z-index:2}
+.rev-arrow:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.rev-prev{left:-8px}.rev-next{right:-8px}
+@media(max-width:840px){.rev-arrow{top:auto;bottom:-6px;transform:none}.rev-prev{left:calc(50% - 62px)}.rev-next{right:calc(50% - 62px)}.rev-dots{margin-top:2.6rem}}
+/* FAQ */
+.faq{max-width:840px;margin-inline:auto}
+.acc{border-bottom:1px solid var(--line);transition:background .3s;border-radius:12px}
+.acc button{width:100%;background:none;border:0;text-align:left;padding:1.25rem 1rem;font-size:1.08rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;color:var(--ink);font-family:'Inter';transition:color .25s}
+.acc button:hover{color:var(--primary)}
+.acc.open{background:var(--soft)}
+.acc.open button{color:var(--primary)}
+.acc .ic{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--soft-2);display:flex;align-items:center;justify-content:center;color:var(--primary);transition:.3s;font-size:1.2rem}
+.acc.open .ic{background:var(--primary);color:#fff;transform:rotate(45deg)}
+.acc .panel{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc .panel p{padding:0 1rem 1.25rem;color:var(--muted);border-left:3px solid var(--primary);margin-left:1rem;padding-left:1rem}
+.acc .panel .faq-imgs{display:flex;gap:.6rem;flex-wrap:wrap;padding:0 1rem 1.3rem 2rem}
+.acc .panel .faq-imgs img{flex:1;min-width:150px;border-radius:12px;object-fit:contain;background:#eef2f7;aspect-ratio:4/3;box-shadow:var(--shadow-sm)}
+
+.acc .panel{margin-top:0}
+.marquee{margin-top:3rem}
+.gallery{overflow:hidden}
+.deck-wrap{display:flex;flex-direction:column;align-items:center;gap:1.4rem}
+.deck{position:relative;width:min(680px,92vw);aspect-ratio:1/1;touch-action:pan-y}
+.wrap-wide{width:min(1180px,92vw);margin-inline:auto}
 </style>
 </head>
 <body>
@@ -231,16 +301,6 @@ main{padding:0 0 90px}
         </button>
       </div>
 
-      <div class="results-band">
-        <h3>Real clients, real results</h3>
-        <div class="rb-sub">Before &amp; after — same-day, at our Long Beach studio</div>
-        <div class="rb-grid">
-          <img loading="lazy" src="/pair01.jpg" alt="Before and after — client result 1">
-          <img loading="lazy" src="/pair02.jpg" alt="Before and after — client result 2">
-          <img loading="lazy" src="/res1.jpg" alt="Before and after — client result 3">
-          <img loading="lazy" src="/res3.jpg" alt="Before and after — client result 4">
-        </div>
-      </div>
     </section>
 
     <!-- STEP 2 · TIME -->
@@ -317,14 +377,133 @@ main{padding:0 0 90px}
       </div>
     </section>
 
-    <div class="proof-strip">
-      <div><b>2,000+</b> smiles brightened</div>
-      <div><b>6–16</b> shades, first visit</div>
-      <div><b>~90 min</b> same-day results</div>
-      <div><b>Zero</b> to minimal sensitivity</div>
-    </div>
-
   </div>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span><span class="mi"><b>Results</b>&nbsp;&mdash; or your session is free</span><span class="dot">✦</span>
+    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span><span class="mi"><b>Results</b>&nbsp;&mdash; or your session is free</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<section class="sec-pad gallery" id="results">
+  <div class="wrap-wide">
+    <div class="head">
+      <span class="eyebrow">Real results</span>
+      <h2>Making our community a brighter place, one smile at a time.</h2>
+      <p class="muted" style="margin-top:.8rem">Over 7,000 happy clients across Long Beach, Orange County, San Pedro &amp; Palos Verdes. Swipe through some of our most dramatic transformations.</p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:2.4rem">
+    <div class="deck-wrap">
+      <div class="deck" id="deck">
+        <div class="deck-card"><img loading="lazy" src="/pair16.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="/pair02.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="/pair04.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="/pair12.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <div class="deck-card"><img loading="lazy" src="/pair01.jpg" alt="Before and after whitening result"><div class="cap"><span class="stars">★★★★★</span> Real client · before &amp; after</div></div>
+        <button class="deck-arrow prev" id="deckPrev" aria-label="Previous result">‹</button>
+        <button class="deck-arrow next" id="deckNext" aria-label="Next result">›</button>
+      </div>
+      <span class="deck-hint">Swipe or tap the arrows to shuffle through</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+
+<section class="sec-pad" id="reviews" style="background:var(--soft)">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow">5-star rated</span>
+      <h2>What our clients are saying.</h2>
+    </div>
+    <div class="proof">
+      <div class="proof-card">
+        <div class="brandlogo ylogo">Yelp</div>
+        <div class="stars">★★★★★</div>
+        <div class="sub">5-star rated by clients across Long Beach &amp; surrounding areas.</div>
+        <a class="btn-bounce" href="https://www.yelp.com/biz/teeth-whitening-lab-long-beach-4" target="_blank" rel="noopener">Read our Yelp reviews →</a>
+      </div>
+      <div class="proof-card">
+        <div class="brandlogo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="sub">Consistent 5-star ratings from our community of 7,000+.</div>
+        <a class="btn-bounce" href="https://www.google.com/maps/place/Teeth+Whitening+Lab+Long+Beach/@33.7747889,-118.1800083,15z/data=!4m5!3m4!1s0x0:0x41704f25b7941cf8!8m2!3d33.7747889!4d-118.1800083" target="_blank" rel="noopener">Read our Google reviews →</a>
+      </div>
+    </div>
+    <div class="rev-carousel" id="revCarousel">
+      <div class="rev-slide active">
+        <span class="stars">★★★★★</span>
+        <div class="vr">Verified reviews</div>
+        <blockquote>"I took my teenage daughter today… I am stunned!! We were helped by Angel and Noel, both super friendly and professional. The results on my daughter's teeth are incredible — 20 shades lighter all in one session! I highly recommend."</blockquote>
+        <div class="who">— Blanca <span>· Los Angeles, CA</span></div>
+      </div>
+      <div class="rev-slide">
+        <span class="stars">★★★★★</span>
+        <div class="vr">Verified reviews</div>
+        <blockquote>"Service was great! All our questions were answered — and they gave us information that actually helped us save money. The pictures are real, guys. We took our two sons and the place was very clean, cozy, and inviting."</blockquote>
+        <div class="who">— Najah C. <span>· Austin, TX</span></div>
+      </div>
+      <div class="rev-slide">
+        <span class="stars">★★★★★</span>
+        <div class="vr">Verified reviews</div>
+        <blockquote>"Angel definitely knows his stuff — not only experienced, but sincerely focused on making sure you get the results you want. He had every follow-up detail covered, right down to the after-care."</blockquote>
+        <div class="who">— Mel N. <span>· Atlanta, GA</span></div>
+      </div>
+      <div class="rev-slide">
+        <span class="stars">★★★★★</span>
+        <div class="vr">Verified reviews</div>
+        <blockquote>"Just had my teeth whitened here and wowzers!!! I'm so impressed with the quality of service &amp; results. Thank you, Teeth Whitening Lab — your service was amazing! Will definitely recommend!"</blockquote>
+        <div class="who">— Susy V. <span>· Norwalk, CA</span></div>
+      </div>
+      <div class="rev-slide">
+        <span class="stars">★★★★★</span>
+        <div class="vr">Verified reviews</div>
+        <blockquote>"Another great visit to the Teeth Whitening Lab — I liked it so much I got the annual membership. Absolutely pleased, and it's worth the drive from South Orange County."</blockquote>
+        <div class="who">— Sherry C. <span>· Lake Forest, CA</span></div>
+      </div>
+      <div class="rev-slide">
+        <span class="stars">★★★★★</span>
+        <div class="vr">Verified reviews</div>
+        <blockquote>"Angel and Noel were very welcoming and informative with the process — definitely coming back next month!"</blockquote>
+        <div class="who">— Yelp review <span>· Long Beach, CA</span></div>
+      </div>
+      <button class="rev-arrow rev-prev" id="revPrev" type="button" aria-label="Previous review">‹</button>
+      <button class="rev-arrow rev-next" id="revNext" type="button" aria-label="Next review">›</button>
+      <div class="rev-dots" id="revDots"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="sec-pad" id="faq">
+  <div class="wrap">
+    <div class="head center">
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <div class="acc"><button>Will I see a difference after my first visit?<span class="ic">+</span></button><div class="panel"><p>Yes — here at the Teeth Whitening Lab we pride ourselves on delivering noticeable, more often than not dramatic, same-day results.</p></div></div>
+      <div class="acc"><button>Does teeth whitening really work?<span class="ic">+</span></button><div class="panel"><p>Yes. There are various whitening methods available, ranging from over-the-counter kits to professional treatments, and their effectiveness can vary significantly. Professional treatments use a higher concentration and yield better results.</p></div></div>
+      <div class="acc"><button>Does teeth whitening damage tooth enamel?<span class="ic">+</span></button><div class="panel"><p>When used as directed, professional whitening does not harm tooth enamel. Excessive or improper use of some products can lead to temporary sensitivity or gum irritation — which is why a professional, controlled treatment matters.</p></div></div>
+      <div class="acc"><button>How often can I whiten my teeth?<span class="ic">+</span></button><div class="panel"><p>As often as every 4–6 weeks. That said, even the most avid stainer wouldn't need to whiten more often than every 3–4 months, provided they brush and floss regularly.</p></div></div>
+      <div class="acc"><button>Should I book the 90-minute or 60-minute option?<span class="ic">+</span></button><div class="panel"><p>We always recommend the 90-minute option so your chair is reserved should you want to complete it. If you're satisfied at 60 minutes, we only charge for services rendered.</p></div></div>
+      <div class="acc"><button>How long will my appointment take?<span class="ic">+</span></button><div class="panel"><p>From start to finish, plan to spend about 2 hours completing your appointment.</p></div></div>
+      <div class="acc"><button>How long do the results last?<span class="ic">+</span></button><div class="panel"><p>Results typically last 6 months to one year, depending on your lifestyle, after-care, and maintenance.</p></div></div>
+      <div class="acc"><button>Are there any restrictions after my treatment?<span class="ic">+</span></button><div class="panel"><p>No restrictions, only recommendations. To protect your investment, we suggest avoiding dark-colored foods, beverages, and smoking for 24 hours. We know it's challenging, so we've come up with a cheat code for you when you come in.</p></div></div>
+      <div class="acc"><button>How should I prepare for my appointment?<span class="ic">+</span></button><div class="panel"><p>If plaque is present, a deep cleaning a few days prior will improve your results. Otherwise, just brush and floss beforehand — the cleaner the surface of your teeth, the better your results. After booking, you'll receive a confirmation email with more details on how to make the most of your visit.</p></div></div>
+      <div class="acc"><button>Do you offer discounts?<span class="ic">+</span></button><div class="panel"><p>Yes — we proudly offer discounts to veterans, seniors, students, educators, first responders, and dental professionals. Just ask at check-out.</p></div></div>
+      <div class="acc"><button>Do you accept insurance?<span class="ic">+</span></button><div class="panel"><p>Teeth whitening falls under a cosmetic category, so it isn't currently covered by insurance — but here at the Lab it's always affordable even without it. We gladly accept HSA and FSA; just let us know at checkout so we can print a physical receipt for you.</p></div></div>
+      <div class="acc"><button>What if I have existing dental work?<span class="ic">+</span></button><div class="panel"><p>We can restore your existing dental work to its original installation shade.</p></div></div>
+      <div class="acc"><button>Can I whiten if I'm under 18?<span class="ic">+</span></button><div class="panel"><p>Yes — parental consent is required for anyone under the age of 18.</p></div></div>
+      <div class="acc"><button>How can I book an appointment?<span class="ic">+</span></button><div class="panel"><p>Booking is easy — reserve online through our booking link, or give us a call or text at <a href="tel:5625148383" style="color:var(--primary);font-weight:600">(562) 514-8383</a>.</p></div></div>
+      <div class="acc"><button>If I cancel, will I get my deposit back?<span class="ic">+</span></button><div class="panel"><p>Yes — as long as you let us know you need to cancel or reschedule within 24 hours of your appointment start time, your deposit is 100% refundable.</p></div></div>
+      <div class="acc"><button>What are your hours?<span class="ic">+</span></button><div class="panel"><p>We're open Tuesday through Saturday, 9:00 AM – 6:00 PM. Call or text <a href="tel:5625148383" style="color:var(--primary);font-weight:600">(562) 514-8383</a> for same-day availability.</p></div></div>
+      <div class="acc"><button>Where can I park?<span class="ic">+</span></button><div class="panel"><p>Free parking is available one building north of the Teeth Whitening Lab. You are in the right parking lot if you see a wall-to-wall mural.</p><div class="faq-imgs"><img loading="lazy" src="/park-lot.jpg" alt="Parking lot, one building north"><img loading="lazy" src="/park-mural.jpg" alt="Wall-to-wall mural landmark"><img loading="lazy" src="/storefront.jpg" alt="Teeth Whitening Lab storefront"></div></div></div>
+    </div>
+  </div>
+</section>
 </main>
 
 <script>
@@ -599,6 +778,73 @@ function renderDetails(id, o, kit){
     '<div class="sum-row"><span>Deposit</span><b>'+fmtUSD(o.deposit)+'</b></div>'+
     '<div class="sum-row"><span>Balance at visit</span><b>'+fmtUSD((kit?o.kitFull:o.full)-o.deposit)+'</b></div>';
 }
+
+/* ===== Landing-page components, verbatim ===== */
+  /* Results swipe deck */
+  (function(){
+    var deck=document.getElementById('deck'); if(!deck) return;
+    var cards=[].slice.call(deck.querySelectorAll('.deck-card'));
+    var order=cards.slice();
+    function render(){
+      order.forEach(function(c,i){
+        c.style.zIndex=String(order.length-i);
+        if(i>2){c.style.opacity='0';c.style.transform='translateY(40px) scale(.88)';c.style.pointerEvents='none';return;}
+        c.style.opacity='1';c.style.pointerEvents=(i===0?'auto':'none');
+        c.style.transform='translateY('+(i*14)+'px) scale('+(1-i*0.05)+')';
+      });
+    }
+    function cycle(dir){
+      var front=order[0];
+      front.style.transition='transform .45s ease, opacity .45s';
+      front.style.transform='translateX('+(dir*140)+'%) rotate('+(dir*12)+'deg)';
+      front.style.opacity='0';
+      setTimeout(function(){order.push(order.shift());render();},340);
+    }
+    var pn=document.getElementById('deckNext'),pp=document.getElementById('deckPrev');
+    if(pn)pn.onclick=function(){cycle(1);};
+    if(pp)pp.onclick=function(){cycle(-1);};
+    var sx=0,dx=0,drag=false;
+    function down(e){if(e.target.closest&&e.target.closest('.deck-arrow'))return;drag=true;dx=0;sx=(e.touches?e.touches[0].clientX:e.clientX);order[0].classList.add('dragging');}
+    function mv(e){if(!drag)return;dx=(e.touches?e.touches[0].clientX:e.clientX)-sx;order[0].style.transform='translateX('+dx+'px) rotate('+(dx*0.05)+'deg)';}
+    function up(){if(!drag)return;drag=false;order[0].classList.remove('dragging');if(Math.abs(dx)>90){cycle(dx>0?1:-1);}else{render();}dx=0;}
+    deck.addEventListener('mousedown',down);window.addEventListener('mousemove',mv);window.addEventListener('mouseup',up);
+    deck.addEventListener('touchstart',down,{passive:true});window.addEventListener('touchmove',mv,{passive:true});window.addEventListener('touchend',up);
+    render();
+  })();
+
+  /* Reviews carousel */
+  (function(){
+    var car=document.getElementById('revCarousel'); if(!car) return;
+    var slides=[].slice.call(car.querySelectorAll('.rev-slide'));
+    var dotsWrap=document.getElementById('revDots');
+    var i=0;
+    if(slides.length<2){if(dotsWrap)dotsWrap.style.display='none';return;}
+    slides.forEach(function(_,idx){var b=document.createElement('button');b.setAttribute('aria-label','Review '+(idx+1));b.innerHTML='<i></i>';b.onclick=function(){go(idx);resetAuto();};dotsWrap.appendChild(b);});
+    var dots=[].slice.call(dotsWrap.children);
+    function restartFill(){var f=dots[i].querySelector('i');if(!f)return;f.style.animation='none';void f.offsetWidth;f.style.animation='';}
+    function go(n){slides[i].classList.remove('active');dots[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('active');dots[i].classList.add('on');restartFill();}
+    dots[0].classList.add('on');restartFill();
+    var auto;
+    function startAuto(){auto=setInterval(function(){go(i+1);},4500);}
+    function resetAuto(){clearInterval(auto);restartFill();startAuto();}
+    startAuto();
+    var prev=document.getElementById('revPrev'),next=document.getElementById('revNext');
+    if(prev)prev.onclick=function(){go(i-1);resetAuto();};
+    if(next)next.onclick=function(){go(i+1);resetAuto();};
+    var sx=0;
+    car.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+    car.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){go(i+(dx<0?1:-1));resetAuto();}});
+  })();
+
+  /* FAQ accordion */
+  document.querySelectorAll('.acc').forEach(function(acc){
+    var btn=acc.querySelector('button'),panel=acc.querySelector('.panel');
+    btn.onclick=function(){
+      var open=acc.classList.contains('open');
+      document.querySelectorAll('.acc').forEach(function(a){a.classList.remove('open');a.querySelector('.panel').style.maxHeight=null;});
+      if(!open){acc.classList.add('open');panel.style.maxHeight=panel.scrollHeight+'px';}
+    };
+  });
 
 /* ============ Boot ============ */
 if(!CFG.CHECKOUT_LIVE) $('previewRibbon').hidden=false;
