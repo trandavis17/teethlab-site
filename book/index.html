@@ -696,13 +696,31 @@ function showPay(){
 $('backToTime').onclick=function(){ $('panelPay').hidden=true; pill(2); $('panelTime').scrollIntoView({behavior:'smooth'}); };
 
 /* ============ Square card element ============ */
-function initCard(){
-  if(state.card || !window.Square) return;
+function initCard(tries){
+  tries = tries || 0;
+  if(state.card || state.cardInitBusy) return;
+  if(!window.Square){
+    /* SDK script may still be loading — poll up to 10s before declaring failure */
+    if(tries < 40){ setTimeout(function(){ initCard(tries+1); }, 250); }
+    else cardFail({ name:'SdkMissing', message:'square.js never loaded (blocked by a browser extension or network?)' });
+    return;
+  }
+  state.cardInitBusy = true;
   try{
-    state.payments = Square.payments(CFG.SQUARE_APP_ID, CFG.LOCATION_ID);
+    if(!state.payments) state.payments = Square.payments(CFG.SQUARE_APP_ID, CFG.LOCATION_ID);
     state.payments.card().then(function(card){ state.card=card; return card.attach('#card-container'); })
-      .catch(function(){ payError('Card form failed to load. Refresh the page or call us at (562) 514-8383.'); });
-  }catch(e){ payError('Card form failed to load. Refresh the page or call us at (562) 514-8383.'); }
+      .then(function(){ state.cardInitBusy=false; clearError(); })
+      .catch(function(e){ state.cardInitBusy=false; cardFail(e); });
+  }catch(e){ state.cardInitBusy=false; cardFail(e); }
+}
+function cardFail(e){
+  var detail='unknown error';
+  try{
+    detail=(e&&((e.name?e.name+': ':'')+(e.message||String(e))))||'unknown error';
+    if(e&&e.errors){ detail+=' | '+JSON.stringify(e.errors); }
+    console.error('Square card init failed:', e);
+  }catch(_){}
+  payError('Card form failed to load — ['+detail+'] — please screenshot this message and send it to us, or call (562) 514-8383.');
 }
 function payError(msg){ var el=$('payErr'); el.textContent=msg; el.style.display='block'; }
 function clearError(){ $('payErr').style.display='none'; }
