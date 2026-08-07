@@ -36,7 +36,19 @@ const ALLOWED_VARIATIONS: Record<string, { deposit: number; full: number; minute
   "XNBJKEJ5WQDT3XBRNG2DGMJJ": { deposit: 5000,  full: 30000, minutes: 90, label: "1 Adult 90 Min + Kit" },
   "OUOPFLGAOM4J75DVMTUJZYT3": { deposit: 10000, full: 45000, minutes: 90, label: "Party of 2 90 Min" },
   "OSBUUUYMXBFW7DEPZS4RC6OU": { deposit: 10000, full: 50000, minutes: 90, label: "Party of 2 90 Min + Kits" },
+  /* v4 — promo offers. Durations, deposits and bookable flags re-verified against the
+   * live catalog on 2026-08-07 (both are 90 min / $50 deposit / bookable_online:true).
+   * Neither has a "+ kit" bundle in the catalog, so the checkout hides the kit upsell
+   * for these two offers. */
+  "ORU55V5HQPLYPEKP6ZZ3PJ5Q": { deposit: 5000,  full: 19900, minutes: 90, label: "Referred Friend $199" },
+  "HZZLEVTC4QH5XKCRVEEIZRDH": { deposit: 5000,  full: 19900, minutes: 90, label: "Welcome-Back $199" },
 };
+
+/* Tip is chosen by the customer, so it cannot be matched against a server map like every
+ * other amount here. It is guarded by shape and by a hard ceiling instead: a non-negative
+ * integer, no greater than the full service price. That stops a UI bug or a hand-crafted
+ * request from turning a $50 deposit into a four-figure charge. */
+const MAX_TIP_MULTIPLE_OF_FULL = 1;
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
@@ -128,7 +140,7 @@ Deno.serve(async (req: Request) => {
     switch (action) {
       case "ping":
         return json({
-          ok: true, action: "ping", square_version: SQUARE_VERSION, bridge_version: 3,
+          ok: true, action: "ping", square_version: SQUARE_VERSION, bridge_version: 4,
           sandbox_token_present: Boolean(Deno.env.get("SQUARE_SANDBOX_ACCESS_TOKEN")),
           production_token_present: Boolean(Deno.env.get("SQUARE_PRODUCTION_ACCESS_TOKEN")),
         });
@@ -199,6 +211,32 @@ Deno.serve(async (req: Request) => {
           return json({ ok: false, error: "amount mismatch" }, 400);
         }
 
+        /* GUARD 1b (v4): pay-in-full and tip.
+         * base  — the service portion being collected now. Comes from the server map only:
+         *         the client sends a boolean, never an amount.
+         * tip   — customer-chosen, so it is validated by shape and ceiling (see
+         *         MAX_TIP_MULTIPLE_OF_FULL above) rather than matched against a map.
+         * If the client also declares charge_cents, it must agree with the server's own
+         * arithmetic — that catches UI/server drift before anyone is charged. */
+        const payFull = body.pay_full === true;
+        const base = payFull ? spec.full : spec.deposit;
+
+        let tip = 0;
+        if (body.tip_cents !== undefined && body.tip_cents !== null && body.tip_cents !== "") {
+          tip = Number(body.tip_cents);
+          if (!Number.isInteger(tip) || tip < 0) {
+            return json({ ok: false, error: "tip_cents must be a non-negative whole number of cents" }, 400);
+          }
+          if (tip > spec.full * MAX_TIP_MULTIPLE_OF_FULL) {
+            return json({ ok: false, error: "tip exceeds the maximum allowed" }, 400);
+          }
+        }
+
+        const charge = base + tip;
+        if (body.charge_cents !== undefined && Number(body.charge_cents) !== charge) {
+          return json({ ok: false, error: "charge mismatch" }, 400);
+        }
+
         // GUARD 2: inputs
         const c = body.customer ?? {};
         const startAt = String(body.start_at ?? "");
@@ -251,16 +289,20 @@ Deno.serve(async (req: Request) => {
         }
         if (!customerId) return json({ ok: false, error: "could not create customer" }, 500);
 
-        // 2) payment — amount comes from the server map ONLY
+        /* 2) payment — the service amount comes from the server map ONLY.
+         * Square treats amount_money as the pre-tip amount and adds tip_money on top,
+         * so the card is charged base + tip and the tip lands in Square's tip reporting
+         * (which is what makes staff tip-outs work normally). */
         const payment = await square(env, "/v2/payments", {
           method: "POST",
           body: JSON.stringify({
             idempotency_key: `${idemBase}-pay`,
             source_id: body.source_id,
-            amount_money: { amount: spec.deposit, currency: "USD" },
+            amount_money: { amount: base, currency: "USD" },
+            ...(tip > 0 ? { tip_money: { amount: tip, currency: "USD" } } : {}),
             location_id: locationId,
             customer_id: customerId,
-            note: `TWL deposit — ${spec.label}`,
+            note: `TWL ${payFull ? "paid in full" : "deposit"} — ${spec.label}${tip > 0 ? " (incl. tip)" : ""}`,
           }),
         });
         const paymentId = payment.payment?.id;
@@ -294,8 +336,9 @@ Deno.serve(async (req: Request) => {
               body: JSON.stringify({
                 idempotency_key: `${idemBase}-refund`,
                 payment_id: paymentId,
-                amount_money: { amount: spec.deposit, currency: "USD" },
-                reason: "Booking failed after deposit — auto-refund",
+                /* refund everything that was actually taken, tip included */
+                amount_money: { amount: charge, currency: "USD" },
+                reason: "Booking failed after payment — auto-refund",
               }),
             });
           } catch { /* refund failure is logged in the row below */ }
@@ -307,13 +350,14 @@ Deno.serve(async (req: Request) => {
             service_name: spec.label,
             customer_name: c.name, customer_email: c.email, customer_phone: c.phone,
             price_cents: spec.full, deposit_cents: spec.deposit,
+            amount_charged_cents: charge, tip_cents: tip, paid_in_full: payFull,
             gclid, gclid_source: gclidSource,
             landing_page_url: attr.landing ?? body.page_url ?? null,
             variant: body.variant ?? null,
             status: "failed",
-            raw: { error: String(bookErr), attribution: attr },
+            raw: { error: String(bookErr), attribution: attr, pay_full: payFull, tip_cents: tip },
           });
-          return json({ ok: false, error: "That time was just taken — your deposit was refunded. Please pick another slot." }, 409);
+          return json({ ok: false, error: "That time was just taken — your payment was refunded in full. Please pick another slot." }, 409);
         }
 
         // 4) DB row (service role — anon has no access to bookings).
@@ -332,15 +376,20 @@ Deno.serve(async (req: Request) => {
           service_name: spec.label,
           customer_name: c.name, customer_email: c.email, customer_phone: c.phone,
           price_cents: spec.full, deposit_cents: spec.deposit,
+          amount_charged_cents: charge, tip_cents: tip, paid_in_full: payFull,
           gclid, gclid_source: gclidSource,
           landing_page_url: attr.landing ?? body.page_url ?? null,
           variant: body.variant ?? null,
           status: "confirmed",
-          raw: { attribution: attr, offer: body.offer ?? null, kit: Boolean(body.kit) },
+          raw: { attribution: attr, offer: body.offer ?? null, kit: Boolean(body.kit), pay_full: payFull, tip_cents: tip },
         });
         } catch (e) { dbError = String(e); }
 
-        return json({ ok: true, booking_id: bookingId, payment_id: paymentId, db_error: dbError });
+        return json({
+          ok: true, booking_id: bookingId, payment_id: paymentId, db_error: dbError,
+          charged_cents: charge, tip_cents: tip, paid_in_full: payFull,
+          balance_due_cents: spec.full - base,
+        });
       }
 
       case "seed_sandbox": {

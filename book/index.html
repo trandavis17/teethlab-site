@@ -65,6 +65,10 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdro
 main{padding:0 0 90px}
 .panel{margin-top:2rem}
 .panel[hidden]{display:none}
+/* The UA's [hidden]{display:none} loses to any class rule that sets display — which
+   .offers (grid), .kit-box (flex), .sum-row (flex) and .tip-custom (flex) all do. Without
+   this, every element toggled via .hidden in the script stays on screen. */
+[hidden]{display:none!important}
 .panel-title{text-align:center;margin-bottom:.4rem;font-size:clamp(1.6rem,4vw,2.3rem)}
 .panel-sub{text-align:center;max-width:560px;margin:0 auto 1.6rem}
 
@@ -135,6 +139,29 @@ main{padding:0 0 90px}
 .field input{width:100%;padding:.78rem .9rem;border:1.5px solid var(--line);border-radius:12px;font-size:1rem;font-family:inherit;transition:border-color .2s}
 .field input:focus{outline:none;border-color:var(--primary)}
 #card-container{border:1.5px solid var(--line);border-radius:12px;padding:.35rem .6rem;background:#fff;min-height:48px}
+
+/* ---- v4: pay-in-full toggle + tip picker ---- */
+.opt-block{margin:.95rem 0 .2rem}
+.opt-label{font-size:.9rem;font-weight:700;margin-bottom:.5rem}
+.opt-opt{font-weight:500;color:#8a86a6;font-size:.82rem}
+.opt-row{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+.opt{display:flex;flex-direction:column;gap:.12rem;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:.6rem .7rem;cursor:pointer;font:inherit;transition:border-color .16s,box-shadow .16s,background .16s}
+.opt:hover{border-color:#b9b2e6}
+.opt.selected{border-color:transparent;background:#fff;box-shadow:0 0 0 2px var(--brand,#6b4ee6)}
+.opt-t{font-size:.86rem;font-weight:700}
+.opt-a{font-size:1.12rem;font-weight:800;line-height:1.15}
+.opt-d{font-size:.76rem;color:#8a86a6;line-height:1.25}
+.chip-row{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:100px;padding:.42rem .85rem;font:inherit;font-size:.86rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:border-color .16s,box-shadow .16s}
+.chip:hover{border-color:#b9b2e6}
+.chip.selected{border-color:transparent;box-shadow:0 0 0 2px var(--brand,#6b4ee6)}
+.tip-custom{display:flex;align-items:center;gap:.3rem;margin-top:.5rem;border:1.5px solid var(--line);border-radius:12px;padding:.3rem .7rem;background:#fff;max-width:190px}
+.tip-custom .tc-pre{font-weight:700;color:#8a86a6}
+.tip-custom input{border:0;outline:0;font:inherit;font-size:1rem;font-weight:700;width:100%;padding:.35rem 0;background:transparent}
+@media(max-width:420px){.opt-row{grid-template-columns:1fr}}
+.promo-note{max-width:560px;margin:0 auto 1.5rem;text-align:center;border:1.5px solid var(--line);border-radius:14px;padding:.85rem 1.1rem;background:#fbfaff}
+.promo-note b{display:block;font-size:1.02rem;margin-bottom:.15rem}
+.promo-note span{font-size:.9rem;color:#8a86a6}
 .pay-err{display:none;background:#fdecec;border:1.5px solid #f3b8b8;color:#8c1f1f;border-radius:12px;padding:.7rem .9rem;font-size:.88rem;margin:.8rem 0}
 .trust-row{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;margin-top:1rem;font-size:.8rem;color:var(--muted)}
 .trust-row span{display:inline-flex;align-items:center;gap:.35em}
@@ -267,7 +294,12 @@ main{padding:0 0 90px}
       <h1 class="panel-title">Book your whitening session</h1>
       <p class="panel-sub muted">Same-day results in about 90 minutes, with zero to minimal sensitivity. Reserve with a small deposit — the rest is due at your visit.</p>
 
-      <div class="offers">
+      <div class="promo-note" id="promoNote" hidden>
+        <b id="promoTitle">Your referral rate is applied</b>
+        <span id="promoDesc">This link books the 90-minute session at your special rate.</span>
+      </div>
+
+      <div class="offers" id="offerPicker">
         <button class="offer selected" id="offerAdult" data-offer="adult" type="button">
           <img class="of-img" src="/adult.jpg" alt="Client relaxing in the whitening chair at the Teeth Whitening Lab">
           <span class="tag">Most popular</span>
@@ -315,7 +347,7 @@ main{padding:0 0 90px}
     <section class="panel" id="panelPay" hidden>
       <button class="back-link" id="backToTime" type="button">← Change time</button>
       <h2 class="panel-title" style="font-size:clamp(1.4rem,3.4vw,1.9rem)">Confirm your booking</h2>
-      <p class="panel-sub muted" style="margin-bottom:1.2rem">Pay the deposit now — the remainder is due at the studio.</p>
+      <p class="panel-sub muted" style="margin-bottom:1.2rem">Hold your time with a deposit, or pay in full now and walk in with nothing left to settle.</p>
 
       <div class="pay-grid">
         <div class="sum-card">
@@ -324,7 +356,7 @@ main{padding:0 0 90px}
           <div class="sum-row"><span>When</span><b id="sumWhen">—</b></div>
           <div class="sum-row"><span>Where</span><b>638 Alamitos Ave, Long Beach</b></div>
 
-          <label class="kit-box" for="kitCheck">
+          <label class="kit-box" for="kitCheck" id="kitBox">
             <input type="checkbox" id="kitCheck">
             <span>
               <span class="kb-t" id="kitTitle">Add take-home whitening kit — +$50</span><br>
@@ -332,7 +364,39 @@ main{padding:0 0 90px}
             </span>
           </label>
 
-          <div class="sum-row total"><span>Due today <span class="due-badge">deposit</span></span><b id="sumDeposit">$50</b></div>
+          <div class="opt-block">
+            <div class="opt-label">How would you like to pay?</div>
+            <div class="opt-row">
+              <button type="button" class="opt selected" id="payToggleDeposit">
+                <span class="opt-t">Deposit today</span>
+                <span class="opt-a" id="payToggleDepositAmt">$50</span>
+                <span class="opt-d">Balance at your visit</span>
+              </button>
+              <button type="button" class="opt" id="payToggleFull">
+                <span class="opt-t">Pay in full</span>
+                <span class="opt-a" id="payToggleFullAmt">$250</span>
+                <span class="opt-d">Nothing to pay at the studio</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="opt-block">
+            <div class="opt-label">Add a tip for your technician <span class="opt-opt">optional</span></div>
+            <div class="chip-row" id="tipChips">
+              <button type="button" class="chip selected" id="tipChip0">No tip</button>
+              <button type="button" class="chip" id="tipChip1">15%</button>
+              <button type="button" class="chip" id="tipChip2">18%</button>
+              <button type="button" class="chip" id="tipChip3">20%</button>
+              <button type="button" class="chip" id="tipChipCustom">Other</button>
+            </div>
+            <div class="tip-custom" id="tipCustomWrap" hidden>
+              <span class="tc-pre">$</span>
+              <input id="tipCustom" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00" aria-label="Custom tip amount in dollars">
+            </div>
+          </div>
+
+          <div class="sum-row total"><span>Due today <span class="due-badge" id="dueBadge">deposit</span></span><b id="sumDeposit">$50</b></div>
+          <div class="sum-row" id="tipRow" hidden><span class="muted">Includes tip</span><span class="muted" id="sumTip">$0</span></div>
           <div class="sum-row"><span class="muted">Due at your visit</span><span class="muted" id="sumBalance">$200</span></div>
         </div>
 
@@ -342,7 +406,7 @@ main{padding:0 0 90px}
           <div class="field"><label for="fPhone">Mobile phone</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" required placeholder="(562) 555-1234"></div>
           <div class="field"><label>Card</label><div id="card-container"></div></div>
           <div class="pay-err" id="payErr"></div>
-          <button class="btn btn-primary btn-lg" id="payBtn" type="submit">Pay <span id="payAmt">$50</span> deposit &amp; confirm</button>
+          <button class="btn btn-primary btn-lg" id="payBtn" type="submit">Pay <span id="payAmt">$50</span> <span id="payMode">deposit</span> &amp; confirm</button>
           <div class="trust-row">
             <span>🔒 Secured by Square</span><span>↩︎ Deposit 100% refundable with 24-hr notice</span><span>💳 HSA / FSA accepted in studio</span>
           </div>
@@ -524,6 +588,7 @@ var OFFERS = {
     variation: 'C7U5ILFM2XBZNABYVTO4AX23',       /* 1 Adult $250 */
     kitVariation: 'XNBJKEJ5WQDT3XBRNG2DGMJJ',    /* 1 Adult + Kit $300 */
     full: 25000, kitFull: 30000, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: true, utmContent: 'checkout-adult',
     kitTitle: 'Add take-home whitening kit — +$50',
     kitDesc: 'Our premium home kit (online price $85+) keeps your results going between visits. Added to your studio balance — deposit stays the same.'
   },
@@ -532,10 +597,40 @@ var OFFERS = {
     variation: 'OUOPFLGAOM4J75DVMTUJZYT3',       /* Party of 2 $450 */
     kitVariation: 'OSBUUUYMXBFW7DEPZS4RC6OU',    /* Party of 2 + Kits $500 */
     full: 45000, kitFull: 50000, deposit: 10000, minutes: 90,
+    img: '/party2.jpg', pickable: true, utmContent: 'checkout-party2',
     kitTitle: 'Add 2 take-home whitening kits — +$50',
     kitDesc: 'One premium home kit each (online price $85+ apiece). Added to your studio balance — deposit stays the same.'
+  },
+
+  /* ---- v4 promo offers. Reached only by direct link (?offer=referral / ?offer=winback);
+   * they are not shown in the offer picker, so the pricing comparison stays two-up.
+   * Durations, deposits and bookable flags re-verified against the live catalog 2026-08-07.
+   * Neither has a "+ kit" bundle in the catalog, so kitVariation is null and the checkout
+   * hides the kit upsell for them. Both variation IDs must also be present in
+   * ALLOWED_VARIATIONS in the edge function or the bridge returns 403 by design. ---- */
+  referral: {
+    label: 'Referred Friend — 90-Minute Whitening',
+    variation: 'ORU55V5HQPLYPEKP6ZZ3PJ5Q',       /* Referred Friend $199 */
+    kitVariation: null,
+    full: 19900, kitFull: 19900, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: false, utmContent: 'checkout-referral',
+    kitTitle: '', kitDesc: ''
+  },
+  winback: {
+    label: 'Welcome Back — 90-Minute Whitening',
+    variation: 'HZZLEVTC4QH5XKCRVEEIZRDH',       /* Welcome-Back $199, returning clients */
+    kitVariation: null,
+    full: 19900, kitFull: 19900, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: false, utmContent: 'checkout-winback',
+    kitTitle: '', kitDesc: ''
   }
 };
+
+/* Tip presets. Percentages are taken off the FULL service price, not the amount due
+ * today — a 20% tip on a $250 session is $50 whether the customer pays the deposit
+ * or pays in full. That is the whole point of the feature for the client: staff get
+ * tipped for the service they perform, not for the size of the prepayment. */
+var TIP_PCTS = [0, 0.15, 0.18, 0.20];
 
 /* ============ Attribution: gclid + UTMs + variant, persisted 90 days ============ */
 function readCookie(n){var m=document.cookie.match('(?:^|; )'+n+'=([^;]*)');return m?decodeURIComponent(m[1]):null;}
@@ -563,11 +658,28 @@ function track(name, params){
 }
 
 /* ============ State ============ */
-var state = { offer:'adult', slot:null, slotsByDay:{}, dayKeys:[], selectedDay:null, card:null, payments:null, busy:false };
-if(qs.get('offer')==='party2') state.offer='party2';
+var state = { offer:'adult', slot:null, slotsByDay:{}, dayKeys:[], selectedDay:null, card:null, payments:null, busy:false,
+              payFull:false, tipPct:0, tipCents:0 };
+/* Any offer key in OFFERS is addressable by ?offer=; unknown values fall back to adult. */
+(function(){
+  var q = (qs.get('offer')||'').toLowerCase();
+  if(Object.prototype.hasOwnProperty.call(OFFERS, q)) state.offer = q;
+})();
+/* Promo offers are single-offer landings — hide the two-up picker entirely so a $199
+   referral link can't be clicked over to the $250 price. */
+var LOCKED_OFFER = !OFFERS[state.offer].pickable;
+/* NB: the offer key already rides along in the create_checkout payload and lands in
+   bookings.raw.offer, so promo traffic is identifiable without synthesising a
+   utm_content here — real attribution from the click is left untouched. */
 
 var $ = function(id){ return document.getElementById(id); };
-var fmtUSD = function(cents){ return '$'+(cents/100).toLocaleString('en-US',{maximumFractionDigits:0}); };
+/* Whole dollars render clean ("$250"); anything with cents renders exact ("$62.50").
+   Custom tips are the first amounts here that aren't whole dollars — rounding the
+   display would show a total that differs from what the card is actually charged. */
+var fmtUSD = function(cents){
+  var d = Math.round(cents) % 100 === 0 ? 0 : 2;
+  return '$'+(cents/100).toLocaleString('en-US',{minimumFractionDigits:d, maximumFractionDigits:d});
+};
 var LA = 'America/Los_Angeles';
 
 function pill(n, cls){ ['pill1','pill2','pill3'].forEach(function(id,i){ $(id).className='step-pill'+(i+1===n?' active':(i+1<n?' done':'')); }); }
@@ -578,18 +690,82 @@ function applyOffer(){
   $('offerAdult').classList.toggle('selected', state.offer==='adult');
   $('offerParty').classList.toggle('selected', state.offer==='party2');
   $('sumService').textContent = o.label;
-  $('sumImg').src = state.offer==='party2' ? '/party2.jpg' : '/adult.jpg';
-  $('kitTitle').textContent = o.kitTitle;
-  $('kitDesc').textContent = o.kitDesc;
+  $('sumImg').src = o.img;
+
+  /* Promo landings show one price and no picker — a $199 referral link must not be
+     clickable over to the $250 offer. Prices below are read from OFFERS, which mirrors
+     the verified Square catalog; nothing here is hardcoded copy. */
+  if(LOCKED_OFFER){
+    $('offerPicker').hidden = true;
+    $('promoNote').hidden = false;
+    $('promoTitle').textContent = state.offer === 'winback'
+      ? 'Welcome back — your returning-client rate is applied'
+      : 'Your referral rate is applied';
+    $('promoDesc').textContent =
+      'This books the 90-minute session at ' + fmtUSD(o.full) + ' instead of ' +
+      fmtUSD(OFFERS.adult.full) + '. Hold it with a ' + fmtUSD(o.deposit) +
+      ' deposit, or pay in full at the last step.';
+  }
+  /* No "+ kit" bundle exists in the Square catalog for the $199 promo offers, so the
+     upsell is removed rather than shown-and-broken. Uncheck first: a customer could have
+     ticked it under a different offer before the URL changed. */
+  var hasKit = Boolean(o.kitVariation);
+  if(!hasKit && $('kitCheck').checked) $('kitCheck').checked = false;
+  $('kitBox').hidden = !hasKit;
+  if(hasKit){
+    $('kitTitle').textContent = o.kitTitle;
+    $('kitDesc').textContent = o.kitDesc;
+  }
   updateTotals();
 }
+
+/* ---- Pay-in-full / deposit + tip ---------------------------------------------
+ * fullPrice()  the service total (kit included when ticked)
+ * base()       what is collected today: the deposit, or the whole thing
+ * tip()        percentage presets resolve against fullPrice(); custom is a raw dollar entry
+ * Everything the customer sees is computed here and re-derived server-side before any
+ * card is charged — the bridge rejects the request outright if the two disagree.        */
+function fullPrice(){ var o=OFFERS[state.offer]; return $('kitCheck').checked ? o.kitFull : o.full; }
+function baseCents(){ return state.payFull ? fullPrice() : OFFERS[state.offer].deposit; }
+function tipCents(){
+  if(state.tipPct === 'custom'){
+    var raw = parseFloat($('tipCustom').value);
+    if(!isFinite(raw) || raw < 0) return 0;
+    return Math.min(Math.round(raw*100), fullPrice());   /* mirrors the bridge ceiling */
+  }
+  return Math.round(fullPrice() * state.tipPct);
+}
+function chargeCents(){ return baseCents() + tipCents(); }
+
 function updateTotals(){
-  var o = OFFERS[state.offer], kit = $('kitCheck').checked;
-  var full = kit ? o.kitFull : o.full;
+  var o = OFFERS[state.offer], full = fullPrice(), base = baseCents(), tip = tipCents();
+
   $('sumPrice').textContent = fmtUSD(full);
-  $('sumDeposit').textContent = fmtUSD(o.deposit);
-  $('payAmt').textContent = fmtUSD(o.deposit);
-  $('sumBalance').textContent = fmtUSD(full - o.deposit);
+  $('sumDeposit').textContent = fmtUSD(chargeCents());
+  $('payAmt').textContent = fmtUSD(chargeCents());
+  $('payMode').textContent = state.payFull ? 'in full' : 'deposit';
+  $('dueBadge').textContent = state.payFull ? 'paid in full' : 'deposit';
+
+  $('tipRow').hidden = !(tip > 0);
+  $('sumTip').textContent = fmtUSD(tip);
+
+  var balance = full - base;
+  $('sumBalance').textContent = balance > 0 ? fmtUSD(balance) : 'Nothing — you’re all set';
+
+  $('payToggleDeposit').classList.toggle('selected', !state.payFull);
+  $('payToggleFull').classList.toggle('selected', state.payFull);
+  $('payToggleDepositAmt').textContent = fmtUSD(o.deposit);
+  $('payToggleFullAmt').textContent = fmtUSD(full);
+
+  /* Tip chips relabel themselves as the price changes (kit on/off, offer switch). */
+  TIP_PCTS.forEach(function(pct,i){
+    var el = $('tipChip'+i);
+    if(pct === 0) el.textContent = 'No tip';
+    else el.textContent = Math.round(pct*100)+'% · '+fmtUSD(Math.round(full*pct));
+    el.classList.toggle('selected', state.tipPct === pct);
+  });
+  $('tipChipCustom').classList.toggle('selected', state.tipPct === 'custom');
+  $('tipCustomWrap').hidden = state.tipPct !== 'custom';
 }
 ['offerAdult','offerParty'].forEach(function(id){
   $(id).addEventListener('click', function(){
@@ -600,6 +776,36 @@ function updateTotals(){
   });
 });
 $('kitCheck').addEventListener('change', updateTotals);
+
+/* ---- pay-in-full toggle ---- */
+$('payToggleDeposit').addEventListener('click', function(){
+  if(!state.payFull) return;
+  state.payFull = false; track('pay_mode_selected',{ mode:'deposit' }); updateTotals();
+});
+$('payToggleFull').addEventListener('click', function(){
+  if(state.payFull) return;
+  state.payFull = true; track('pay_mode_selected',{ mode:'full' }); updateTotals();
+});
+
+/* ---- tip chips ---- */
+TIP_PCTS.forEach(function(pct,i){
+  $('tipChip'+i).addEventListener('click', function(){
+    state.tipPct = pct; updateTotals();
+    if(pct>0) track('tip_selected',{ tip_pct:pct, tip_value:tipCents()/100 });
+  });
+});
+$('tipChipCustom').addEventListener('click', function(){
+  state.tipPct = 'custom'; updateTotals();
+  try{ $('tipCustom').focus(); }catch(e){}
+});
+$('tipCustom').addEventListener('input', updateTotals);
+$('tipCustom').addEventListener('blur', function(){
+  /* Clamp the visible field to what will actually be charged, so nobody sees $9999
+     in the box and a different number on the button. */
+  var c = tipCents();
+  if($('tipCustom').value !== '') $('tipCustom').value = (c/100).toFixed(2);
+  updateTotals();
+});
 
 /* ============ Availability ============ */
 function bridge(body){
@@ -750,6 +956,9 @@ $('payForm').addEventListener('submit', function(e){
       start_at: state.slot.start_at,
       team_member_id: state.slot.team_member_id,
       deposit_cents: o.deposit, price_cents: kit? o.kitFull : o.full,
+      /* v4 — the client sends a boolean and a tip, never a service amount. The bridge
+         re-derives base + tip from its own map and rejects the request on any mismatch. */
+      pay_full: state.payFull, tip_cents: tipCents(), charge_cents: chargeCents(),
       customer:{ name:name, email:email, phone:phone },
       attribution: attr, variant: variant, page_url: location.href
     };
@@ -785,17 +994,28 @@ $('payForm').addEventListener('submit', function(e){
   }).catch(fail);
 
   function fail(err){ done(); payError(err.message||'Something went wrong — you have not been charged. Try again or call (562) 514-8383.'); }
-  function done(){ state.busy=false; $('payBtn').disabled=false; $('payBtn').innerHTML='Pay <span id="payAmt">'+fmtUSD(OFFERS[state.offer].deposit)+'</span> deposit &amp; confirm'; }
+  function done(){
+    state.busy=false; $('payBtn').disabled=false;
+    /* Restore the label structure, then let updateTotals refill it from live state —
+       after a failed attempt the button must not fall back to saying "deposit" when
+       the customer chose to pay in full. */
+    $('payBtn').innerHTML = 'Pay <span id="payAmt"></span> <span id="payMode"></span> &amp; confirm';
+    updateTotals();
+  }
 });
 
 function renderDetails(id, o, kit){
   var whenF=new Intl.DateTimeFormat('en-US',{timeZone:LA,weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'});
-  $(id).innerHTML =
+  var full=kit?o.kitFull:o.full, base=baseCents(), tip=tipCents(), balance=full-base;
+  var rows =
     '<div class="sum-row"><span>Session</span><b>'+o.label+(kit?' + kit':'')+'</b></div>'+
     '<div class="sum-row"><span>When</span><b>'+whenF.format(new Date(state.slot.start_at))+' PT</b></div>'+
     '<div class="sum-row"><span>Where</span><b>638 Alamitos Ave, Long Beach</b></div>'+
-    '<div class="sum-row"><span>Deposit</span><b>'+fmtUSD(o.deposit)+'</b></div>'+
-    '<div class="sum-row"><span>Balance at visit</span><b>'+fmtUSD((kit?o.kitFull:o.full)-o.deposit)+'</b></div>';
+    '<div class="sum-row"><span>'+(state.payFull?'Paid in full':'Deposit')+'</span><b>'+fmtUSD(base)+'</b></div>';
+  if(tip>0) rows += '<div class="sum-row"><span>Tip</span><b>'+fmtUSD(tip)+'</b></div>';
+  rows += '<div class="sum-row total"><span>Charged today</span><b>'+fmtUSD(base+tip)+'</b></div>'+
+    '<div class="sum-row"><span>Balance at visit</span><b>'+(balance>0?fmtUSD(balance):'Nothing — you’re all set')+'</b></div>';
+  $(id).innerHTML = rows;
 }
 
 /* ===== Landing-page components, verbatim ===== */
