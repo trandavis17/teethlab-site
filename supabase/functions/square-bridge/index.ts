@@ -2,13 +2,26 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
 /**
- * ClickPogo — Square bridge for The Teeth Whitening Lab.  v3 (deployed 2026-08-06 with Davis's go-ahead)
+ * ClickPogo — Square bridge for The Teeth Whitening Lab.  v5 (deployed 2026-08-10 with Davis's go-ahead)
+ *
+ * v5 is additive over v4: three more service variations are whitelisted (Teen 60 min $225,
+ * Model/Influencer $225, Follow-Up $150) so the landing page no longer sends anyone out to
+ * Square. No behaviour changes for any existing offer.
  *
  * v2 shipped read-only actions: ping, locations, services, team, availability,
- * plus the sandbox-only seed_sandbox. v3 adds ONE production write action:
+ * plus the sandbox-only seed_sandbox. v3 added ONE production write action:
  *
  *   create_checkout — tokenized card -> CreatePayment (deposit) -> CreateBooking
  *                     -> bookings row (service role). Guarded, see GUARDS below.
+ *
+ * v4 extends create_checkout, additively — a request that omits the new fields
+ * behaves exactly as it did under v3:
+ *   - two promo variations ($199 referral, $199 welcome-back) added to the whitelist
+ *   - pay_full: true   collects the full service price instead of the deposit
+ *   - tip_cents: n     adds a Square tip_money on top, so it lands in tip reporting
+ *   - charge_cents     optional client cross-check; server arithmetic always wins
+ * Requires migration 20260807_bookings_tip_and_payinfull (amount_charged_cents,
+ * tip_cents, paid_in_full on public.bookings).
  *
  * The access token lives ONLY in Supabase secrets and is never returned.
  */
@@ -42,6 +55,14 @@ const ALLOWED_VARIATIONS: Record<string, { deposit: number; full: number; minute
    * for these two offers. */
   "ORU55V5HQPLYPEKP6ZZ3PJ5Q": { deposit: 5000,  full: 19900, minutes: 90, label: "Referred Friend $199" },
   "HZZLEVTC4QH5XKCRVEEIZRDH": { deposit: 5000,  full: 19900, minutes: 90, label: "Welcome-Back $199" },
+  /* v5 — the three services that were still leaking to Square from the landing page.
+   * Verified against the live catalog 2026-08-10. Full prices cross-checked two ways:
+   * the item name AND the non-bookable POS twin that carries the real price
+   * (60 MIN P1 = 22500, MODEL/INFLUENCER SPECIAL = 22500, FOLLOW-UP = 15000).
+   * Teen is the first 60-minute service in the checkout — every other offer is 90. */
+  "K5IQTDNORTXUM2RJ3H2KMIEN": { deposit: 5000,  full: 22500, minutes: 60, label: "1 Teenager 60 Min" },
+  "L4VTLGCC6IFOYRH2QO77KRMS": { deposit: 5000,  full: 22500, minutes: 90, label: "Model/Influencer Special" },
+  "D7VI7J2J2WJIRFUNLUED6BFW": { deposit: 5000,  full: 15000, minutes: 90, label: "Follow-Up Appointment" },
 };
 
 /* Tip is chosen by the customer, so it cannot be matched against a server map like every
@@ -140,7 +161,7 @@ Deno.serve(async (req: Request) => {
     switch (action) {
       case "ping":
         return json({
-          ok: true, action: "ping", square_version: SQUARE_VERSION, bridge_version: 4,
+          ok: true, action: "ping", square_version: SQUARE_VERSION, bridge_version: 5,
           sandbox_token_present: Boolean(Deno.env.get("SQUARE_SANDBOX_ACCESS_TOKEN")),
           production_token_present: Boolean(Deno.env.get("SQUARE_PRODUCTION_ACCESS_TOKEN")),
         });

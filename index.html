@@ -570,7 +570,7 @@ function gtag_report_conversion(url){
         <h4>1 Teenager</h4>
         <div class="amt">$225<span> / 60 min</span></div>
         <p>A 60-minute session perfect for teens with light to moderate staining — up to 12 shades* brighter.</p>
-        <a class="btn btn-primary" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener">Book</a>
+        <a class="btn btn-primary" href="/book/?offer=teen&utm_source=twl_site&utm_medium=cta&utm_content=pricing_teen">Book</a>
       </div>
       <div class="price-card" data-reveal>
         <img class="pc-img" loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_800/u_https://storage.googleapis.com/msgsndr/ZLXnU2RS6LXT98HUe0PV/media/66a2a8b549e0c6d0614e7b3c.jpeg" alt="Take-home professional whitening kit">
@@ -584,8 +584,8 @@ function gtag_report_conversion(url){
       <div class="px-head">More options — all bookable online</div>
       <a class="px-row" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=px_adult_kit"><span class="px-name">1 Adult 90 Min + Home Kit</span><span class="px-val">$300 · 90 min</span></a>
       <a class="px-row" href="/book/?offer=party2&utm_source=twl_site&utm_medium=cta&utm_content=px_party2_kits"><span class="px-name">Party of 2 90 Min + Home Kits</span><span class="px-val">$500 · 90 min</span></a>
-      <a class="px-row" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener"><span class="px-name">Model / Influencer Special</span><span class="px-val">$225</span></a>
-      <a class="px-row" href="https://squareup.com/appointments/book/g0u49xna9iq4xe/LBT6DHXGMSP0S/services" target="_blank" rel="noopener"><span class="px-name">Follow-Up</span><span class="px-val">$150 · within 90 days</span></a>
+      <a class="px-row" href="/book/?offer=model&utm_source=twl_site&utm_medium=cta&utm_content=px_model"><span class="px-name">Model / Influencer Special</span><span class="px-val">$225</span></a>
+      <a class="px-row" href="/book/?offer=followup&utm_source=twl_site&utm_medium=cta&utm_content=px_followup"><span class="px-name">Follow-Up</span><span class="px-val">$150 · within 90 days</span></a>
       <a class="px-row" href="https://squareup.com/gift/MLGPTZDZ0TGWD/order" target="_blank" rel="noopener"><span class="px-name">Gift Cards</span><span class="px-val">Send a brighter smile →</span></a>
     </div>
   </div>
@@ -1059,9 +1059,14 @@ function gtag_report_conversion(url){
       if(a.hasAttribute('data-conv-kit')){
         /* Kit purchase — value $69.99 is configured account-side (same-each) */
         gtag('event','conversion',{send_to:TWL_CONV.kit,transaction_id:''});
-      }else if(href.indexOf('/book/')===0 || href.indexOf('squareup.com/appointments')>-1){
-        /* Book appointment — opens Square in a new tab, page stays alive so the hit sends */
-        gtag('event','conversion',{send_to:TWL_CONV.book,value:1.0,currency:'USD'});
+      }else if(href.indexOf('/book/')===0){
+        /* v5 — funnel step ONLY, deliberately NOT a Google Ads conversion.
+         * This click now stays on our own site (every CTA points at /book/), so
+         * counting it as a conversion is the phantom-conversion problem this whole
+         * rebuild exists to remove: 87 of 93 recorded conversions were this event.
+         * The one reportable Ads conversion is booking_confirmed, fired from the
+         * checkout only after Square confirms a real, paid booking. */
+        gtag('event','begin_checkout',{value:1.0,currency:'USD',link_url:href});
       }else if(href.indexOf('tel:')===0){
         /* Click to call — tel: doesn't unload the page; fire and let default proceed */
         gtag('event','conversion',{send_to:TWL_CONV.call,value:1.0,currency:'USD'});

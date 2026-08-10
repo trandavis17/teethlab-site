@@ -623,6 +623,41 @@ var OFFERS = {
     full: 19900, kitFull: 19900, deposit: 5000, minutes: 90,
     img: '/adult.jpg', pickable: false, utmContent: 'checkout-winback',
     kitTitle: '', kitDesc: ''
+  },
+
+  /* ---- v5: the three services that used to send visitors out to Square. Verified against
+   * the live catalog 2026-08-10; full prices confirmed both by the item name and by the
+   * non-bookable POS twin that carries the real price. Like the promo offers these are
+   * single-offer landings with no picker and no kit bundle in the catalog. ---- */
+  teen: {
+    label: '1 Teenager — 60-Minute Whitening',
+    variation: 'K5IQTDNORTXUM2RJ3H2KMIEN',       /* Teen $225 — the only 60-minute service */
+    kitVariation: null,
+    full: 22500, kitFull: 22500, deposit: 5000, minutes: 60,
+    img: '/adult.jpg', pickable: false, utmContent: 'checkout-teen',
+    promoTitle: 'Teen whitening — 60 minutes',
+    promoDesc: 'A 60-minute session for light to moderate staining.',
+    kitTitle: '', kitDesc: ''
+  },
+  model: {
+    label: 'Model / Influencer Special — 90-Minute Whitening',
+    variation: 'L4VTLGCC6IFOYRH2QO77KRMS',       /* Model/Influencer $225 */
+    kitVariation: null,
+    full: 22500, kitFull: 22500, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: false, utmContent: 'checkout-model',
+    promoTitle: 'Model / Influencer rate applied',
+    promoDesc: '',
+    kitTitle: '', kitDesc: ''
+  },
+  followup: {
+    label: 'Follow-Up Appointment — 90 Minutes',
+    variation: 'D7VI7J2J2WJIRFUNLUED6BFW',       /* Follow-Up $150, within 90 days */
+    kitVariation: null,
+    full: 15000, kitFull: 15000, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: false, utmContent: 'checkout-followup',
+    promoTitle: 'Follow-up rate applied',
+    promoDesc: 'For returning clients within 90 days of their last session.',
+    kitTitle: '', kitDesc: ''
   }
 };
 
@@ -698,13 +733,16 @@ function applyOffer(){
   if(LOCKED_OFFER){
     $('offerPicker').hidden = true;
     $('promoNote').hidden = false;
-    $('promoTitle').textContent = state.offer === 'winback'
+    $('promoTitle').textContent = o.promoTitle || (state.offer === 'winback'
       ? 'Welcome back — your returning-client rate is applied'
-      : 'Your referral rate is applied';
+      : 'Your referral rate is applied');
+    /* Built from OFFERS, which mirrors the verified catalog — no hardcoded prices or
+       durations, and no false "instead of $250" comparison on services that aren't
+       discounts off the adult session. */
     $('promoDesc').textContent =
-      'This books the 90-minute session at ' + fmtUSD(o.full) + ' instead of ' +
-      fmtUSD(OFFERS.adult.full) + '. Hold it with a ' + fmtUSD(o.deposit) +
-      ' deposit, or pay in full at the last step.';
+      (o.promoDesc ? o.promoDesc + ' ' : '') +
+      o.minutes + ' minutes, ' + fmtUSD(o.full) + ' total. Hold it with a ' +
+      fmtUSD(o.deposit) + ' deposit, or pay in full at the last step.';
   }
   /* No "+ kit" bundle exists in the Square catalog for the $199 promo offers, so the
      upsell is removed rather than shown-and-broken. Uncheck first: a customer could have
