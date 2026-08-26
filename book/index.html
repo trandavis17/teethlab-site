@@ -404,6 +404,18 @@ main{padding:0 0 90px}
           <div class="field"><label for="fName">Full name</label><input id="fName" name="name" type="text" autocomplete="name" required placeholder="Jane Smith"></div>
           <div class="field"><label for="fEmail">Email</label><input id="fEmail" name="email" type="email" autocomplete="email" required placeholder="jane@email.com"></div>
           <div class="field"><label for="fPhone">Mobile phone</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" required placeholder="(562) 555-1234"></div>
+          <div class="opt-block" style="margin:.2rem 0 1.1rem">
+            <div class="opt-label">How did you hear about us? <span class="opt-opt">optional</span></div>
+            <div class="chip-row" id="srcChips">
+              <button type="button" class="chip" data-src="google">Google</button>
+              <button type="button" class="chip" data-src="yelp">Yelp</button>
+              <button type="button" class="chip" data-src="social">Instagram / TikTok</button>
+              <button type="button" class="chip" data-src="friend">Friend or family</button>
+              <button type="button" class="chip" data-src="walk_by">Drove / walked by</button>
+              <button type="button" class="chip" data-src="returning">I&rsquo;m a returning client</button>
+              <button type="button" class="chip" data-src="other">Other</button>
+            </div>
+          </div>
           <div class="field"><label>Card</label><div id="card-container"></div></div>
           <div class="pay-err" id="payErr"></div>
           <button class="btn btn-primary btn-lg" id="payBtn" type="submit">Pay <span id="payAmt">$50</span> <span id="payMode">deposit</span> &amp; confirm</button>
@@ -715,6 +727,21 @@ try{ localStorage.setItem('twl_attr', JSON.stringify(attr)); }catch(e){}
 /* A/B variant — sticky 50/50, shared with the landing page */
 var variant = readCookie('twl_variant');
 if(variant!=='a' && variant!=='b'){ variant = Math.random()<0.5?'a':'b'; writeCookie('twl_variant', variant, 90); }
+
+/* ============ How did you hear about us — rides along in `attr`, no bridge change ============ */
+(function(){
+  var wrap=document.getElementById('srcChips'); if(!wrap) return;
+  wrap.addEventListener('click', function(e){
+    var b=e.target.closest('.chip'); if(!b) return;
+    var already=b.classList.contains('selected');
+    wrap.querySelectorAll('.chip').forEach(function(c){c.classList.remove('selected');});
+    if(already){ delete attr.heard_about_us; }
+    else { b.classList.add('selected'); attr.heard_about_us=b.getAttribute('data-src'); }
+    try{ writeCookie('twl_attr', JSON.stringify(attr), 90);
+         localStorage.setItem('twl_attr', JSON.stringify(attr)); }catch(err){}
+    try{ track('heard_about_us',{ source: attr.heard_about_us||'cleared' }); }catch(err){}
+  });
+})();
 
 /* ============ Events ============ */
 function track(name, params){
