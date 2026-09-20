@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="color-scheme" content="light only" />
 <meta name="theme-color" content="#ffffff" />
-<title>Teeth Whitening Lab — Book Online · A Brighter Smile in 90 Minutes or Less, Guaranteed | Long Beach</title>
-<meta name="description" content="Premium LED teeth whitening in Long Beach. A brighter, whiter smile in 90 minutes or less — guaranteed, with zero to minimal sensitivity. Book your session today." />
-<meta property="og:title" content="Teeth Whitening Lab — A Brighter Smile in 90 Minutes or Less, Guaranteed" />
+<title>Teeth Whitening in Long Beach — Same-Day, Up to 16 Shades Brighter, Guaranteed | Teeth Whitening Lab</title>
+<meta name="description" content="Yellow teeth? Long Beach's LED teeth whitening studio — up to 16 shades brighter in 90 minutes or less, guaranteed, with zero to minimal sensitivity. Same-day appointments. Serving Long Beach, Huntington Beach, Seal Beach, Lakewood &amp; Orange County. Book online in about a minute." />
+<meta property="og:title" content="Teeth Whitening in Long Beach — Same-Day, Up to 16 Shades Brighter, Guaranteed" />
 <meta property="og:description" content="Premium LED teeth whitening in Long Beach. Brighter, whiter, guaranteed — with zero to minimal sensitivity." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://www.teethwhiteninglablongbeach.com/hero1.png" />
@@ -387,6 +387,17 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .op-btn:hover{transform:translateY(-1px)}
 .op-sub{font-size:.74rem;color:#cfc4ff;margin-top:.6rem}
 
+
+/* Local band */
+.local-band{background:#fff;padding:clamp(40px,6vw,72px) 0 0}
+.local-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,48px);align-items:center}
+.local-head h2{font-size:clamp(1.6rem,3.4vw,2.4rem);margin-top:.5rem}
+.local-head h2 .tint{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+.local-head p{margin-top:.7rem}
+.city-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.city{border:1.5px solid var(--line);border-radius:100px;padding:.5rem .95rem;font-size:.9rem;font-weight:600;color:var(--ink-2);background:#fff}
+.city.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:var(--shadow-sm)}
+@media(max-width:820px){.local-wrap{grid-template-columns:1fr}}
 /* ============ SUPER CHECKOUT — booking module (merged from /book/) ============ */
 :root{--green:#16b85c;--green-2:#0f9d4f}
 #book{scroll-margin-top:72px;background:#fff}
@@ -545,7 +556,14 @@ function gtag_report_conversion(url){
    Google Ads (AW-10941549968) is NOT configured here — it is loaded above and
    its conversion labels are fired directly; nothing about it changes.
    ========================================================================== */
-var TWL_PIXELS = { GA4: '', META: '', TIKTOK: '' };
+var TWL_PIXELS = {
+  GA4: '', META: '', TIKTOK: '',
+  CLARITY: '',                                             /* Microsoft Clarity project ID (heat maps) — paste when created */
+  /* Google Ads secondary conversion actions (Observation only — never Primary). Labels read from the
+     Ads event-snippet DOM on 2026-09-20. CP - Booking confirmed stays the single Primary (CFG.CONV_BOOKED). */
+  ADS_LP_VIEW:        'AW-10941549968/DVRzCIfyq-0cEJCbq-Eo',   /* CP - Landing page view (Every) */
+  ADS_BEGIN_CHECKOUT: 'AW-10941549968/LSUECKjxte0cEJCbq-Eo'    /* CP - Begin checkout (first field touch) (One) */
+};
 
 (function(){
   var P = TWL_PIXELS;
@@ -555,6 +573,10 @@ var TWL_PIXELS = { GA4: '', META: '', TIKTOK: '' };
   if(P.META){
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', P.META); fbq('track', 'PageView');
+  }
+  /* Microsoft Clarity — heat maps + session recordings */
+  if(P.CLARITY){
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",P.CLARITY);
   }
   /* TikTok pixel — standard base code */
   if(P.TIKTOK){
@@ -582,6 +604,12 @@ function track(name, params){
   var p = Object.assign({ variant: window.TWL_VARIANT || null }, params || {});
   var m = TWL_EVENT_MAP[name] || null;
   try{ window.dataLayer = window.dataLayer || []; window.dataLayer.push(Object.assign({ event:'twl_'+name }, p)); }catch(e){}
+  /* Google Ads secondary actions: landing page view on load, begin checkout once. Fired as Ads
+     'conversion' events with send_to so they show as columns in Ads without touching bidding. */
+  try{
+    if(name==='view_content' && TWL_PIXELS.ADS_LP_VIEW) gtag('event','conversion',{ send_to: TWL_PIXELS.ADS_LP_VIEW });
+    if(name==='begin_checkout' && TWL_PIXELS.ADS_BEGIN_CHECKOUT) gtag('event','conversion',{ send_to: TWL_PIXELS.ADS_BEGIN_CHECKOUT });
+  }catch(e){}
   /* Google (GA4 + Ads share gtag). If GA4 is not configured this is still harmless. */
   try{
     var gp = Object.assign({}, p);
@@ -653,8 +681,8 @@ function track(name, params){
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="h-head" data-reveal>
-      <span class="eyebrow">Teeth Whitening Specialists</span>
-      <h1>A brighter smile in 90&nbsp;minutes<br class="hbr">or less &mdash; <span class="tint">guaranteed*.</span></h1>
+      <span class="eyebrow">Long Beach teeth whitening &middot; serving <span class="locCity">Huntington Beach &amp; Orange County</span></span>
+      <h1>Yellow teeth? <span class="tint">Up to 16 shades* brighter</span> in 90&nbsp;minutes or less &mdash; right here in Long Beach, guaranteed*.</h1>
     </div>
     <div class="h-media" data-reveal>
       <div class="ba" id="ba" tabindex="0" role="slider" aria-label="Before and after teeth whitening. Drag to reveal." aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
@@ -666,10 +694,10 @@ function track(name, params){
       </div>
       <p class="ba-caption">Results vary per client.</p>
     </div>
-    <p class="lede h-para" data-reveal>Say goodbye to yellow, stained teeth. Up to 16 shades* brighter on your very first visit <b style="color:var(--ink)">or your session is free!</b></p>
+    <p class="lede h-para" data-reveal>Say goodbye to yellow, stained teeth. Same-day appointments at our studio on Alamitos Ave in Long Beach &mdash; <span class="locLede">a short drive from Huntington Beach, Seal Beach, Lakewood &amp; the rest of Orange County</span>. Up to 16 shades* brighter on your very first visit <b style="color:var(--ink)">or your session is free!</b></p>
     <div class="h-cta" data-reveal>
       <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="#book" data-cta="hero">Book a Teeth Whitening Session →</a>
+        <a class="btn btn-primary btn-lg" href="#book" data-cta="hero">Book your Long Beach session →</a>
         <a class="link-cta" href="#results">Look at our happy customers</a>
         <a class="hero-tel" href="tel:5625148383">Or call / text <b>(562) 514-8383</b> — consults are always free</a>
       </div>
@@ -687,8 +715,8 @@ function track(name, params){
 <!-- ===== TRUST MARQUEE (FX4 — removable) ===== -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span><span class="mi"><b>Results</b>&nbsp;&mdash; or your session is free</span><span class="dot">✦</span>
-    <span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span><span class="mi"><b>Results</b>&nbsp;&mdash; or your session is free</span><span class="dot">✦</span>
+    <span class="mi"><b>Long Beach</b>&nbsp;&middot; Huntington Beach &middot; Seal Beach &middot; Lakewood &middot; OC</span><span class="dot">✦</span><span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span><span class="mi"><b>Results</b>&nbsp;&mdash; or your session is free</span><span class="dot">✦</span>
+    <span class="mi"><b>Long Beach</b>&nbsp;&middot; Huntington Beach &middot; Seal Beach &middot; Lakewood &middot; OC</span><span class="dot">✦</span><span class="mi"><b>7,000+&nbsp;smiles</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Yelp</b></span><span class="dot">✦</span><span class="mi">5★ on <b>&nbsp;Google</b></span><span class="dot">✦</span><span class="mi"><b>Same-day</b>&nbsp;results</span><span class="dot">✦</span><span class="mi"><b>Zero</b>&nbsp;to minimal sensitivity</span><span class="dot">✦</span><span class="mi"><b>90 minutes</b>&nbsp;or less</span><span class="dot">✦</span><span class="mi"><b>Results</b>&nbsp;&mdash; or your session is free</span><span class="dot">✦</span>
   </div>
 </div>
 
@@ -702,13 +730,27 @@ function track(name, params){
   </div>
 </section>
 
+<!-- LOCAL BAND — "you're in the area" -->
+<section class="local-band">
+  <div class="wrap local-wrap" data-reveal>
+    <div class="local-head">
+      <span class="eyebrow">Near you</span>
+      <h2>Long Beach&rsquo;s teeth whitening studio &mdash; <span class="tint">minutes from the coast.</span></h2>
+      <p class="muted">638 Alamitos Ave, Long Beach. Free parking one building north. Same-day appointments &mdash; book online below, or call / text <a href="tel:5625148383" style="color:var(--primary);font-weight:700;text-decoration:none">(562) 514-8383</a>.</p>
+    </div>
+    <div class="city-chips" id="cityChips" aria-label="Areas we serve">
+      <span class="city on">Long Beach</span><span class="city">Signal Hill</span><span class="city">Lakewood</span><span class="city">Seal Beach</span><span class="city">Huntington Beach</span><span class="city">Los Alamitos</span><span class="city">Cerritos</span><span class="city">Carson</span><span class="city">San Pedro</span><span class="city">Torrance</span><span class="city">Orange County</span>
+    </div>
+  </div>
+</section>
+
 <!-- ===== SUPER CHECKOUT — the booking module. Ad CTAs scroll here; nothing navigates away. ===== -->
 <section class="sec-pad" id="book" style="padding-top:clamp(48px,7vw,96px)">
   <div class="wrap">
     <div class="head center" data-reveal>
       <span class="eyebrow">Book online · about a minute</span>
       <h2>Pick a time. Hold it with a <span class="shade-num" id="bkDepositWord">$50</span> deposit.</h2>
-      <p class="muted" style="margin-top:.7rem">Live availability at our Long Beach studio. Same-day results, zero to minimal sensitivity — and your deposit is 100% refundable with 24-hour notice.</p>
+      <p class="muted" style="margin-top:.7rem">Live availability at our Long Beach studio, 638 Alamitos Ave &mdash; same-day appointments when a chair is open. Same-day results, zero to minimal sensitivity, and your deposit is 100% refundable with 24-hour notice.</p>
     </div>
 
     <div class="bk-grid" id="bkGrid">
@@ -1234,6 +1276,18 @@ function track(name, params){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var SUPA_URL='https://pjrcbpbuujxtvjttylgc.supabase.co'; /* dedicated teethlab-leads Supabase project */
   var SUPA_KEY='sb_publishable_ygFhbx4wSDfyaGUHKVd8cg_T8jWMicp'; /* publishable key — safe client-side; RLS = anonymous INSERT only */
+
+
+  /* ?loc=<city> — "if you're in Huntington Beach, check this out". Whitelisted; unknown values are ignored.
+     Swaps the hero eyebrow/lede city and lights up that chip. Stored in attribution as loc. */
+  (function(){
+    var LOC={'long-beach':'Long Beach','signal-hill':'Signal Hill','lakewood':'Lakewood','seal-beach':'Seal Beach','huntington-beach':'Huntington Beach','los-alamitos':'Los Alamitos','cerritos':'Cerritos','carson':'Carson','san-pedro':'San Pedro','torrance':'Torrance','orange-county':'Orange County','oc':'Orange County','costa-mesa':'Costa Mesa','newport-beach':'Newport Beach','anaheim':'Anaheim','downey':'Downey','compton':'Compton','bellflower':'Bellflower','garden-grove':'Garden Grove','westminster':'Westminster','fountain-valley':'Fountain Valley','irvine':'Irvine'};
+    var q=(new URLSearchParams(location.search).get('loc')||'').toLowerCase(); var city=LOC[q]; if(!city||city==='Long Beach') return;
+    document.querySelectorAll('.locCity').forEach(function(e){e.textContent=city;});
+    document.querySelectorAll('.locLede').forEach(function(e){e.textContent='just a short drive from '+city;});
+    var chips=document.getElementById('cityChips'); if(chips){var hit=[].slice.call(chips.children).find(function(c){return c.textContent.trim()===city;}); if(!hit){hit=document.createElement('span');hit.className='city';hit.textContent=city;chips.insertBefore(hit,chips.firstChild);} hit.classList.add('on');}
+    try{ if(window.TWL_ATTR){ TWL_ATTR.loc=q; document.cookie='twl_attr='+encodeURIComponent(JSON.stringify(TWL_ATTR))+'; path=/; max-age=7776000; SameSite=Lax'; } }catch(e){}
+  })();
 
   /* Nav scroll state */
   var hdr=document.getElementById('hdr');
