@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="color-scheme" content="light only" />
 <meta name="theme-color" content="#ffffff" />
-<title>Teeth Whitening Lab — A Brighter Smile in 90 Minutes or Less, Guaranteed | Long Beach</title>
+<title>Teeth Whitening Lab — Book Online · A Brighter Smile in 90 Minutes or Less, Guaranteed | Long Beach</title>
 <meta name="description" content="Premium LED teeth whitening in Long Beach. A brighter, whiter smile in 90 minutes or less — guaranteed, with zero to minimal sensitivity. Book your session today." />
 <meta property="og:title" content="Teeth Whitening Lab — A Brighter Smile in 90 Minutes or Less, Guaranteed" />
 <meta property="og:description" content="Premium LED teeth whitening in Long Beach. Brighter, whiter, guaranteed — with zero to minimal sensitivity." />
@@ -325,6 +325,9 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .tooth.sel{transform:translateY(-16px) scale(1.08);box-shadow:0 0 0 3px var(--primary),0 12px 22px rgba(0,0,0,.22)}
 .tooth.bright::after{content:"★ brightest";position:absolute;top:-22px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.6rem;font-weight:700;letter-spacing:.04em;color:#f5a623}
 .tooth .tn{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:.55rem;font-weight:700;color:rgba(0,0,0,.42)}
+.sg-bar{display:none}
+.sg-bar.on{display:block;position:relative;height:4px;width:min(190px,54%);margin:15px auto 0;border-radius:99px;background:rgba(20,16,10,.13)}
+.sg-bar.on #sgThumb{position:absolute;top:-1px;bottom:-1px;left:0;width:40px;border-radius:99px;background:var(--primary);opacity:.85}
 .sg-read{text-align:center;margin-top:2.6rem;color:var(--muted);font-size:1.02rem;min-height:1.4em}
 .sg-read strong{color:var(--ink)} .sg-read b{color:var(--primary)}
 @media(max-width:620px){.shade-wrap{overflow:visible}.sg-row{flex-wrap:nowrap;justify-content:flex-start;gap:6px;overflow-x:auto;overflow-y:hidden;padding:34px 30px 10px 16px;margin-inline:-16px;scroll-snap-type:x proximity;scroll-padding-inline:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none;--mL:transparent 0,#000 7%;--mR:#000 93%,transparent 100%;-webkit-mask-image:linear-gradient(90deg,var(--mL),var(--mR));mask-image:linear-gradient(90deg,var(--mL),var(--mR))}.sg-row.at-start{--mL:#000 0,#000 0}.sg-row.at-end{--mR:#000 100%,#000 100%}.sg-row::-webkit-scrollbar{display:none}.tooth{flex:0 0 auto;width:clamp(30px,9vw,46px);height:clamp(62px,17vw,84px);scroll-snap-align:center}.tooth .tn{display:block;font-size:.6rem;bottom:5px}.tooth:hover{transform:none}.tooth.sel{transform:translateY(-8px) scale(1.1)}.tooth.bright::after{font-size:.46rem;top:-14px}.sg-read{margin-top:1.6rem}}
@@ -383,6 +386,111 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .op-btn{width:100%;border:0;border-radius:100px;padding:.95rem 1rem;font-size:1rem;font-weight:800;color:#3b2a86;background:#fff;cursor:pointer;letter-spacing:.02em}
 .op-btn:hover{transform:translateY(-1px)}
 .op-sub{font-size:.74rem;color:#cfc4ff;margin-top:.6rem}
+
+/* ============ SUPER CHECKOUT — booking module (merged from /book/) ============ */
+:root{--green:#16b85c;--green-2:#0f9d4f}
+#book{scroll-margin-top:72px;background:#fff}
+[hidden]{display:none!important}
+.bk-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1.4rem;align-items:start;margin-top:clamp(24px,3vw,40px)}
+.bk-side{position:sticky;top:84px}
+@media(max-width:900px){.bk-grid{grid-template-columns:1fr}.bk-side{position:static}}
+.bk-main{display:grid;gap:1rem}
+.offer-line{display:flex;align-items:center;gap:.9rem;border:1.5px solid var(--line);border-radius:var(--r);padding:.8rem 1rem;background:#fff;box-shadow:var(--shadow-sm);flex-wrap:wrap}
+.offer-line img{width:54px;height:54px;border-radius:12px;object-fit:cover;object-position:center 30%;border:1.5px solid #dcd9f0;flex:0 0 auto}
+.offer-line .ol-txt{display:flex;flex-direction:column;min-width:0;flex:1 1 200px}
+.offer-line .ol-txt b{font-size:1.02rem;line-height:1.25}
+.offer-line .ol-txt span{font-size:.88rem}
+.ol-change{background:none;border:0;color:var(--primary);font:inherit;font-weight:600;font-size:.88rem;cursor:pointer;padding:.5rem .4rem;min-height:40px;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.ol-change:hover{color:var(--blue)}
+.offer-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+@media(max-width:560px){.offer-picker{grid-template-columns:1fr}}
+.opick{display:flex;flex-direction:column;gap:.1rem;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:.75rem .85rem;cursor:pointer;font:inherit;transition:border-color .16s,box-shadow .16s}
+.opick:hover{border-color:#b9b2e6}
+.opick.selected{border-color:transparent;box-shadow:0 0 0 2px var(--primary)}
+.opick .op-t{font-weight:700;font-size:.92rem}
+.opick .op-a{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;color:var(--primary);line-height:1.1}
+.opick .op-d{font-size:.76rem;color:#8a86a6}
+.promo-note{text-align:center;border:1.5px solid var(--line);border-radius:14px;padding:.85rem 1.1rem;background:#fbfaff}
+.promo-note b{display:block;font-size:1.02rem;margin-bottom:.15rem}
+.promo-note span{font-size:.9rem;color:#8a86a6}
+/* Calendar */
+.cal-card{border:1.5px solid var(--line);border-radius:var(--r);padding:1.2rem;background:#fff;box-shadow:var(--shadow-sm)}
+.cal-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.6rem;flex-wrap:wrap}
+.cal-head h3{font-size:1.15rem;font-family:'Inter';font-weight:700}
+.tz-note{font-size:.78rem;color:var(--muted)}
+.day-strip{display:flex;gap:.55rem;overflow-x:auto;padding-bottom:.6rem;scrollbar-width:thin}
+.day-chip{flex:0 0 auto;min-width:72px;text-align:center;border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:.5rem .55rem;cursor:pointer;transition:all .2s;font:inherit}
+.day-chip .dow{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.day-chip .dom{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;line-height:1.15}
+.day-chip .n{font-size:.66rem;color:var(--green-2);font-weight:600}
+.day-chip.selected{border-color:var(--primary);background:var(--soft);box-shadow:var(--shadow-sm)}
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:.55rem;margin-top:.9rem}
+.slot{border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:.62rem .3rem;font:inherit;font-weight:600;font-size:.92rem;cursor:pointer;transition:all .18s;min-height:44px}
+.slot:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px)}
+.slot.selected{background:var(--grad);border-color:transparent;color:#fff;box-shadow:var(--shadow-sm)}
+.cal-status{padding:1.4rem .5rem;text-align:center;color:var(--muted);font-size:.95rem}
+.spinner{width:26px;height:26px;border-radius:50%;border:3px solid var(--soft-2);border-top-color:var(--primary);animation:spin .8s linear infinite;margin:0 auto .7rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* Summary */
+.sum-card{border:1.5px solid var(--line);border-radius:var(--r);background:var(--soft);padding:1.2rem 1.3rem}
+.sum-card h3{font-size:1.08rem;font-family:'Inter';font-weight:700;margin-bottom:.5rem}
+.sum-row{display:flex;justify-content:space-between;gap:1rem;font-size:.94rem;padding:.32rem 0}
+.sum-row b{font-weight:700;text-align:right}
+.sum-row.total{border-top:1.5px solid #dcd9f0;margin-top:.5rem;padding-top:.7rem;font-size:1.02rem}
+.sum-row .due-badge{background:var(--grad);color:#fff;border-radius:100px;padding:.1rem .7rem;font-size:.78rem;font-weight:700;margin-left:.3rem}
+.kit-box{display:flex;gap:.7rem;align-items:flex-start;background:#fff;border:1.5px dashed var(--primary-2);border-radius:12px;padding:.75rem .85rem;margin:.8rem 0 .2rem;cursor:pointer}
+.kit-box input{margin-top:.3rem;accent-color:var(--primary);width:17px;height:17px;flex:0 0 auto}
+.kit-box .kb-t{font-weight:700;font-size:.9rem}
+.kit-box .kb-d{font-size:.8rem;color:var(--muted)}
+.opt-block{margin:.85rem 0 .2rem}
+.opt-label{font-size:.88rem;font-weight:700;margin-bottom:.45rem}
+.opt-opt{font-weight:500;color:#8a86a6;font-size:.8rem}
+.opt-row{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+.opt{display:flex;flex-direction:column;gap:.1rem;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:.58rem .7rem;cursor:pointer;font:inherit;transition:border-color .16s,box-shadow .16s}
+.opt:hover{border-color:#b9b2e6}
+.opt.selected{border-color:transparent;box-shadow:0 0 0 2px var(--primary)}
+.opt-t{font-size:.84rem;font-weight:700}
+.opt-a{font-size:1.1rem;font-weight:800;line-height:1.15}
+.opt-d{font-size:.74rem;color:#8a86a6;line-height:1.25}
+@media(max-width:420px){.opt-row{grid-template-columns:1fr}}
+/* Details + card form */
+.form-card{border:1.5px solid var(--line);border-radius:var(--r);background:#fff;padding:1.2rem 1.3rem;box-shadow:var(--shadow-sm)}
+.form-card h3{font-size:1.15rem;font-family:'Inter';font-weight:700;margin-bottom:.7rem}
+.slot-pick{display:flex;align-items:center;justify-content:space-between;gap:.8rem;border:1.5px dashed var(--line);border-radius:12px;padding:.65rem .9rem;margin-bottom:.9rem;font-size:.92rem;background:#fbfaff}
+.slot-pick.has{border-style:solid;border-color:#bfe8cf;background:#f2fbf5}
+.slot-pick b{font-weight:700}
+.slot-pick button{background:none;border:0;color:var(--primary);font:inherit;font-weight:600;font-size:.85rem;cursor:pointer;min-height:40px;padding:0 .3rem;text-decoration:underline;text-underline-offset:3px}
+.field{margin-bottom:.8rem}
+.field label{display:block;font-size:.82rem;font-weight:700;margin-bottom:.3rem}
+.field input{width:100%;padding:.78rem .9rem;border:1.5px solid var(--line);border-radius:12px;font-size:1rem;font-family:inherit;transition:border-color .2s;background:#fff;color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--primary)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+@media(max-width:520px){.field-row{grid-template-columns:1fr}}
+#card-container{border:1.5px solid var(--line);border-radius:12px;padding:.35rem .6rem;background:#fff;min-height:48px}
+.card-wait{font-size:.82rem;color:var(--muted);padding:.55rem .2rem}
+.cardsave{display:flex;gap:.6rem;align-items:flex-start;margin:.2rem 0 .9rem;padding:.7rem .8rem;border:1px solid #cfe0f7;background:#f4f8ff;border-radius:10px;font-size:.8rem;line-height:1.45;color:#3d5266;cursor:pointer}
+.cardsave input{flex:0 0 auto;width:18px;height:18px;margin-top:1px;accent-color:var(--primary);cursor:pointer}
+.cardsave a{color:var(--primary);font-weight:600}
+.pay-err{display:none;background:#fdecec;border:1.5px solid #f3b8b8;color:#8c1f1f;border-radius:12px;padding:.7rem .9rem;font-size:.88rem;margin:.8rem 0}
+.btn-book{width:100%;justify-content:center;padding:1.15rem 1.6rem;font-size:1.06rem;animation:none}
+.btn-book:disabled{opacity:.55;cursor:not-allowed;filter:none}
+.trust-row{display:flex;flex-wrap:wrap;gap:.7rem 1rem;justify-content:center;margin-top:.9rem;font-size:.78rem;color:var(--muted)}
+.trust-row span{display:inline-flex;align-items:center;gap:.35em}
+.chip-row{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:100px;padding:.45rem .9rem;font:inherit;font-size:.86rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:border-color .16s,box-shadow .16s;min-height:40px}
+.chip:hover{border-color:#b9b2e6}
+.chip.selected{border-color:transparent;box-shadow:0 0 0 2px var(--primary)}
+/* Confirmation */
+.confirm-card{border:2px solid #bfe8cf;background:#f2fbf5;border-radius:var(--r);padding:2rem 1.4rem;text-align:center;max-width:640px;margin:clamp(20px,3vw,36px) auto 0}
+.confirm-card .big{font-size:2.4rem}
+.confirm-details{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.2rem;margin:1.2rem auto;text-align:left;max-width:440px;font-size:.94rem}
+.confirm-photo{width:100%;max-width:440px;border-radius:14px;margin:1rem auto 0;border:1.5px solid var(--line)}
+.park-tip{font-size:.85rem;color:var(--muted);max-width:440px;margin:.5rem auto 0}
+.hdyhau{margin:1.4rem auto .4rem;max-width:520px}
+.hdyhau .opt-label{text-align:center;margin-bottom:.6rem}
+.hdyhau .thanks{font-size:.88rem;color:#0f7a3d;font-weight:700;margin-top:.6rem}
+.notice-card{border:2px solid #f2dfae;background:#fff7e6;border-radius:var(--r);padding:1.6rem;text-align:center;max-width:640px;margin:1rem auto 0}
+.preview-ribbon{background:#fff7e6;border-bottom:1px solid #f2dfae;color:#7a5b00;font-size:.85rem;font-weight:600;text-align:center;padding:.45rem .8rem;position:fixed;top:0;left:0;right:0;z-index:95}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"HealthAndBeautyBusiness","name":"Teeth Whitening Lab","description":"Advanced LED teeth whitening in Long Beach — a brighter smile in 90 minutes or less, guaranteed.","url":"https://www.teethwhiteninglablongbeach.com/","telephone":"+1-562-514-8383","email":"teethwhiteninglablongbeach@gmail.com","address":{"@type":"PostalAddress","streetAddress":"638 Alamitos Avenue","addressLocality":"Long Beach","addressRegion":"CA","postalCode":"90802","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":33.7747889,"longitude":-118.1800083},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"18:00"},"priceRange":"$150-$500","sameAs":["https://www.instagram.com/teethwhiteninglablongbeach/","https://www.facebook.com/TeethWhiteningLabLongBeach","https://www.yelp.com/biz/teeth-whitening-lab-long-beach-4"]}
@@ -426,6 +534,82 @@ function gtag_report_conversion(url){
   if(v!=='a'&&v!=='b'){ v=Math.random()<0.5?'a':'b'; wc('twl_variant',v,90); }
   window.TWL_ATTR=attr; window.TWL_VARIANT=v;
 })();
+
+/* ============================================================================
+   PIXEL STACK — one config, one track() helper, every platform.
+   Paste each ID below once it exists. An empty string means "not installed":
+   the loader is skipped and track() silently ignores that platform.
+     GA4    -> "G-XXXXXXXXXX"      (Google Analytics 4 measurement ID)
+     META   -> "1234567890123456"  (Meta / Facebook pixel ID, digits only)
+     TIKTOK -> "CXXXXXXXXXXXXXXXXX" (TikTok pixel ID, starts with C)
+   Google Ads (AW-10941549968) is NOT configured here — it is loaded above and
+   its conversion labels are fired directly; nothing about it changes.
+   ========================================================================== */
+var TWL_PIXELS = { GA4: '', META: '', TIKTOK: '' };
+
+(function(){
+  var P = TWL_PIXELS;
+  /* GA4 rides on the gtag.js loader already on the page (same script, second config). */
+  if(P.GA4){ gtag('config', P.GA4, { send_page_view: true }); }
+  /* Meta pixel — standard base code */
+  if(P.META){
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', P.META); fbq('track', 'PageView');
+  }
+  /* TikTok pixel — standard base code */
+  if(P.TIKTOK){
+    !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};ttq.load(P.TIKTOK);ttq.page();}(window,document,'ttq');
+  }
+})();
+
+/* Event map: one funnel moment -> the native event name on each platform.
+   Anything not in the map goes out as a custom event under its own name. */
+var TWL_EVENT_MAP = {
+  view_content:     { ga:'view_item',        fb:'ViewContent',      tt:'ViewContent' },
+  begin_checkout:   { ga:'begin_checkout',   fb:'InitiateCheckout', tt:'InitiateCheckout' },
+  slot_selected:    { ga:'add_to_cart',      fb:'AddToCart',        tt:'AddToCart' },
+  add_payment_info: { ga:'add_payment_info', fb:'AddPaymentInfo',   tt:'AddPaymentInfo' },
+  purchase:         { ga:'purchase',         fb:'Purchase',         tt:'CompletePayment' },
+  lead:             { ga:'generate_lead',    fb:'Lead',             tt:'SubmitForm' },
+  call:             { ga:'contact',          fb:'Contact',          tt:'Contact' }
+};
+
+/* track(name, params)
+   params may carry: value (dollars), currency, content_name, content_id,
+   transaction_id, offer, variant, plus anything custom. Each platform gets
+   the shape it expects; nothing here throws into page code. */
+function track(name, params){
+  var p = Object.assign({ variant: window.TWL_VARIANT || null }, params || {});
+  var m = TWL_EVENT_MAP[name] || null;
+  try{ window.dataLayer = window.dataLayer || []; window.dataLayer.push(Object.assign({ event:'twl_'+name }, p)); }catch(e){}
+  /* Google (GA4 + Ads share gtag). If GA4 is not configured this is still harmless. */
+  try{
+    var gp = Object.assign({}, p);
+    if(name==='purchase'){
+      gp.items = [{ item_id: p.content_id||'', item_name: p.content_name||'', price: p.value||0, quantity: 1 }];
+    }
+    gtag('event', m ? m.ga : name, gp);
+  }catch(e){}
+  /* Meta */
+  try{
+    if(window.fbq && TWL_PIXELS.META){
+      var fp = { value: p.value, currency: p.currency||'USD', content_name: p.content_name, content_ids: p.content_id?[p.content_id]:undefined, content_type:'product' };
+      Object.keys(fp).forEach(function(k){ if(fp[k]===undefined) delete fp[k]; });
+      var opts = p.transaction_id ? { eventID: String(p.transaction_id) } : undefined;   /* dedupe key if CAPI is added later */
+      if(m) fbq('track', m.fb, fp, opts); else fbq('trackCustom', name, p);
+    }
+  }catch(e){}
+  /* TikTok */
+  try{
+    if(window.ttq && TWL_PIXELS.TIKTOK){
+      var tp = { value: p.value, currency: p.currency||'USD', content_type:'product',
+                 contents: [{ content_id: p.content_id||'', content_name: p.content_name||'', price: p.value, quantity: 1 }] };
+      if(p.value===undefined){ delete tp.value; delete tp.contents; }
+      var topts = p.transaction_id ? { event_id: String(p.transaction_id) } : undefined;
+      ttq.track(m ? m.tt : name, tp, topts);
+    }
+  }catch(e){}
+}
 </script>
 </head>
 <body>
@@ -446,7 +630,7 @@ function gtag_report_conversion(url){
     </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="tel:5625148383">Call / Text</a>
-      <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=nav">Book Now</a>
+      <a class="btn btn-primary" href="#book" data-cta="nav">Book Now</a>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
   </div>
@@ -460,7 +644,7 @@ function gtag_report_conversion(url){
   <a href="#reviews">Reviews</a>
   <a href="#faq">FAQ</a>
   <a href="#contact">Contact</a>
-  <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=mobile_menu" style="justify-content:center">Book Your Session</a>
+  <a class="btn btn-primary" href="#book" data-cta="mobile_menu" style="justify-content:center">Book Your Session</a>
 </div>
 
 <a id="top"></a>
@@ -485,7 +669,7 @@ function gtag_report_conversion(url){
     <p class="lede h-para" data-reveal>Say goodbye to yellow, stained teeth. Up to 16 shades* brighter on your very first visit <b style="color:var(--ink)">or your session is free!</b></p>
     <div class="h-cta" data-reveal>
       <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=hero">Book a Teeth Whitening Session →</a>
+        <a class="btn btn-primary btn-lg" href="#book" data-cta="hero">Book a Teeth Whitening Session →</a>
         <a class="link-cta" href="#results">Look at our happy customers</a>
         <a class="hero-tel" href="tel:5625148383">Or call / text <b>(562) 514-8383</b> — consults are always free</a>
       </div>
@@ -515,6 +699,120 @@ function gtag_report_conversion(url){
     <div class="stat" data-reveal><div class="n" data-count="90" data-suffix=" min">0</div><div class="l">Same-day results</div></div>
     <div class="stat" data-reveal><div class="n" data-count="16" data-suffix=" shades*">0</div><div class="l">Brighter, first visit</div></div>
     <div class="stat" data-reveal><div class="n" data-count="12" data-suffix=" mo">0</div><div class="l">Results can last, with care*</div></div>
+  </div>
+</section>
+
+<!-- ===== SUPER CHECKOUT — the booking module. Ad CTAs scroll here; nothing navigates away. ===== -->
+<section class="sec-pad" id="book" style="padding-top:clamp(48px,7vw,96px)">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Book online · about a minute</span>
+      <h2>Pick a time. Hold it with a <span class="shade-num" id="bkDepositWord">$50</span> deposit.</h2>
+      <p class="muted" style="margin-top:.7rem">Live availability at our Long Beach studio. Same-day results, zero to minimal sensitivity — and your deposit is 100% refundable with 24-hour notice.</p>
+    </div>
+
+    <div class="bk-grid" id="bkGrid">
+      <div class="bk-main">
+
+        <!-- Selected offer (preselected from ?offer=; the picker is a link, not a step) -->
+        <div class="offer-line" id="offerLine">
+          <img id="olImg" src="/adult.jpg" alt="">
+          <div class="ol-txt"><b id="olLabel">1 Adult — 90-Minute Whitening</b><span id="olPrice" class="muted">$250 · $50 deposit today</span></div>
+          <button type="button" class="ol-change" id="olChange">Booking something else?</button>
+        </div>
+        <div class="offer-picker" id="offerPicker" hidden></div>
+        <div class="promo-note" id="promoNote" hidden>
+          <b id="promoTitle">Your rate is applied</b>
+          <span id="promoDesc"></span>
+        </div>
+
+        <!-- Time -->
+        <div class="cal-card" id="calCard">
+          <div class="cal-head"><h3>1 · Pick a day &amp; time</h3><span class="tz-note">All times Pacific · 638 Alamitos Ave</span></div>
+          <div id="calStatus" class="cal-status"><div class="spinner"></div>Checking live availability…</div>
+          <div class="day-strip" id="dayStrip" hidden></div>
+          <div class="slot-grid" id="slotGrid" hidden></div>
+        </div>
+
+        <!-- Details + card, one submit -->
+        <form class="form-card" id="payForm" novalidate>
+          <h3>2 · Your details &amp; card</h3>
+          <div class="slot-pick" id="slotPick"><span>Your time: <b id="slotPickTxt">pick one above ↑</b></span><button type="button" id="slotPickChange" hidden>Change</button></div>
+          <div class="field"><label for="fName">Full name</label><input id="fName" name="name" type="text" autocomplete="name" required placeholder="Jane Smith"></div>
+          <div class="field-row">
+            <div class="field"><label for="fEmail">Email</label><input id="fEmail" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="jane@email.com"></div>
+            <div class="field"><label for="fPhone">Mobile phone</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="(562) 555-1234"></div>
+          </div>
+          <div class="field"><label>Card</label><div id="card-container"><div class="card-wait" id="cardWait">Secure card form loads when you're ready…</div></div></div>
+          <label class="cardsave" for="saveCard">
+            <input type="checkbox" id="saveCard" checked>
+            <span><b>Save my card for the cancellation policy.</b> I understand my card is stored securely by Square and may be charged if I miss my appointment or cancel with less than 24 hours' notice, as described in the <a href="#cancelPolicy" id="cpLink">cancellation policy</a>. My card details are never stored by The Teeth Whitening Lab.</span>
+          </label>
+          <div class="pay-err" id="payErr"></div>
+          <button class="btn btn-primary btn-book" id="payBtn" type="submit">Book &amp; pay <span id="payAmt">$50</span> <span id="payMode">deposit</span> →</button>
+          <div class="trust-row">
+            <span>🔒 Secured by Square</span><span>↩︎ 100% refundable with 24-hr notice</span><span>💳 HSA / FSA accepted in studio</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Summary -->
+      <aside class="bk-side">
+        <div class="sum-card">
+          <h3>Your session</h3>
+          <div class="sum-row"><span id="sumService">1 Adult — 90-Minute Whitening</span><b id="sumPrice">$250</b></div>
+          <div class="sum-row"><span>When</span><b id="sumWhen">—</b></div>
+          <div class="sum-row"><span>Where</span><b>638 Alamitos Ave, Long Beach</b></div>
+          <label class="kit-box" for="kitCheck" id="kitBox">
+            <input type="checkbox" id="kitCheck">
+            <span><span class="kb-t" id="kitTitle">Add take-home whitening kit — +$50</span><br><span class="kb-d" id="kitDesc">Our premium home kit (online price $85+) keeps your results going between visits. Added to your studio balance — deposit stays the same.</span></span>
+          </label>
+          <div class="opt-block">
+            <div class="opt-label">How would you like to pay?</div>
+            <div class="opt-row">
+              <button type="button" class="opt selected" id="payToggleDeposit"><span class="opt-t">Deposit today</span><span class="opt-a" id="payToggleDepositAmt">$50</span><span class="opt-d">Balance at your visit</span></button>
+              <button type="button" class="opt" id="payToggleFull"><span class="opt-t">Pay in full</span><span class="opt-a" id="payToggleFullAmt">$250</span><span class="opt-d">Nothing to pay at the studio</span></button>
+            </div>
+          </div>
+          <div class="sum-row total"><span>Due today<span class="due-badge" id="dueBadge">deposit</span></span><b id="sumDeposit">$50</b></div>
+          <div class="sum-row"><span class="muted">Due at your visit</span><span class="muted" id="sumBalance">$200</span></div>
+        </div>
+        <p class="muted" id="cancelPolicy" style="font-size:.78rem;line-height:1.5;margin-top:.8rem"><b style="color:var(--ink)">Cancellation policy.</b> Each appointment includes one courtesy reschedule. If you miss a rescheduled appointment, or cancel or no-show with less than 24 hours' notice, the full session price is charged to the card saved at booking. This keeps the chair available for everyone — thank you for understanding.</p>
+      </aside>
+    </div>
+
+    <!-- Confirmation replaces the module -->
+    <div id="panelDone" hidden>
+      <div class="confirm-card">
+        <div class="big">✨</div>
+        <h2 style="font-size:clamp(1.6rem,4vw,2.3rem)">You're booked!</h2>
+        <p class="muted" style="margin-top:.4rem">A confirmation is on its way to your email with everything you need before your visit.</p>
+        <div class="confirm-details" id="doneDetails"></div>
+        <a class="btn btn-ghost" id="gcalLink" target="_blank" rel="noopener">＋ Add to Google Calendar</a>
+        <div class="hdyhau" id="hdyhau">
+          <div class="opt-label">One quick question — how did you hear about us?</div>
+          <div class="chip-row" id="srcChips">
+            <button type="button" class="chip" data-src="google">Google</button>
+            <button type="button" class="chip" data-src="yelp">Yelp</button>
+            <button type="button" class="chip" data-src="social">Instagram / TikTok</button>
+            <button type="button" class="chip" data-src="friend">Friend or family</button>
+            <button type="button" class="chip" data-src="walk_by">Drove / walked by</button>
+            <button type="button" class="chip" data-src="returning">I&rsquo;m a returning client</button>
+            <button type="button" class="chip" data-src="other">Other</button>
+          </div>
+          <div class="thanks" id="hdyhauThanks" hidden>Thank you! See you soon. ✨</div>
+        </div>
+        <img class="confirm-photo" loading="lazy" src="/storefront.jpg" alt="Teeth Whitening Lab storefront, 638 Alamitos Ave, Long Beach">
+        <p class="park-tip">Free parking one building north — you're in the right lot if you see the wall-to-wall mural.</p>
+      </div>
+    </div>
+    <div id="panelPreviewDone" hidden>
+      <div class="notice-card">
+        <h2 style="font-size:1.4rem">Preview mode — no charge was made</h2>
+        <p class="muted" style="margin-top:.5rem">This build has live availability but payments are switched off.</p>
+        <div class="confirm-details" id="previewDetails" style="margin-top:1rem"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -588,7 +886,7 @@ function gtag_report_conversion(url){
         <h4>Party of 2</h4>
         <div class="amt">$450<span> / 90 min</span></div>
         <p>You and a loved one, up to 16 shades* brighter together — same day, same time. Think of it as a spa day (a tooth spa). Grab a pal and get to booking!</p>
-        <a class="btn btn-primary" href="/book/?offer=party2&utm_source=twl_site&utm_medium=cta&utm_content=pricing_party2">Book for two</a>
+        <a class="btn btn-primary" href="#book" data-offer="party2" data-cta="pricing_party2">Book for two</a>
       </div>
       <div class="price-card feat" data-reveal>
         <span class="pop">Most popular</span>
@@ -596,14 +894,14 @@ function gtag_report_conversion(url){
         <h4>1 Adult</h4>
         <div class="amt">$250<span> / 90 min</span></div>
         <p>Our most popular session — up to 16 shades* brighter, recommended for first-time whiteners. A smile so bright, even the sun will be jealous.</p>
-        <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=pricing_adult">Book</a>
+        <a class="btn btn-primary" href="#book" data-offer="adult" data-cta="pricing_adult">Book</a>
       </div>
       <div class="price-card" data-reveal>
         <img class="pc-img" loading="lazy" src="https://assets.cdn.filesafe.space/ZLXnU2RS6LXT98HUe0PV/media/66adb21436ab420466a27f86.jpeg" alt="Teen whitening session">
         <h4>1 Teenager</h4>
         <div class="amt">$225<span> / 60 min</span></div>
         <p>A 60-minute session perfect for teens with light to moderate staining — up to 12 shades* brighter.</p>
-        <a class="btn btn-primary" href="/book/?offer=teen&utm_source=twl_site&utm_medium=cta&utm_content=pricing_teen">Book</a>
+        <a class="btn btn-primary" href="#book" data-offer="teen" data-cta="pricing_teen">Book</a>
       </div>
       <div class="price-card" data-reveal>
         <img class="pc-img" loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_800/u_https://storage.googleapis.com/msgsndr/ZLXnU2RS6LXT98HUe0PV/media/66a2a8b549e0c6d0614e7b3c.jpeg" alt="Take-home professional whitening kit">
@@ -615,10 +913,10 @@ function gtag_report_conversion(url){
     </div>
     <div class="price-extra" data-reveal>
       <div class="px-head">More options — all bookable online</div>
-      <a class="px-row" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=px_adult_kit"><span class="px-name">1 Adult 90 Min + Home Kit</span><span class="px-val">$300 · 90 min</span></a>
-      <a class="px-row" href="/book/?offer=party2&utm_source=twl_site&utm_medium=cta&utm_content=px_party2_kits"><span class="px-name">Party of 2 90 Min + Home Kits</span><span class="px-val">$500 · 90 min</span></a>
-      <a class="px-row" href="/book/?offer=model&utm_source=twl_site&utm_medium=cta&utm_content=px_model"><span class="px-name">Model / Influencer Special</span><span class="px-val">$225</span></a>
-      <a class="px-row" href="/book/?offer=followup&utm_source=twl_site&utm_medium=cta&utm_content=px_followup"><span class="px-name">Follow-Up</span><span class="px-val">$150 · within 90 days</span></a>
+      <a class="px-row" href="#book" data-offer="adult" data-cta="px_adult_kit" data-kit="1"><span class="px-name">1 Adult 90 Min + Home Kit</span><span class="px-val">$300 · 90 min</span></a>
+      <a class="px-row" href="#book" data-offer="party2" data-cta="px_party2_kits" data-kit="1"><span class="px-name">Party of 2 90 Min + Home Kits</span><span class="px-val">$500 · 90 min</span></a>
+      <a class="px-row" href="#book" data-offer="model" data-cta="px_model"><span class="px-name">Model / Influencer Special</span><span class="px-val">$225</span></a>
+      <a class="px-row" href="#book" data-offer="followup" data-cta="px_followup"><span class="px-name">Follow-Up</span><span class="px-val">$150 · within 90 days</span></a>
       <a class="px-row" href="https://squareup.com/gift/MLGPTZDZ0TGWD/order" target="_blank" rel="noopener"><span class="px-name">Gift Cards</span><span class="px-val">Send a brighter smile →</span></a>
     </div>
   </div>
@@ -634,6 +932,7 @@ function gtag_report_conversion(url){
     </div>
     <div class="shade-wrap" data-reveal>
       <div class="sg-row" id="sgRow" role="group" aria-label="Dental shade guide"></div>
+      <div class="sg-bar" id="sgBar" aria-hidden="true"><span id="sgThumb"></span></div>
       <div class="sg-read"><strong id="sgOut">Click a shade to see how many shades brighter you could go.</strong></div>
     </div>
   </div>
@@ -714,7 +1013,7 @@ function gtag_report_conversion(url){
 <section class="recap-band">
   <div class="wrap recap-wrap" data-reveal>
     <span class="ri"><b>Party of 2</b> $450</span><span class="ri"><b>1 Adult</b> $250</span><span class="ri"><b>1 Teenager</b> $225</span>
-    <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=mid_cta">Book a Teeth Whitening Session →</a>
+    <a class="btn btn-primary" href="#book" data-cta="mid_cta">Book a Teeth Whitening Session →</a>
     <a class="ri-tel" href="tel:5625148383">or call / text (562) 514-8383</a>
   </div>
 </section>
@@ -748,7 +1047,7 @@ function gtag_report_conversion(url){
       <div class="seal">90 MIN<br>OR LESS</div>
       <h2>Your brightest smile &mdash; guaranteed*.</h2>
       <p style="color:#EDEAFF"><b style="color:#fff">See a remarkable improvement on your very first visit — or your session is free.</b> Advanced LED whitening with zero to minimal sensitivity, plus a free consultation, digital before &amp; after photos, and an after-care kit to take home. Call or text for same-day availability.</p>
-      <a class="btn btn-primary btn-lg" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=session_cta">Book Your Session</a>
+      <a class="btn btn-primary btn-lg" href="#book" data-cta="session_cta">Book Your Session</a>
       <div style="margin-top:.8rem"><a href="tel:5625148383" style="color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px">or call / text (562) 514-8383</a></div>
       <p style="font-size:.72rem;color:#b6b6c6;margin-top:1.4rem;max-width:60ch;margin-inline:auto">*Guarantee: see a noticeable improvement on your very first visit or your session is free. Individual results vary depending on starting shade, staining type, and aftercare.</p>
     </div>
@@ -840,8 +1139,8 @@ function gtag_report_conversion(url){
       <div class="acc"><button>Do you accept insurance?<span class="ic">+</span></button><div class="panel"><p>Teeth whitening falls under a cosmetic category, so it isn't currently covered by insurance — but here at the Lab it's always affordable even without it. We gladly accept HSA and FSA; just let us know at checkout so we can print a physical receipt for you.</p></div></div>
       <div class="acc"><button>What if I have existing dental work?<span class="ic">+</span></button><div class="panel"><p>We can restore your existing dental work to its original installation shade.</p></div></div>
       <div class="acc"><button>Can I whiten if I'm under 18?<span class="ic">+</span></button><div class="panel"><p>Yes — parental consent is required for anyone under the age of 18.</p></div></div>
-      <div class="acc"><button>How can I book an appointment?<span class="ic">+</span></button><div class="panel"><p>Booking is easy — reserve online through our booking link, or give us a call or text at <a href="tel:5625148383" style="color:var(--primary);font-weight:600">(562) 514-8383</a>.</p></div></div>
-      <div class="acc"><button>If I cancel, will I get my deposit back?<span class="ic">+</span></button><div class="panel"><p>Yes — as long as you let us know you need to cancel or reschedule within 24 hours of your appointment start time, your deposit is 100% refundable.</p></div></div>
+      <div class="acc"><button>How can I book an appointment?<span class="ic">+</span></button><div class="panel"><p>Booking is easy — <a href="#book" data-cta="faq" style="color:var(--primary);font-weight:600">book online right here</a> in about a minute, or give us a call or text at <a href="tel:5625148383" style="color:var(--primary);font-weight:600">(562) 514-8383</a>.</p></div></div>
+      <div class="acc"><button>If I cancel, will I get my deposit back?<span class="ic">+</span></button><div class="panel"><p>Yes — as long as you let us know you need to cancel or reschedule within 24 hours of your appointment start time, your deposit is 100% refundable. Each appointment includes one courtesy reschedule; a missed rescheduled appointment, or a cancellation or no-show with less than 24 hours&rsquo; notice, is charged to the card saved at booking.</p></div></div>
       <div class="acc"><button>What are your hours?<span class="ic">+</span></button><div class="panel"><p>We're open Tuesday through Saturday, 9:00 AM – 6:00 PM. Call or text <a href="tel:5625148383" style="color:var(--primary);font-weight:600">(562) 514-8383</a> for same-day availability.</p></div></div>
       <div class="acc"><button>Where can I park?<span class="ic">+</span></button><div class="panel"><p>Free parking is available one building north of the Teeth Whitening Lab. You are in the right parking lot if you see a wall-to-wall mural.</p><div class="faq-imgs"><img loading="lazy" src="park-lot.jpg" alt="Parking lot, one building north"><img loading="lazy" src="park-mural.jpg" alt="Wall-to-wall mural landmark"><img loading="lazy" src="storefront.jpg" alt="Teeth Whitening Lab storefront"></div></div></div>
     </div>
@@ -873,7 +1172,7 @@ function gtag_report_conversion(url){
             </div>
           </div>
           <div class="vc-map"><iframe title="Teeth Whitening Lab location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=638+Alamitos+Avenue,+Long+Beach,+CA+90802&output=embed"></iframe></div>
-          <a class="btn btn-primary btn-lg" style="margin-top:1.1rem;width:100%;justify-content:center" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=proof_card">⭐ Book Appointment →</a>
+          <a class="btn btn-primary btn-lg" style="margin-top:1.1rem;width:100%;justify-content:center" href="#book" data-cta="proof_card">⭐ Book Appointment →</a>
           <div class="leadcap">
             <label class="dlabel">Not ready to book yet? Get your free consultation here.</label>
             <form id="leadForm" class="drow" novalidate>
@@ -924,7 +1223,7 @@ function gtag_report_conversion(url){
 <!-- sticky mobile book bar -->
 <div class="book-bar">
   <a class="btn btn-ghost" href="tel:5625148383">Call / Text</a>
-  <a class="btn btn-primary" href="/book/?offer=adult&utm_source=twl_site&utm_medium=cta&utm_content=book_bar">Book Now</a>
+  <a class="btn btn-primary" href="#book" data-cta="book_bar">Book Now</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -942,7 +1241,7 @@ function gtag_report_conversion(url){
   function onScroll(){
     var sc=window.scrollY||document.documentElement.scrollTop||0;
     hdr.classList.toggle('scrolled',sc>20);
-    if(bbar){var max=document.documentElement.scrollHeight-window.innerHeight;var ratio=max>0?sc/max:0;var footEl=document.querySelector('footer');var footTop=footEl?footEl.getBoundingClientRect().top:1e9;bbar.classList.toggle('show',ratio>0.12 && footTop>window.innerHeight-8);}
+    if(bbar){var max=document.documentElement.scrollHeight-window.innerHeight;var ratio=max>0?sc/max:0;var footEl=document.querySelector('footer');var footTop=footEl?footEl.getBoundingClientRect().top:1e9;var bk=document.getElementById('book');var br=bk?bk.getBoundingClientRect():null;var inBook=br&&br.top<window.innerHeight*0.7&&br.bottom>window.innerHeight*0.3;bbar.classList.toggle('show',ratio>0.12 && footTop>window.innerHeight-8 && !inBook);}
   }
   onScroll();window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll,{passive:true});
 
@@ -1048,7 +1347,11 @@ function gtag_report_conversion(url){
     var KEY='twl_pop_seen';
     try{var seen=localStorage.getItem(KEY); if(seen && (Date.now()-(+seen))<6048e5) return;}catch(e){}
     var shown=false;
-    function show(){if(shown)return;shown=true;pop.hidden=false;try{localStorage.setItem(KEY,String(Date.now()));}catch(e){}}
+    function show(){if(shown)return;
+      /* never pop over the booking module or on someone who has picked a time */
+      try{var bk=document.getElementById('book');var r=bk.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)return;}catch(e){}
+      if(window.TWL_slotChosen)return;
+      shown=true;pop.hidden=false;try{localStorage.setItem(KEY,String(Date.now()));}catch(e){}}
     function hide(){pop.hidden=true;}
     /* Exit-intent first (desktop); slow 45s fallback so it never feels pushy */
     setTimeout(show,45000);
@@ -1063,6 +1366,7 @@ function gtag_report_conversion(url){
       try{var k='twl_leads';var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(Object.assign({ts:new Date().toISOString(),consent:true},row));localStorage.setItem(k,JSON.stringify(a));}catch(err){}
       /* Google Ads: CP - Lead form submit */
       try{gtag('event','conversion',{send_to:TWL_CONV.lead,value:1.0,currency:'USD'});}catch(err){}
+      try{track('lead',{ source:'popup_25off' });}catch(err){}
       if(typeof SUPA_URL!=='undefined'&&/^https:\/\//.test(SUPA_URL)){
         fetch(SUPA_URL+'/rest/v1/leads',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}).catch(function(){});
       }
@@ -1080,6 +1384,7 @@ function gtag_report_conversion(url){
       try{var k='twl_leads';var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(Object.assign({ts:new Date().toISOString()},row));localStorage.setItem(k,JSON.stringify(a));}catch(err){}
       /* Google Ads: CP - Lead form submit */
       try{gtag('event','conversion',{send_to:TWL_CONV.lead,value:1.0,currency:'USD'});}catch(err){}
+      try{track('lead',{ source:'website' });}catch(err){}
       if(/^https:\/\//.test(SUPA_URL)){
         fetch(SUPA_URL+'/rest/v1/leads',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}).catch(function(){});
       }
@@ -1095,17 +1400,15 @@ function gtag_report_conversion(url){
       if(a.hasAttribute('data-conv-kit')){
         /* Kit purchase — value $69.99 is configured account-side (same-each) */
         gtag('event','conversion',{send_to:TWL_CONV.kit,transaction_id:''});
-      }else if(href.indexOf('/book/')===0){
-        /* v5 — funnel step ONLY, deliberately NOT a Google Ads conversion.
-         * This click now stays on our own site (every CTA points at /book/), so
-         * counting it as a conversion is the phantom-conversion problem this whole
-         * rebuild exists to remove: 87 of 93 recorded conversions were this event.
-         * The one reportable Ads conversion is booking_confirmed, fired from the
-         * checkout only after Square confirms a real, paid booking. */
-        gtag('event','begin_checkout',{value:1.0,currency:'USD',link_url:href});
+      }else if(href.indexOf('#book')===0){
+        /* v6 — the CTA scrolls to the booking module on this same page. Deliberately NOT a
+         * Google Ads conversion (that was the phantom-conversion bug: 87 of 93 conversions).
+         * TWL_goBook preselects the offer and fires begin_checkout through track() once. */
+        if(window.TWL_goBook) TWL_goBook(a.getAttribute('data-offer')||null, a.getAttribute('data-cta')||'cta', a.getAttribute('data-kit')==='1');
       }else if(href.indexOf('tel:')===0){
         /* Click to call — tel: doesn't unload the page; fire and let default proceed */
         gtag('event','conversion',{send_to:TWL_CONV.call,value:1.0,currency:'USD'});
+        track('call',{ link_url: href });
       }
     }catch(err){}
   },true);
@@ -1205,10 +1508,19 @@ function gtag_report_conversion(url){
       row.appendChild(btn);
     });
     /* Default view = the lighter half (shades 20-2); darker shades are a swipe left. */
+    var bar=document.getElementById('sgBar'), thumb=document.getElementById('sgThumb');
     function edges(){
       var max=row.scrollWidth-row.clientWidth;
       row.classList.toggle('at-start', row.scrollLeft<=2);
       row.classList.toggle('at-end', row.scrollLeft>=max-2);
+      if(!bar||!thumb) return;
+      var scrolls = max>2 && getComputedStyle(row).overflowX!=='visible';
+      bar.classList.toggle('on', scrolls);
+      if(!scrolls) return;
+      var track=bar.clientWidth;
+      var w=Math.max(28, Math.round(track*(row.clientWidth/row.scrollWidth)));
+      thumb.style.width=w+'px';
+      thumb.style.transform='translateX('+Math.round((track-w)*(row.scrollLeft/max))+'px)';
     }
     function startLighter(){
       if(row.scrollWidth>row.clientWidth+2){
@@ -1221,6 +1533,480 @@ function gtag_report_conversion(url){
     startLighter();
     window.addEventListener('load', startLighter);
   })();
+})();
+</script>
+
+<script>
+/* ============================================================================
+   SUPER CHECKOUT — booking module logic (merged from /book/, v6 · Sept 2026)
+   What changed vs /book/:
+     - no page navigation: CTAs scroll here; ?offer= preselects, picker is a link
+     - availability is prefetched on page load and cached per offer
+     - steps 2 + 3 are one scroll; one submit button; no step pills
+     - tip removed entirely (tip_cents: 0 is still sent so the column stays valid)
+     - Square SDK loads lazily (module near viewport or CTA click), not on page load
+     - card on file: #saveCard consent (checked) -> save_card: true to the bridge
+     - "how did you hear about us" moved AFTER payment (set_heard_about_us action)
+     - every funnel moment goes through track() -> Google Ads / GA4 / Meta / TikTok
+   OFFERS, bridge() and CONV_BOOKED are byte-for-byte from /book/ — they are
+   verified against the live Square catalog; do not edit them casually.
+   ========================================================================== */
+(function(){
+"use strict";
+
+/* ============ CONFIG — every ID verified against the live Square catalog on 2026-08-06 ============ */
+var CFG = {
+  CHECKOUT_LIVE: true,                     /* square-bridge v3 deployed 2026-08-06 — payments are REAL from here on */
+  SUPA_URL: 'https://pjrcbpbuujxtvjttylgc.supabase.co',
+  SUPA_KEY: 'sb_publishable_ygFhbx4wSDfyaGUHKVd8cg_T8jWMicp', /* publishable — safe client-side */
+  BRIDGE: 'https://pjrcbpbuujxtvjttylgc.supabase.co/functions/v1/square-bridge',
+  SQUARE_APP_ID: 'sq0idp-JyfU-XukbVVd6r568ODIdg',   /* public application id — capital I, verified from Credentials page 2026-08-06 */
+  LOCATION_ID: 'LBT6DHXGMSP0S',
+  CONV_BOOKED: 'AW-10941549968/obP1CP2Hut0cEJCbq-Eo',   /* Google Ads conversion label — CP - Booking confirmed (Purchase, Primary), read from Ads event snippet 2026-08-10 */
+  DAYS_AHEAD: 14,
+  SQUARE_SDK: 'https://web.squarecdn.com/v1/square.js'
+};
+
+var OFFERS = {
+  adult: {
+    label: '1 Adult — 90-Minute Whitening',
+    variation: 'C7U5ILFM2XBZNABYVTO4AX23',       /* 1 Adult $250 */
+    kitVariation: 'XNBJKEJ5WQDT3XBRNG2DGMJJ',    /* 1 Adult + Kit $300 */
+    full: 25000, kitFull: 30000, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: true, utmContent: 'checkout-adult',
+    short: '1 Adult', pickDesc: '90 min · $50 deposit',
+    kitTitle: 'Add take-home whitening kit — +$50',
+    kitDesc: 'Our premium home kit (online price $85+) keeps your results going between visits. Added to your studio balance — deposit stays the same.'
+  },
+  party2: {
+    label: 'Party of 2 — 90-Minute Whitening',
+    variation: 'OUOPFLGAOM4J75DVMTUJZYT3',       /* Party of 2 $450 */
+    kitVariation: 'OSBUUUYMXBFW7DEPZS4RC6OU',    /* Party of 2 + Kits $500 */
+    full: 45000, kitFull: 50000, deposit: 10000, minutes: 90,
+    img: '/party2.jpg', pickable: true, utmContent: 'checkout-party2',
+    short: 'Party of 2', pickDesc: '90 min · $100 deposit',
+    kitTitle: 'Add 2 take-home whitening kits — +$50',
+    kitDesc: 'One premium home kit each (online price $85+ apiece). Added to your studio balance — deposit stays the same.'
+  },
+  referral: {
+    label: 'Referred Friend — 90-Minute Whitening',
+    variation: 'ORU55V5HQPLYPEKP6ZZ3PJ5Q',       /* Referred Friend $199 */
+    kitVariation: null,
+    full: 19900, kitFull: 19900, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: false, utmContent: 'checkout-referral',
+    short: 'Referred Friend', pickDesc: '90 min · $50 deposit',
+    promoTitle: 'Your referral rate is applied',
+    kitTitle: '', kitDesc: ''
+  },
+  winback: {
+    label: 'Welcome Back — 90-Minute Whitening',
+    variation: 'HZZLEVTC4QH5XKCRVEEIZRDH',       /* Welcome-Back $199, returning clients */
+    kitVariation: null,
+    full: 19900, kitFull: 19900, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: false, utmContent: 'checkout-winback',
+    short: 'Welcome Back', pickDesc: '90 min · $50 deposit',
+    promoTitle: 'Welcome back — your returning-client rate is applied',
+    kitTitle: '', kitDesc: ''
+  },
+  teen: {
+    label: '1 Teenager — 60-Minute Whitening',
+    variation: 'K5IQTDNORTXUM2RJ3H2KMIEN',       /* Teen $225 — the only 60-minute service */
+    kitVariation: null,
+    full: 22500, kitFull: 22500, deposit: 5000, minutes: 60,
+    img: '/adult.jpg', pickable: true, utmContent: 'checkout-teen',
+    short: '1 Teenager', pickDesc: '60 min · $50 deposit',
+    promoTitle: 'Teen whitening — 60 minutes',
+    promoDesc: 'A 60-minute session for light to moderate staining.',
+    kitTitle: '', kitDesc: ''
+  },
+  model: {
+    label: 'Model / Influencer Special — 90-Minute Whitening',
+    variation: 'L4VTLGCC6IFOYRH2QO77KRMS',       /* Model/Influencer $225 */
+    kitVariation: null,
+    full: 22500, kitFull: 22500, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: false, utmContent: 'checkout-model',
+    short: 'Model / Influencer', pickDesc: '90 min · $50 deposit',
+    promoTitle: 'Model / Influencer rate applied',
+    promoDesc: '',
+    kitTitle: '', kitDesc: ''
+  },
+  followup: {
+    label: 'Follow-Up Appointment — 90 Minutes',
+    variation: 'D7VI7J2J2WJIRFUNLUED6BFW',       /* Follow-Up $150, within 90 days */
+    kitVariation: null,
+    full: 15000, kitFull: 15000, deposit: 5000, minutes: 90,
+    img: '/adult.jpg', pickable: false, utmContent: 'checkout-followup',
+    short: 'Follow-Up', pickDesc: '90 min · $50 deposit',
+    promoTitle: 'Follow-up rate applied',
+    promoDesc: 'For returning clients within 90 days of their last session.',
+    kitTitle: '', kitDesc: ''
+  }
+};
+
+/* Attribution + variant were captured in <head> (window.TWL_ATTR / TWL_VARIANT). */
+var attr = window.TWL_ATTR || {};
+var variant = window.TWL_VARIANT || null;
+var qs = new URLSearchParams(location.search);
+function writeCookie(n,v,days){document.cookie=n+'='+encodeURIComponent(v)+'; path=/; max-age='+(days*86400)+'; SameSite=Lax';}
+
+/* ============ State ============ */
+var state = { offer:'adult', slot:null, slotsByDay:{}, dayKeys:[], selectedDay:null,
+              card:null, payments:null, busy:false, payFull:false, cardInitBusy:false,
+              sdkRequested:false, availCache:{}, availReq:null, beganCheckout:false, addedPayment:false, bookingId:null };
+(function(){
+  var q = (qs.get('offer')||'').toLowerCase();
+  if(Object.prototype.hasOwnProperty.call(OFFERS, q)) state.offer = q;
+  if(qs.get('kit')==='1') state.kitFromUrl = true;
+})();
+
+var $ = function(id){ return document.getElementById(id); };
+var fmtUSD = function(cents){
+  var d = Math.round(cents) % 100 === 0 ? 0 : 2;
+  return '$'+(cents/100).toLocaleString('en-US',{minimumFractionDigits:d, maximumFractionDigits:d});
+};
+var LA = 'America/Los_Angeles';
+function offerParams(extra){
+  var o = OFFERS[state.offer], kit = $('kitCheck').checked && o.kitVariation;
+  return Object.assign({ offer: state.offer, content_name: o.label + (kit?' + kit':''),
+                         content_id: kit ? o.kitVariation : o.variation, currency:'USD' }, extra||{});
+}
+
+/* ============ Offer selection ============ */
+function renderPicker(){
+  var wrap = $('offerPicker'); wrap.innerHTML = '';
+  var keys = ['adult','party2','teen'];
+  if(keys.indexOf(state.offer) < 0) keys.unshift(state.offer);   /* promo/link offers stay reachable once chosen */
+  keys.forEach(function(k){
+    var o = OFFERS[k], b = document.createElement('button');
+    b.type='button'; b.className='opick'+(k===state.offer?' selected':''); b.setAttribute('data-offer',k);
+    b.innerHTML = '<span class="op-t">'+o.short+'</span><span class="op-a">'+fmtUSD(o.full)+'</span><span class="op-d">'+o.pickDesc+'</span>';
+    b.onclick = function(){ setOffer(k); $('offerPicker').hidden = true; };
+    wrap.appendChild(b);
+  });
+}
+function setOffer(key){
+  if(!OFFERS[key]) key = 'adult';
+  var changed = key !== state.offer;
+  state.offer = key;
+  applyOffer();
+  if(changed){ state.slot = null; renderSlotPick(); loadAvailability(); }
+}
+function applyOffer(){
+  var o = OFFERS[state.offer];
+  $('sumService').textContent = o.label;
+  $('olImg').src = o.img;
+  $('olLabel').textContent = o.label;
+  $('olPrice').textContent = fmtUSD(o.full) + ' · ' + fmtUSD(o.deposit) + ' deposit today';
+  $('bkDepositWord').textContent = fmtUSD(o.deposit);
+  var promo = !o.pickable;
+  $('promoNote').hidden = !promo;
+  if(promo){
+    $('promoTitle').textContent = o.promoTitle || 'Your rate is applied';
+    $('promoDesc').textContent = (o.promoDesc ? o.promoDesc + ' ' : '') + o.minutes + ' minutes, ' + fmtUSD(o.full) + ' total. Hold it with a ' + fmtUSD(o.deposit) + ' deposit, or pay in full below.';
+  }
+  var hasKit = Boolean(o.kitVariation);
+  if(!hasKit && $('kitCheck').checked) $('kitCheck').checked = false;
+  if(hasKit && state.kitFromUrl){ $('kitCheck').checked = true; state.kitFromUrl = false; }
+  $('kitBox').hidden = !hasKit;
+  if(hasKit){ $('kitTitle').textContent = o.kitTitle; $('kitDesc').textContent = o.kitDesc; }
+  renderPicker();
+  updateTotals();
+}
+$('olChange').onclick = function(){ var p=$('offerPicker'); p.hidden = !p.hidden; };
+
+/* ---- money: deposit vs full. No tip anymore — tip_cents is always 0. ---- */
+function fullPrice(){ var o=OFFERS[state.offer]; return $('kitCheck').checked ? o.kitFull : o.full; }
+function baseCents(){ return state.payFull ? fullPrice() : OFFERS[state.offer].deposit; }
+function chargeCents(){ return baseCents(); }
+
+function updateTotals(){
+  var o = OFFERS[state.offer], full = fullPrice(), base = baseCents();
+  $('sumPrice').textContent = fmtUSD(full);
+  $('sumDeposit').textContent = fmtUSD(base);
+  $('payAmt').textContent = fmtUSD(base);
+  $('payMode').textContent = state.payFull ? 'in full' : 'deposit';
+  $('dueBadge').textContent = state.payFull ? 'paid in full' : 'deposit';
+  var balance = full - base;
+  $('sumBalance').textContent = balance > 0 ? fmtUSD(balance) : 'Nothing — you’re all set';
+  $('payToggleDeposit').classList.toggle('selected', !state.payFull);
+  $('payToggleFull').classList.toggle('selected', state.payFull);
+  $('payToggleDepositAmt').textContent = fmtUSD(o.deposit);
+  $('payToggleFullAmt').textContent = fmtUSD(full);
+}
+$('kitCheck').addEventListener('change', function(){ updateTotals(); track('kit_toggled', offerParams({ kit: $('kitCheck').checked })); });
+$('payToggleDeposit').addEventListener('click', function(){ if(!state.payFull) return; state.payFull=false; track('pay_mode_selected',{ mode:'deposit' }); updateTotals(); });
+$('payToggleFull').addEventListener('click',    function(){ if(state.payFull) return;  state.payFull=true;  track('pay_mode_selected',{ mode:'full' });    updateTotals(); });
+
+/* ============ Availability — prefetched on load, cached per variation ============ */
+function bridge(body){
+  return fetch(CFG.BRIDGE, {
+    method:'POST',
+    headers:{ 'Authorization':'Bearer '+CFG.SUPA_KEY, 'apikey':CFG.SUPA_KEY, 'Content-Type':'application/json' },
+    body: JSON.stringify(body)
+  }).then(function(r){ return r.json(); });
+}
+function fetchAvailability(variation){
+  if(state.availCache[variation]) return state.availCache[variation];
+  var start = new Date(Date.now()+60*60*1000).toISOString();
+  var end   = new Date(Date.now()+CFG.DAYS_AHEAD*86400*1000).toISOString();
+  var p = bridge({ action:'availability', env:'production', service_variation_id:variation, start_at:start, end_at:end })
+    .then(function(res){ if(!res.ok) throw new Error(res.error||'availability failed'); return res.slots||[]; });
+  p.catch(function(){ delete state.availCache[variation]; });   /* never cache a failure */
+  state.availCache[variation] = p;
+  return p;
+}
+function loadAvailability(){
+  var o = OFFERS[state.offer], v = o.variation;
+  $('calStatus').innerHTML = '<div class="spinner"></div>Checking live availability…';
+  $('calStatus').style.display='block'; $('dayStrip').hidden=true; $('slotGrid').hidden=true;
+  var req = fetchAvailability(v); state.availReq = req;
+  req.then(function(slots){
+      if(state.availReq !== req) return;           /* offer changed mid-flight */
+      groupSlots(slots); renderDays();
+    })
+    .catch(function(){
+      if(state.availReq !== req) return;
+      $('calStatus').innerHTML = 'We couldn’t load live availability just now. <br><br><a class="btn btn-ghost" href="javascript:void 0" id="retryBtn">Try again</a> &nbsp; or call/text <a href="tel:5625148383" style="color:var(--primary);font-weight:700">(562) 514-8383</a>';
+      var rb=$('retryBtn'); if(rb) rb.onclick=loadAvailability;
+    });
+}
+function groupSlots(slots){
+  state.slotsByDay={}; state.dayKeys=[];
+  var dayFmt = new Intl.DateTimeFormat('en-CA',{timeZone:LA,year:'numeric',month:'2-digit',day:'2-digit'});
+  slots.forEach(function(s){
+    var key = dayFmt.format(new Date(s.start_at));
+    if(!state.slotsByDay[key]){ state.slotsByDay[key]=[]; state.dayKeys.push(key); }
+    state.slotsByDay[key].push(s);
+  });
+  state.dayKeys.sort();
+  state.selectedDay = state.dayKeys[0]||null;
+}
+function renderDays(){
+  var strip=$('dayStrip'); strip.innerHTML='';
+  if(!state.dayKeys.length){
+    $('calStatus').innerHTML='No online openings in the next two weeks. Call or text <a href="tel:5625148383" style="color:var(--primary);font-weight:700">(562) 514-8383</a> — same-day spots often open up.';
+    return;
+  }
+  $('calStatus').style.display='none'; strip.hidden=false; $('slotGrid').hidden=false;
+  var dowF=new Intl.DateTimeFormat('en-US',{timeZone:LA,weekday:'short'});
+  var domF=new Intl.DateTimeFormat('en-US',{timeZone:LA,day:'numeric'});
+  var monF=new Intl.DateTimeFormat('en-US',{timeZone:LA,month:'short'});
+  state.dayKeys.forEach(function(key){
+    var d=new Date(key+'T12:00:00-07:00');
+    var b=document.createElement('button');
+    b.type='button'; b.className='day-chip'+(key===state.selectedDay?' selected':'');
+    b.innerHTML='<div class="dow">'+dowF.format(d)+'</div><div class="dom">'+domF.format(d)+'</div><div class="n">'+monF.format(d)+' · '+state.slotsByDay[key].length+' open</div>';
+    b.onclick=function(){ state.selectedDay=key; renderDays(); };
+    strip.appendChild(b);
+  });
+  renderSlots();
+}
+function renderSlots(){
+  var grid=$('slotGrid'); grid.innerHTML='';
+  var tF=new Intl.DateTimeFormat('en-US',{timeZone:LA,hour:'numeric',minute:'2-digit'});
+  (state.slotsByDay[state.selectedDay]||[]).forEach(function(s){
+    var b=document.createElement('button');
+    b.type='button'; b.className='slot'+(state.slot&&state.slot.start_at===s.start_at?' selected':''); b.textContent=tF.format(new Date(s.start_at));
+    b.onclick=function(){
+      state.slot=s; window.TWL_slotChosen=true;
+      [].forEach.call(grid.children,function(c){c.classList.remove('selected');});
+      b.classList.add('selected');
+      renderSlotPick();
+      track('slot_selected', offerParams({ slot: s.start_at, value: fullPrice()/100 }));
+      ensureSquare();
+      /* Bring the details form up — on a phone the form is below the fold at this point */
+      try{ $('payForm').scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){}
+      setTimeout(function(){ try{ if(!$('fName').value) $('fName').focus({preventScroll:true}); }catch(e){} }, 450);
+    };
+    grid.appendChild(b);
+  });
+}
+function renderSlotPick(){
+  var sp=$('slotPick'), txt=$('slotPickTxt'), ch=$('slotPickChange');
+  if(state.slot){
+    var whenF=new Intl.DateTimeFormat('en-US',{timeZone:LA,weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+    var w = whenF.format(new Date(state.slot.start_at))+' PT';
+    txt.textContent = w; $('sumWhen').textContent = w; sp.classList.add('has'); ch.hidden=false;
+  } else {
+    txt.textContent = 'pick one above ↑'; $('sumWhen').textContent='—'; sp.classList.remove('has'); ch.hidden=true;
+  }
+}
+$('slotPickChange').onclick=function(){ try{ $('calCard').scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){} };
+
+/* ============ Square Web Payments SDK — lazy ============ */
+function ensureSquare(){
+  if(state.sdkRequested){ initCard(); return; }
+  state.sdkRequested = true;
+  if(window.Square){ initCard(); return; }
+  var s=document.createElement('script'); s.src=CFG.SQUARE_SDK; s.async=true;
+  s.onload=function(){ initCard(); };
+  s.onerror=function(){ cardFail({ name:'SdkLoad', message:'square.js failed to load' }); };
+  document.head.appendChild(s);
+}
+function initCard(tries){
+  tries = tries || 0;
+  if(state.card || state.cardInitBusy) return;
+  if(!window.Square){
+    if(tries < 40){ setTimeout(function(){ initCard(tries+1); }, 250); }
+    else cardFail({ name:'SdkMissing', message:'square.js never loaded (blocked by a browser extension or network?)' });
+    return;
+  }
+  state.cardInitBusy = true;
+  try{
+    if(!state.payments) state.payments = Square.payments(CFG.SQUARE_APP_ID, CFG.LOCATION_ID);
+    state.payments.card().then(function(card){
+        state.card=card;
+        var w=$('cardWait'); if(w) w.remove();
+        try{ card.addEventListener('focusClassAdded', function(){ firePaymentInfo(); }); }catch(e){}
+        return card.attach('#card-container');
+      })
+      .then(function(){ state.cardInitBusy=false; clearError(); })
+      .catch(function(e){ state.cardInitBusy=false; cardFail(e); });
+  }catch(e){ state.cardInitBusy=false; cardFail(e); }
+}
+function firePaymentInfo(){ if(state.addedPayment) return; state.addedPayment=true; track('add_payment_info', offerParams({ value: fullPrice()/100 })); }
+function cardFail(e){
+  var detail='unknown error';
+  try{ detail=(e&&((e.name?e.name+': ':'')+(e.message||String(e))))||'unknown error'; if(e&&e.errors){ detail+=' | '+JSON.stringify(e.errors); } console.error('Square card init failed:', e); }catch(_){}
+  payError('Card form failed to load — ['+detail+'] — please screenshot this message and send it to us, or call (562) 514-8383.');
+}
+function payError(msg){ var el=$('payErr'); el.textContent=msg; el.style.display='block'; }
+function clearError(){ $('payErr').style.display='none'; }
+
+/* ============ Entering the module: begin_checkout once, load the SDK once ============ */
+function enterCheckout(source){
+  ensureSquare();
+  if(state.beganCheckout) return;
+  state.beganCheckout = true;
+  track('begin_checkout', offerParams({ value: fullPrice()/100, source: source||'scroll' }));
+}
+window.TWL_goBook = function(offer, cta, kit){
+  if(offer && OFFERS[offer]) { setOffer(offer); }
+  if(kit && OFFERS[state.offer].kitVariation){ $('kitCheck').checked = true; updateTotals(); }
+  enterCheckout(cta||'cta');
+};
+if('IntersectionObserver' in window){
+  /* SDK preload when the module is within ~1 screen; begin_checkout only when a third of it is actually on screen */
+  var pio = new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting){ ensureSquare(); pio.disconnect(); } }); }, { rootMargin:'600px 0px' });
+  pio.observe($('calCard'));
+  var bio = new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting){ enterCheckout('scroll'); bio.disconnect(); } }); }, { threshold: 0.5 });
+  bio.observe($('calCard'));
+}
+['fName','fEmail','fPhone'].forEach(function(id){ $(id).addEventListener('focus', function(){ ensureSquare(); }, { once:true }); });
+
+/* ============ Submit ============ */
+$('payForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  if(state.busy) return;
+  clearError();
+  var name=$('fName').value.trim(), email=$('fEmail').value.trim(), phone=$('fPhone').value.trim();
+  if(!state.slot){ payError('Please pick a day and time first.'); try{ $('calCard').scrollIntoView({behavior:'smooth',block:'start'}); }catch(_){} return; }
+  if(!name||!email||!phone){ payError('Please fill in your name, email and phone.'); return; }
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ payError('That email doesn’t look right.'); return; }
+  if(!state.card){ ensureSquare(); payError('Card form is still loading — one second and try again.'); return; }
+  firePaymentInfo();
+
+  var o=OFFERS[state.offer], kit=$('kitCheck').checked && Boolean(o.kitVariation);
+  state.busy=true; $('payBtn').disabled=true; $('payBtn').innerHTML='Confirming…';
+
+  state.card.tokenize().then(function(tok){
+    if(tok.status!=='OK'){ throw new Error((tok.errors&&tok.errors[0]&&tok.errors[0].message)||'Card was not accepted.'); }
+    var payload = {
+      action:'create_checkout', env:'production',
+      source_id: tok.token,
+      service_variation_id: kit? o.kitVariation : o.variation,
+      offer: state.offer, kit: kit,
+      start_at: state.slot.start_at,
+      team_member_id: state.slot.team_member_id,
+      deposit_cents: o.deposit, price_cents: kit? o.kitFull : o.full,
+      pay_full: state.payFull, tip_cents: 0, charge_cents: chargeCents(),
+      customer:{ name:name, email:email, phone:phone },
+      attribution: attr, variant: variant, page_url: location.href,
+      save_card: !!(document.getElementById('saveCard')||{}).checked
+    };
+    if(!CFG.CHECKOUT_LIVE){
+      renderDetails('previewDetails', o, kit);
+      $('bkGrid').hidden=true; $('panelPreviewDone').hidden=false;
+      try{ $('book').scrollIntoView({behavior:'smooth',block:'start'}); }catch(_){}
+      done(); return;
+    }
+    bridge(payload).then(function(res){
+      if(!res.ok) throw new Error(res.error||'Booking failed.');
+      state.bookingId = res.booking_id;
+      var value = (kit?o.kitFull:o.full)/100;
+      /* Purchase — value is the FULL booking value, not the deposit; transaction_id dedupes everywhere */
+      track('purchase', offerParams({ value: value, transaction_id: res.booking_id, paid_in_full: state.payFull, kit: kit }));
+      if(CFG.CONV_BOOKED){
+        try{ gtag('event','conversion',{ send_to:CFG.CONV_BOOKED, value:value, currency:'USD', transaction_id:res.booking_id }); }catch(err){}
+      }
+      renderDetails('doneDetails', o, kit);
+      var start=new Date(state.slot.start_at), end=new Date(start.getTime()+o.minutes*60000);
+      var z=function(d){return d.toISOString().replace(/[-:]|\.\d{3}/g,'');};
+      $('gcalLink').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Teeth Whitening Lab — '+o.label)+'&dates='+z(start)+'/'+z(end)+'&location='+encodeURIComponent('638 Alamitos Ave, Long Beach, CA 90802');
+      $('bkGrid').hidden=true; $('panelDone').hidden=false; try{ $('book').querySelector('.head').hidden=true; }catch(_){}
+      var bb=document.querySelector('.book-bar'); if(bb) bb.remove();
+      try{ $('book').scrollIntoView({behavior:'smooth',block:'start'}); }catch(_){}
+      done();
+    }).catch(fail);
+  }).catch(fail);
+
+  function fail(err){ done(); payError(err.message||'Something went wrong — you have not been charged. Try again or call (562) 514-8383.'); }
+  function done(){
+    state.busy=false; $('payBtn').disabled=false;
+    $('payBtn').innerHTML = 'Book &amp; pay <span id="payAmt"></span> <span id="payMode"></span> →';
+    updateTotals();
+  }
+});
+
+function renderDetails(id, o, kit){
+  var whenF=new Intl.DateTimeFormat('en-US',{timeZone:LA,weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'});
+  var full=kit?o.kitFull:o.full, base=baseCents(), balance=full-base;
+  $(id).innerHTML =
+    '<div class="sum-row"><span>Session</span><b>'+o.label+(kit?' + kit':'')+'</b></div>'+
+    '<div class="sum-row"><span>When</span><b>'+whenF.format(new Date(state.slot.start_at))+' PT</b></div>'+
+    '<div class="sum-row"><span>Where</span><b>638 Alamitos Ave, Long Beach</b></div>'+
+    '<div class="sum-row"><span>'+(state.payFull?'Paid in full':'Deposit')+'</span><b>'+fmtUSD(base)+'</b></div>'+
+    '<div class="sum-row total"><span>Charged today</span><b>'+fmtUSD(base)+'</b></div>'+
+    '<div class="sum-row"><span>Balance at visit</span><b>'+(balance>0?fmtUSD(balance):'Nothing — you’re all set')+'</b></div>';
+}
+
+/* ============ How did you hear about us — AFTER payment, so it can never cost a booking ============ */
+(function(){
+  var wrap=$('srcChips'); if(!wrap) return;
+  wrap.addEventListener('click', function(e){
+    var b=e.target.closest('.chip'); if(!b) return;
+    wrap.querySelectorAll('.chip').forEach(function(c){c.classList.remove('selected');});
+    b.classList.add('selected');
+    var src=b.getAttribute('data-src');
+    attr.heard_about_us=src;
+    try{ writeCookie('twl_attr', JSON.stringify(attr), 90); localStorage.setItem('twl_attr', JSON.stringify(attr)); }catch(err){}
+    track('heard_about_us',{ source: src });
+    $('hdyhauThanks').hidden=false;
+    if(state.bookingId){ bridge({ action:'set_heard_about_us', env:'production', booking_id: state.bookingId, heard_about_us: src }).catch(function(){}); }
+  });
+})();
+
+/* ============ Layout: on phones the summary (kit, deposit vs full, due today) sits between the
+   calendar and the form so nobody submits without seeing the numbers; on desktop it is the sticky aside. ============ */
+(function(){
+  var side=document.querySelector('.bk-side'), main=document.querySelector('.bk-main'), grid=$('bkGrid'), cal=$('calCard');
+  if(!side||!main||!grid||!cal) return;
+  var mq=window.matchMedia('(max-width:900px)');
+  function place(){
+    if(mq.matches){ if(side.parentNode!==main) cal.insertAdjacentElement('afterend', side); }
+    else { if(side.parentNode!==grid) grid.appendChild(side); }
+  }
+  place();
+  if(mq.addEventListener) mq.addEventListener('change',place); else if(mq.addListener) mq.addListener(place);
+})();
+
+/* ============ Boot ============ */
+if(!CFG.CHECKOUT_LIVE){ var rb=document.createElement('div'); rb.className='preview-ribbon'; rb.textContent='Preview build — payments are disabled. No card will be charged.'; document.body.appendChild(rb); }
+applyOffer();
+renderSlotPick();
+loadAvailability();                                  /* prefetch: the grid is populated before anyone scrolls to it */
+track('view_content', offerParams({ value: fullPrice()/100 }));
+if(location.hash==='#book'){ setTimeout(function(){ try{ $('book').scrollIntoView({block:'start'}); }catch(e){} }, 50); }
 })();
 </script>
 </body>
