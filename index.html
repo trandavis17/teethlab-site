@@ -402,10 +402,10 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 :root{--green:#16b85c;--green-2:#0f9d4f}
 #book{scroll-margin-top:72px;background:#fff}
 [hidden]{display:none!important}
-.bk-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1.4rem;align-items:start;margin-top:clamp(24px,3vw,40px)}
+.bk-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:1.4rem;align-items:start;margin-top:clamp(24px,3vw,40px)}
 .bk-side{position:sticky;top:84px}
-@media(max-width:900px){.bk-grid{grid-template-columns:1fr}.bk-side{position:static}}
-.bk-main{display:grid;gap:1rem}
+@media(max-width:900px){.bk-grid{grid-template-columns:minmax(0,1fr)}.bk-side{position:static}}
+.bk-main{display:grid;gap:1rem;min-width:0}.bk-side{min-width:0}.bk-main>*{min-width:0}
 .offer-line{display:flex;align-items:center;gap:.9rem;border:1.5px solid var(--line);border-radius:var(--r);padding:.8rem 1rem;background:#fff;box-shadow:var(--shadow-sm);flex-wrap:wrap}
 .offer-line img{width:54px;height:54px;border-radius:12px;object-fit:cover;object-position:center 30%;border:1.5px solid #dcd9f0;flex:0 0 auto}
 .offer-line .ol-txt{display:flex;flex-direction:column;min-width:0;flex:1 1 200px}
@@ -429,7 +429,7 @@ footer{background:#fff;color:#6d6d7a;padding:48px 0 30px;font-size:.9rem;border-
 .cal-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.6rem;flex-wrap:wrap}
 .cal-head h3{font-size:1.15rem;font-family:'Inter';font-weight:700}
 .tz-note{font-size:.8rem;color:var(--muted)}
-.day-strip{display:flex;gap:.55rem;overflow-x:auto;padding-bottom:.6rem;scrollbar-width:thin}
+.day-strip{display:flex;gap:.55rem;overflow-x:auto;min-width:0;max-width:100%;padding-bottom:.6rem;scrollbar-width:thin}
 .day-chip{flex:0 0 auto;min-width:72px;text-align:center;border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:.5rem .55rem;cursor:pointer;transition:all .2s;font:inherit}
 .day-chip .dow{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .day-chip .dom{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;line-height:1.15}
